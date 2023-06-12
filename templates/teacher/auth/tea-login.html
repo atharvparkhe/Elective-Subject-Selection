@@ -1,4 +1,4 @@
-{% extends '../../stu-base.html' %}
+{% extends '../../teacher-base.html' %}
 {% load static %}
 
 {% block content %}
@@ -9,7 +9,7 @@
             {% csrf_token %}
             <input type="email" name="email" class="inputfeild" placeholder="Enter your Email ID" required>
             <input type="password" name="password" class="inputfeild" placeholder="Enter Password" required>
-            <div class="abc"><a href="{% url 'student-forgot' %}">Forgot Password ??</a></div>
+            <div class="abc"><a href="{% url 'teacher-forgot' %}">Forgot Password ??</a></div>
             <button type="submit" name="submit" class="submitbtn">Log in</button>
         </form>
     </div>

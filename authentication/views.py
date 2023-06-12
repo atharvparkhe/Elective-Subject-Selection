@@ -1,15 +1,16 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from .threads import *
-from .models import StudentModel
+from .models import *
 import uuid
 
 context = {}
 
-@login_required(login_url='login')
+
+@login_required(login_url='index')
 def logoutView(request):
     logout(request)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -22,7 +23,7 @@ def StudentLogIn(request):
             password = request.POST.get('password')
             student_obj = StudentModel.objects.filter(email=email).first()
             if student_obj is None:
-                messages.info(request, 'User does not exists. Please Signup')
+                messages.info(request, 'User does not exists.')
                 return redirect('student-login')
             user = authenticate(email=email, password=password)
             if user is  None:
@@ -32,7 +33,6 @@ def StudentLogIn(request):
             messages.success(request, 'Successfully logged in')
             return redirect('index')
     except Exception as e:
-        print(e)
         messages.error(request, str(e))
     return render(request, "student/auth/stu-login.html", context)
 
@@ -43,7 +43,7 @@ def StudentForgot(request):
             email = request.POST.get('email')
             user = StudentModel.objects.get(email=email)
             if not user:
-                messages.info(request, 'This user does not exist. Please Signup.')
+                messages.info(request, 'This user does not exist..')
                 return redirect('student-login')
             token = str(uuid.uuid4())
             user.token = token
@@ -51,9 +51,8 @@ def StudentForgot(request):
             thread_obj.start()
             user.save()
             messages.info(request, 'We have sent you a link to reset password via mail')
-            # return redirect('stu-message')
+            return redirect('student-reset')
     except Exception as e:
-        print(e)
         messages.error(request, str(e))
     return render(request, "student/auth/stu-forgot.html", context)
 
@@ -62,8 +61,8 @@ def StudentReset(request, token):
     try:
         student_obj = StudentModel.objects.get(token=token)
         if not student_obj:
-            messages.info(request, 'This user does not exist. Please Signup.')
-            return redirect('/signup')
+            messages.info(request, 'This user does not exist..')
+            return redirect('student-login')
         if request.method == 'POST':
             npw = request.POST.get('npw')
             cpw = request.POST.get('cpw')
@@ -71,11 +70,133 @@ def StudentReset(request, token):
                 student_obj.set_password(cpw)
                 student_obj.save()
                 messages.info(request, 'Password Changed successfully.')
-                return redirect('/login')
+                return redirect('student-login')
             messages.error(request, 'New Password and Confirm Password dont match.')
-            return redirect('/login')
-    except Exception as e :
-        print(e)
+            return redirect('student-login')
+    except Exception as e:
         messages.error(request, str(e))
-    return render(request, "student/accounts/reset.html", context)
+    return render(request, "student/auth/stu-reset.html", context)
 
+
+def TeacherLogIn(request):
+    try:
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            teacher_obj = TeacherModel.objects.filter(email=email).first()
+            if teacher_obj is None:
+                messages.info(request, 'User does not exists.')
+                return redirect('teacher-login')
+            user = authenticate(email=email, password=password)
+            if user is  None:
+                messages.info(request, 'Incorrect Password.')
+                return redirect('teacher-login')
+            login(request, user)
+            messages.success(request, 'Successfully logged in')
+            return redirect('index')
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "teacher/auth/tea-login.html", context)
+
+
+def TeacherForgot(request):
+    try:
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            user = TeacherModel.objects.get(email=email)
+            if not user:
+                messages.info(request, 'This user does not exist..')
+                return redirect('teacher-login')
+            token = str(uuid.uuid4())
+            user.token = token
+            thread_obj = send_forgot_link(email, token, "teacher")
+            thread_obj.start()
+            user.save()
+            messages.info(request, 'We have sent you a link to reset password via mail')
+            return redirect('teacher-reset')
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "teacher/auth/tea-forgot.html", context)
+
+
+def TeacherReset(request, token):
+    try:
+        teacher_obj = TeacherModel.objects.get(token=token)
+        if not teacher_obj:
+            messages.info(request, 'This user does not exist..')
+            return redirect('teacher-login')
+        if request.method == 'POST':
+            npw = request.POST.get('npw')
+            cpw = request.POST.get('cpw')
+            if npw == cpw:
+                teacher_obj.set_password(cpw)
+                teacher_obj.save()
+                messages.info(request, 'Password Changed successfully.')
+                return redirect('teacher-login')
+            messages.error(request, 'New Password and Confirm Password dont match.')
+            return redirect('teacher-login')
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "teacher/auth/tea-reset.html", context)
+
+
+def AdminLogIn(request):
+    try:
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            admin_obj = AdminModel.objects.filter(email=email).first()
+            if admin_obj is None:
+                messages.info(request, 'User does not exists.')
+                return redirect('admin-login')
+            user = authenticate(email=email, password=password)
+            if user is  None:
+                messages.info(request, 'Incorrect Password.')
+                return redirect('admin-login')
+            login(request, user)
+            messages.success(request, 'Successfully logged in')
+            return redirect('index')
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "admin/auth/admin-login.html", context)
+
+
+def AdminForgot(request):
+    try:
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            admin_obj = AdminModel.objects.get(email=email)
+            if not admin_obj:
+                messages.info(request, 'This admin does not exist..')
+                return redirect('admin-login')
+            token = str(uuid.uuid4())
+            admin_obj.token = token
+            thread_obj = send_forgot_link(email, token, "student")
+            thread_obj.start()
+            admin_obj.save()
+            messages.info(request, 'We have sent you a link to reset password via mail')
+            return redirect('student-reset')
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "admin/auth/admin-forgot.html", context)
+
+
+def AdminReset(request, token):
+    try:
+        admin_obj = AdminModel.objects.get(token=token)
+        if not admin_obj:
+            messages.info(request, 'This user does not exist..')
+            return redirect('admin-login')
+        if request.method == 'POST':
+            npw = request.POST.get('npw')
+            cpw = request.POST.get('cpw')
+            if npw == cpw:
+                admin_obj.set_password(cpw)
+                admin_obj.save()
+                messages.info(request, 'Password Changed successfully.')
+                return redirect('admin-login')
+            messages.error(request, 'New Password and Confirm Password dont match.')
+            return redirect('admin-login')
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "admin/auth/admin-reset.html", context)

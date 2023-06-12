@@ -1,0 +1,17 @@
+{% extends '../../admin-base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="formbox">
+        <img class="y" src="{% static 'images/logo.png' %}" width="100px" height="100px">
+
+        <h3 class="x">Reset password</h3>
+
+        <form id="login" class="inputgrp" method="post">
+            {% csrf_token %}
+            <input type="password" name="npw" class="inputfeild" placeholder="New Password" required>
+            <input type="password" name="cpw" class="inputfeild" placeholder="Confirm Password" required>
+            <button type="submit" name="submit" class="submitbtn">Reset Password</button>
+        </form>
+    </div>
+{% endblock content %}
