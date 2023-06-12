@@ -12,8 +12,10 @@ class SubjectModel(BaseModel):
 
 
 class EnollmentModel(BaseModel):
-    subject = models.ForeignKey(SubjectModel, related_name="enrolled_subject", on_delete=models.CASCADE)
     student = models.ForeignKey(StudentModel, related_name="enrolled_student", on_delete=models.CASCADE)
+    subject_1 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_1", on_delete=models.CASCADE)
+    subject_2 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_2", on_delete=models.CASCADE)
+    subject_3 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_3", on_delete=models.CASCADE)
     def __str__(self):
         return self.student.name
 

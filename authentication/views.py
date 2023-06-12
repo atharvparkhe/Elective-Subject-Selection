@@ -34,7 +34,7 @@ def StudentLogIn(request):
             return redirect('index')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "student/auth/stu-login.html", context)
+    return render(request, "auth/student/stu-login.html", context)
 
 
 def StudentForgot(request):
@@ -54,7 +54,7 @@ def StudentForgot(request):
             return redirect('student-reset')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "student/auth/stu-forgot.html", context)
+    return render(request, "auth/student/stu-forgot.html", context)
 
 
 def StudentReset(request, token):
@@ -75,7 +75,7 @@ def StudentReset(request, token):
             return redirect('student-login')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "student/auth/stu-reset.html", context)
+    return render(request, "auth/student/stu-reset.html", context)
 
 
 def TeacherLogIn(request):
@@ -96,7 +96,7 @@ def TeacherLogIn(request):
             return redirect('index')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "teacher/auth/tea-login.html", context)
+    return render(request, "auth/teacher/tea-login.html", context)
 
 
 def TeacherForgot(request):
@@ -116,7 +116,7 @@ def TeacherForgot(request):
             return redirect('teacher-reset')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "teacher/auth/tea-forgot.html", context)
+    return render(request, "auth/teacher/tea-forgot.html", context)
 
 
 def TeacherReset(request, token):
@@ -137,7 +137,7 @@ def TeacherReset(request, token):
             return redirect('teacher-login')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "teacher/auth/tea-reset.html", context)
+    return render(request, "auth/teacher/tea-reset.html", context)
 
 
 def AdminLogIn(request):
@@ -158,7 +158,7 @@ def AdminLogIn(request):
             return redirect('index')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "admin/auth/admin-login.html", context)
+    return render(request, "auth/admin/admin-login.html", context)
 
 
 def AdminForgot(request):
@@ -178,7 +178,7 @@ def AdminForgot(request):
             return redirect('student-reset')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "admin/auth/admin-forgot.html", context)
+    return render(request, "auth/admin/admin-forgot.html", context)
 
 
 def AdminReset(request, token):
@@ -199,4 +199,26 @@ def AdminReset(request, token):
             return redirect('admin-login')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "admin/auth/admin-reset.html", context)
+    return render(request, "auth/admin/admin-reset.html", context)
+
+
+###############################################################################################################
+
+# @login_required("admin-login")
+def allTeachers(request):
+    context["teachers"] = TeacherModel.objects.all()
+    return render(request, "teacher/all-teachers.html", context=context)
+
+
+# @login_required("admin-login")
+def singleTeacher(request, teacher_id):
+    try:
+        if not TeacherModel.objects.filter(id=teacher_id).exists():
+            messages.error(request, 'Invalid Teacher ID.')
+            return redirect('all-teachers')
+        context["teacher"] = TeacherModel.objects.get(id=teacher_id)
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "teacher/single-teacher.html", context=context)
+
+
