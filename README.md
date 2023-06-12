@@ -5,10 +5,10 @@ Build an application that can be run as a container on the cloud for creating/up
 
 - Allow user to add, update, delete a student
 - Each student should have:
- - Student Name
- - Student ID Number
- - Student Email
- - Student Phone Number
+  - Student Name
+  - Student ID Number
+  - Student Email
+  - Student Phone Number
 - Persist all student details in the database
 
 ### Problem Statement 2 - Elective Subject App
@@ -16,9 +16,9 @@ Build an application that can be run as a container on the cloud for creating/up
 
 - Allow user to add, update, delete an elective subject
 - Each elective subject should have:
- - - Elective Subject Name
- - Elective Subject Description
- - Elective Subject Code
+  - Elective Subject Name
+  - Elective Subject Description
+  - Elective Subject Code
 - Persist all subjects in the database
 
 ### Problem Statement 3 - Elective Subject Selection App
@@ -30,8 +30,8 @@ Build an application that can be run as a container on the cloud for selecting/u
 - Then let them select, update, delete the elective subject(s)(From Problem Statement 2) for that student
 
 - On the Elective Subject Page:
- - The user should be able to select an elective subject from list of elective subject (From Problem Statement 2)
- - Then let them select, update, delete the student(s) that have chosen the elective subject
+  - The user should be able to select an elective subject from list of elective subject (From Problem Statement 2)
+  - Then let them select, update, delete the student(s) that have chosen the elective subject
 
 
 ## Evaluation Criteria for all Problem Statements:
