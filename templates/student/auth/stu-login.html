@@ -1,0 +1,16 @@
+{% extends '../../stu-base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="formbox">
+        <img class="y" src="{% static 'images/logo.png' %}" width="100px" height="100px">
+        <h3 class="x">Login</h3>
+        <form id="login" class="inputgrp" method="post">
+            {% csrf_token %}
+            <input type="email" name="stu_email" class="inputfeild" placeholder="Enter your Email ID" required>
+            <input type="password" name="stu_pass" class="inputfeild" placeholder="Enter Password" required>
+            <div class="abc"><a href="{% url 'student-forgot' %}">forgot password?</a></div>
+            <button type="submit" name="submit" class="submitbtn">Log in</button>
+        </form>
+    </div>
+{% endblock content %}

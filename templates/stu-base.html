@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+<head>
+    <!-- Respponsive Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Title -->
+    <title>Elective Subject Selection</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}" sizes="32x32" type="image/png">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="{% static 'css/stu-style.css' %}">
+    <!-- SEO tags -->
+    <meta name="description" content="Elective Subject Selection">
+    <meta name="author" content="Team Alpha">
+    <meta name="keywords" content="Elective, Subject, Selection">
+    <meta property="og:title" content="Elective Subject Selection" />
+    <meta property="og:type" content="web-application" />
+    <meta property="og:url" content="http://127.0.0.1:8000" />
+    <meta property="og:image" content="{% static 'images/logo.png' %}" />
+</head>
+
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="imp_msg" >{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% block content %}
+    {% endblock content %}
+</body>
+
+</html>

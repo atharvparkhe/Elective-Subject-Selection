@@ -23,38 +23,39 @@ def StudentLogIn(request):
             student_obj = StudentModel.objects.filter(email=email).first()
             if student_obj is None:
                 messages.info(request, 'User does not exists. Please Signup')
-                return redirect('signup') 
+                return redirect('student-login')
             user = authenticate(email=email, password=password)
             if user is  None:
                 messages.info(request, 'Incorrect Password.')
-                return redirect('login')
+                return redirect('student-login')
             login(request, user)
             messages.success(request, 'Successfully logged in')
             return redirect('index')
     except Exception as e:
         print(e)
         messages.error(request, str(e))
-    return render(request, "student/accounts/login.html", context)
+    return render(request, "student/auth/stu-login.html", context)
 
 
-def StudentForget(request):
+def StudentForgot(request):
     try:
         if request.method == 'POST':
             email = request.POST.get('email')
             user = StudentModel.objects.get(email=email)
             if not user:
                 messages.info(request, 'This user does not exist. Please Signup.')
-                return redirect('/signup')
+                return redirect('student-login')
             token = str(uuid.uuid4())
             user.token = token
             thread_obj = send_forgot_link(email, token, "student")
             thread_obj.start()
             user.save()
             messages.info(request, 'We have sent you a link to reset password via mail')
+            # return redirect('stu-message')
     except Exception as e:
         print(e)
         messages.error(request, str(e))
-    return render(request, "student/accounts/forgot.html", context)
+    return render(request, "student/auth/stu-forgot.html", context)
 
 
 def StudentReset(request, token):
