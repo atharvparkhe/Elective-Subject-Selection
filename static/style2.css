@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body{
-    background: radial-gradient(#fff,#84efff);
+    background: radial-gradient(#fff,#8e887f);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -434,7 +434,7 @@ nav ul li a{
     padding: 10px 30px;
     cursor: pointer;
     display: block;
-    background-color:#84efff;
+    background-color:#8e887f;
     border: 0;
     outline: none;
     border-radius: 30px;
