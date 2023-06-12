@@ -1,0 +1,14 @@
+{% extends '../../stu-base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="formbox">
+        <img class="y" src="{% static 'images/logo.png' %}" width="100px" height="100px">
+        <h3 class="x">Forgot Password</h3>
+        <form id="login" class="inputgrp">
+            {% csrf_token %}
+            <input type="email" name="email" class="inputfeild" placeholder="Enter your email" required>
+            <button type="submit" name="submit" class="submitbtn">SUBMIT</button>
+        </form>
+    </div>
+{% endblock content %}
