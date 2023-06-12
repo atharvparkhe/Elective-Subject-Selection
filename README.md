@@ -16,7 +16,7 @@ Build an application that can be run as a container on the cloud for creating/up
 
 - Allow user to add, update, delete an elective subject
 - Each elective subject should have:
- - Elective Subject Name
+ - - Elective Subject Name
  - Elective Subject Description
  - Elective Subject Code
 - Persist all subjects in the database
