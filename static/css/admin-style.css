@@ -1,13 +1,19 @@
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 body{
-    background: radial-gradient(#fff,#8e887f);
+    background: radial-gradient(#fff,#84efff);
     font-family: 'Poppins', sans-serif;
 }
-
+.video{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 500px;
+    height: 281px;
+}
 .navbar{
 
     display: flex;
@@ -56,8 +62,8 @@ p{
     justify-content: space-around;
 }
 .col-1{
-    flex-basis: 50%;
-    min-width: 300px;
+    flex-basis: 35%;
+    min-width: 0px;
 
 }
 .col-2{
@@ -71,7 +77,7 @@ p{
 }
 .btn{
     display: inline-block;
-    background: #ff2953;
+    background: #84efff;
     color: #fff;
     padding: 8px 30px;
     margin: 30px 0;
@@ -102,9 +108,9 @@ p{
     margin: auto;
 }
 .col4{
-    flex-basis: 25%;
+    flex-basis: 33%;
     padding: 10px;
-    min-width: 200px;
+    min-width: 400px;
     margin-bottom: 50px;
     transition: transform 0.5s;
    
@@ -120,7 +126,7 @@ p{
 }
 .title{
     text-align:center ;
-    margin: 80px auto 80px;
+    margin: 0px auto 20px;
     position: relative;
     line-height: 60px;
     color: #555;
@@ -128,7 +134,7 @@ p{
 }
 .title::after{
  content: '';
- background: #ff2953;
+ background: #4addf4;
  width: 80px;
  height: 5px;
  border-radius: 5px;
@@ -203,7 +209,8 @@ color: #080808;
     color: rgb(0, 0, 0);
     margin-bottom: 20px;
 }
-.footercol1, .footercol2, .footercol3 , .footercol4{
+.footer
+, .footercol2, .footercol3 , .footercol4{
     min-width: 250px;
     margin-bottom: 20px;
 }
@@ -276,9 +283,9 @@ nav ul li a{
    
     transition: transform 0.5s;
 }
-.col-2 img:hover{
+/* .col-2 img:hover{
     transform: translateY(-15px);
-}
+} */
 @media only screen and (max-width: 600px){
     .row{
         text-align: center;
@@ -326,7 +333,7 @@ nav ul li a{
     font-weight: 400;
 }.btn{
     display: inline-block;
-    background: #ff2953;
+    background: #34c0d5;
     color: #fff;
     padding: 8px 30px;
     margin: 30px 0;
@@ -335,7 +342,7 @@ nav ul li a{
    margin: none;
 }
 .btn:hover{
-    background:rgb(155, 88, 88);
+    background:rgb(151, 241, 249);
 }
 .contactcol input, .contactcol textarea{
     width: 100%;
@@ -345,13 +352,10 @@ nav ul li a{
     border: 1px solid#ccc;
 }
 .an{
-    border-radius: 15px;
+    border-radius: 10px;
     transition: transform 0.5s;
     box-shadow: 0 5px 0px rgba(0, 0,0,0.1);
     cursor: pointer;
-}
-.an:hover{
-    transform: translateY(-7px);
 }
 .log{
     height: 100%;
@@ -434,12 +438,14 @@ nav ul li a{
     padding: 10px 30px;
     cursor: pointer;
     display: block;
-    background-color:#8e887f;
+    background-color:#84efff;
     border: 0;
     outline: none;
     border-radius: 30px;
     margin-top: 20px;
-    margin-left: 25px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
     
 }
 .submitbtn1{
@@ -664,7 +670,7 @@ th:last-child{
 }
 .formbox2{
     width: 580px;
-    height: 880px;
+    height: auto;
     position: relative;
     margin: 6% auto;
     background: #fff;
@@ -840,3 +846,14 @@ margin-top: 30px;
           .d:hover{
               color: #f44336;
           }
+          .btn5{
+            display: inline-block;
+            background: #34c0d5;
+            color: #fff;
+            transition:background 0.5s;
+           /* margin: none; */
+        }
+        .btn5:hover{
+            background:rgb(151, 241, 249);
+        }
+       

@@ -19,3 +19,20 @@ class send_forgot_link(Thread):
             print("Email send finished")
         except Exception as e:
                 print(e)
+
+
+class send_password_via_mail(Thread):
+    def __init__(self, email, password):
+        self.email = email
+        self.password = password
+        Thread.__init__(self)
+    def run(self):
+        try:
+            subject = "Your Login Credentials"
+            message = f"Here are your Login Credentials\n Email: {self.email}\n Password: {self.password}"
+            email_from = settings.EMAIL_HOST_USER
+            print("Email send started")
+            send_mail(subject , message ,email_from ,[self.email])
+            print("Email send finished")
+        except Exception as e:
+            print(e)

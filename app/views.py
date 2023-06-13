@@ -7,7 +7,11 @@ context = {}
 
 
 def homePage(request):
-    return render(request, "index.html")
+    return render(request, "common/index.html")
+
+
+def timeTable(request):
+    return render(request, "common/time-table.html")
 
 
 def allSubjects(request):

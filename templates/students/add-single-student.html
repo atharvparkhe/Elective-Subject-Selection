@@ -1,0 +1,38 @@
+{% extends '../../admin-base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
+                </div>
+                <nav>
+                    <ul id="menuitem">
+                        <li><a href="{% url 'index' %}">HOME</a></li>
+                        <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
+                        <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
+                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
+                    </ul>
+                </nav>
+                <!-- <img src="image/BELL.png" width="30px" height="30px"> -->
+                <!-- <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()"> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="formbox2">
+        <div class="contactcol ">
+            <h2 class="title">Add Student</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <input name="name" class="an" type="text" placeholder="Enter Student Name" required>
+                <input name="roll" class="an" type="text" placeholder="Enter Student Roll No" required>
+                <input name="email" class="an" type="email" placeholder="Enter Student Email ID" required>
+                <input name="phone" class="an" type="text" placeholder="Enter Student Phone No" required>
+                <button class="submitbtn" type="submit">Add Student</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

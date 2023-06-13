@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from .threads import *
 from .models import *
+from .utils import *
 import uuid
 
 context = {}
@@ -201,7 +202,7 @@ def AdminReset(request, token):
         messages.error(request, str(e))
     return render(request, "auth/admin/admin-reset.html", context)
 
-
+pw = generate_random_passsword(12)
 ###############################################################################################################
 
 # @login_required("admin-login")
@@ -222,3 +223,12 @@ def singleTeacher(request, teacher_id):
     return render(request, "teacher/single-teacher.html", context=context)
 
 
+def addStudent(request):
+    try:
+        if request.method == 'POST':
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "teacher/single-teacher.html", context=context)
