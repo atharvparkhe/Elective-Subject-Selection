@@ -3,10 +3,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from django.conf import settings
 from .threads import *
 from .models import *
 from .utils import *
-import uuid
+import uuid, pandas
 
 context = {}
 
@@ -243,6 +244,7 @@ def singleTeacher(request, teacher_id):
 
 def addStudent(request):
     try:
+        context["departments"] = DepartmentModel.objects.all()
         if request.method == 'POST':
             name = request.POST.get('name')
             roll = request.POST.get('roll')
@@ -251,7 +253,7 @@ def addStudent(request):
             if StudentModel.objects.filter(roll_no=roll).exists() or StudentModel.objects.filter(email=email).exists():
                 messages.info(request, 'This account already exist')
                 return redirect('add-student')
-            obj = StudentModel.objects.create(name=name, email=email, phone=phone, roll_no=roll)
+            obj = StudentModel.objects.create(name=name, email=email, phone=phone, roll_no=roll, department=DepartmentModel.objects.first())
             pw = generate_random_passsword(12)
             obj.set_password(pw)
             obj.save()
@@ -262,3 +264,17 @@ def addStudent(request):
         messages.error(request, str(e))
     return render(request, "students/add-single-student.html", context=context)
 
+
+def addStudentsExcel(request):
+    try:
+        if request.method == 'POST':
+            excel_file = request.FILES.get('excel_file')
+            obj = FileModel.objects.create(file=excel_file)
+            file_path = settings.BASE_DIR + obj.file
+            print("@@@@@@@@@@@@@@@@")
+            print(file_path)
+            print("@@@@@@@@@@@@@@@@")
+            # df = pandas.read_excel()
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "students/add-students-excel.html", context=context)

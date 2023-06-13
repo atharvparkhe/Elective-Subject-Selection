@@ -28,5 +28,6 @@ urlpatterns = [
     
 	# Student
 	path('add-student/', views.addStudent, name="add-student"),
+	path('add-students-excel/', views.addStudentsExcel, name="add-students-excel"),
 
 ]
