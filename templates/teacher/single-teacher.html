@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="with=device-width, intial-scale=1.0 shrink-to-fit=no">
+    <title>PROFILE</title>
+    <link rel="stylesheet" href="student-style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="./admin/image/image.png" width="125px">
+                </div>
+                <nav>
+                    <ul id="menuitem">
+
+                        <li><a href="">HOME</a></li>
+                        <li><a href="allproduct.html">PROFILE</a></li>
+                        <li><a href="aboutus.html">ELECTIVE</a></li>
+                        <li><a href="">TIME TABLE</a></li>
+                        <!-- <li><a href="">CONTACT US</a></li> -->
+                    </ul>
+                </nav>
+
+
+                <!-- <img  src="./image/BELL.png" width="30px" height="30px"><a href="cart.html" class="yo">2</a> -->
+                <!-- <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()"> -->
+            </div>
+            <div class="smallcon">
+                <div class="row" style="display: block;"> 
+                    <div class="col-2" style="text-align: center;">
+                        <img src="./admin/image/hu4.jpeg">
+                    </div>
+                   
+                    <div class="col-2">
+                        <h1>Faculty Name</h1>
+                        <!-- <p>201101010</p> -->
+                        <p>Department : IT</p>
+                        <p>Subject Taught: Maths</p>
+                        <p>Experience : 10years</p>
+                        <p>Contact : 1234567890</p>
+                        <p>Email : ab@ab.com</p> 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <h2 class="title">List Of Students Enrolled</h2>
+    <div class="smallcon">
+        <div class="row">
+            <a href="" class="btn">
+                Enrolled Students 
+            </a>
+    </div> 
+
+    <script>
+        var menuitem = document.getElementById("menuitem")
+        menuitem.style.maxHeight = "0px";
+        function menutoggle() {
+            if (menuitem.style.maxHeight == "0px") {
+                menuitem.style.maxHeight = "200px";
+            }
+            else {
+                menuitem.style.maxHeight = "0px";
+            }
+        }
+    </script>
+</body>
+
+</html>
