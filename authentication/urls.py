@@ -19,4 +19,8 @@ urlpatterns = [
 	# Teacher
 	path('all-teachers', views.allTeachers, name="all-teachers"),
 	path('teacher/<teacher_id>/', views.singleTeacher, name="single-teacher"),
+    
+	# Student
+	path('add-student/', views.addStudent, name="add-student"),
+
 ]

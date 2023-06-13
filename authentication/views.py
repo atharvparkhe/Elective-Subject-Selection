@@ -202,7 +202,7 @@ def AdminReset(request, token):
         messages.error(request, str(e))
     return render(request, "auth/admin/admin-reset.html", context)
 
-pw = generate_random_passsword(12)
+
 ###############################################################################################################
 
 # @login_required("admin-login")
@@ -227,8 +227,19 @@ def addStudent(request):
     try:
         if request.method == 'POST':
             name = request.POST.get('name')
+            roll = request.POST.get('roll')
             email = request.POST.get('email')
-            password = request.POST.get('password')
+            phone = request.POST.get('phone')
+            if StudentModel.objects.filter(roll_no=roll).exists() or StudentModel.objects.filter(email=email).exists():
+                messages.info(request, 'This account already exist')
+                return redirect('add-student')
+            obj = StudentModel.objects.create(name=name, email=email, phone=phone, roll_no=roll)
+            pw = generate_random_passsword(12)
+            obj.set_password(pw)
+            obj.save()
+            thread_obj = send_password_via_mail(email, pw)
+            thread_obj.start()
+            messages.info(request, 'Student Added')
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "teacher/single-teacher.html", context=context)
+    return render(request, "students/add-single-student.html", context=context)

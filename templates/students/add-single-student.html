@@ -1,4 +1,4 @@
-{% extends '../../admin-base.html' %}
+{% extends '../admin-base.html' %}
 {% load static %}
 
 {% block content %}
@@ -11,7 +11,6 @@
                 <nav>
                     <ul id="menuitem">
                         <li><a href="{% url 'index' %}">HOME</a></li>
-                        <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
                         <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
                         <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
                     </ul>
