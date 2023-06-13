@@ -11,6 +11,10 @@ import uuid
 context = {}
 
 
+def mailMessage(request):
+    return render(request, "common/mail-message.html")
+
+
 @login_required(login_url='index')
 def logoutView(request):
     logout(request)
@@ -52,7 +56,7 @@ def StudentForgot(request):
             thread_obj.start()
             user.save()
             messages.info(request, 'We have sent you a link to reset password via mail')
-            return redirect('student-reset')
+            return redirect('mail-message')
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "auth/student/stu-forgot.html", context)
@@ -114,7 +118,7 @@ def TeacherForgot(request):
             thread_obj.start()
             user.save()
             messages.info(request, 'We have sent you a link to reset password via mail')
-            return redirect('teacher-reset')
+            return redirect('mail-message')
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "auth/teacher/tea-forgot.html", context)
@@ -176,7 +180,7 @@ def AdminForgot(request):
             thread_obj.start()
             admin_obj.save()
             messages.info(request, 'We have sent you a link to reset password via mail')
-            return redirect('student-reset')
+            return redirect('mail-message')
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "auth/admin/admin-forgot.html", context)
@@ -204,6 +208,20 @@ def AdminReset(request, token):
 
 
 ###############################################################################################################
+
+
+@login_required(login_url="student-login")
+def StudentDashboard(request):
+    try:
+        context["user"] = StudentModel.objects.get(email=request.user.email)
+        context["abc"] = "abc"
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "dashboard/student.html", context)
+
+
+###############################################################################################################
+
 
 # @login_required("admin-login")
 def allTeachers(request):
@@ -243,3 +261,4 @@ def addStudent(request):
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "students/add-single-student.html", context=context)
+

@@ -1,4 +1,4 @@
-{% extends '../../stu-base.html' %}
+{% extends '../stu-base.html' %}
 {% load static %}
 
 {% block content %}
@@ -27,11 +27,11 @@
                         <img src="./image/hu1.jpg">
                     </div>
                     <div class="col-2">
-                        <h1>Student Name</h1>
-                        <p>201101010</p>
-                        <p>Department : IT</p>
-                        <p>Contact : 1234567890</p>
-                        <p>Email : ab@ab.com</p> 
+                        <h2>{{user.name}}</h2>
+                        <p><b>Roll No : </b>{{user.roll_no}}</p>
+                        <p><b>Department : </b>IT</p>
+                        <p><b>Contact : </b>{{user.phone}}</p>
+                        <p><b>Email : </b>{{user.email}}</p> 
                     </div>
                 </div>
             </div>

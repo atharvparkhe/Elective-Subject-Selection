@@ -1,11 +1,13 @@
 from django.db import models
 from base.models import BaseModel
-from authentication.models import StudentModel
+from authentication.models import *
 
 
 class SubjectModel(BaseModel):
     name = models.CharField(max_length=50)
     desc = models.TextField()
+    department = models.ForeignKey(DepartmentModel, related_name="department_subject", on_delete=models.CASCADE)
+    teacher = models.ForeignKey(TeacherModel, related_name="subject_teacher", on_delete=models.CASCADE, null=True, blank=True)
     syllabus = models.URLField(max_length=200)
     def __str__(self):
         return self.name

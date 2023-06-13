@@ -7,6 +7,7 @@ class send_forgot_link(Thread):
     def __init__(self, email, tok, user):
         self.email = email
         self.tok = tok
+        self.user = user
         Thread.__init__(self)
     def run(self):
         try:
