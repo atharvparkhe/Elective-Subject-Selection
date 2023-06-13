@@ -120,9 +120,9 @@ p{
 }
 .title{
     text-align:center ;
-    margin: 80px auto 80px;
+    /* margin: 80px auto 80px; */
     position: relative;
-    line-height: 60px;
+    /* line-height: 60px; */
     color: #555;
 
 }
@@ -148,11 +148,7 @@ h4{
     transform: translateY(-10px);
 }
 .info{
-   
     justify-content: space-around;
-   
-
- 
 }
 .sec{
     max-width: 100%;
@@ -356,21 +352,19 @@ nav ul li a{
 .log{
     height: 100%;
     width: 100%;
-   
-   
 }
 .formbox{
     width: 380px;
-    height: 480px;
+    height: 500px;
     position: relative;
-    margin: 6% auto;
+    margin: 20px auto;
     background: #fff;
     padding: 5px;
     overflow: hidden;
     border-radius: 15px;
 }
 .button{
-    width: 220px;
+    width: 120px;
     margin: 35px auto;
     position: relative;
     box-shadow: 0 0 20px 9px  #f862944f;
@@ -405,7 +399,7 @@ nav ul li a{
     border-radius: 1px
 }
 .inputgrp{
-    top: 180px;
+    top: 100px;
     position: absolute;
     width: 280px;
     transition: 0.5s;
