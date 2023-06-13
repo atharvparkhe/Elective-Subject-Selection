@@ -1,0 +1,61 @@
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="image/image.png" width="125px">
+                </div>
+                <nav>
+                    <ul id="menuitem">
+                        <li><a href="">HOME</a></li>
+                        <li><a href="">PROFILE</a></li>
+                        <li><a href="">ELECTIVE</a></li>
+                        <li><a href="">TIME TABLE</a></li>
+                    </ul>
+                </nav>
+                <img src="image/BELL.png" width="30px" height="30px">
+                <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
+            </div>
+        
+        </div>
+    </div>
+
+
+    <div class="smallcon">
+        <h2 class="title">teacher</h2>
+        <div class="row">
+            <div class="col4">
+                <img src="image/hu4.jpeg" width="200px" height="400px">
+                <h4>faculty name</h4>
+                <p>IT dept</p>
+                
+            </div>
+            <div class="col4">
+                <img src="image/hu4.jpeg" width="200px" height="400px">
+                <h4>faculty name</h4>
+                <p>civil dept</p>
+            </div>
+            <div class="col4">
+                <img src="image/hu4.jpeg" width="200px" height="400px">
+                <h4>faculty name</h4>
+                <p>ETC dept</p>
+            </div>
+            <div class="col4">
+                <img src="image/hu4.jpeg" width="200px" height="400px">
+                <h4>faculty name</h4>
+                <p>IT dept</p>
+            </div>
+    <script>
+        var menuitem = document.getElementById("menuitem")
+        menuitem.style.maxHeight = "0px";
+        function menutoggle() {
+            if (menuitem.style.maxHeight == "0px") {
+                menuitem.style.maxHeight = "200px";
+            }
+            else {
+                menuitem.style.maxHeight = "0px";
+            }
+        }
+
+    </script>
+</body>
