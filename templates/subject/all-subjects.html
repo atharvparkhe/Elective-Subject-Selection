@@ -8,92 +8,35 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="./a4login/image/image.png" width="125px">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
                 </div>
                 <nav>
                     <ul id="menuitem">
-                        <li><a href="">HOME</a></li>
-                        <li><a href="allproduct.html">PROFILE</a></li>
-                        <li><a href="aboutus.html">ELECTIVE</a></li>
-                        <li><a href="">TIME TABLE</a></li>
+                        <li><a href="{% url 'index' %}">HOME</a></li>
+                        <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
+                        <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
+                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
                     </ul>
                 </nav>
-                <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
             </div>
         </div>
     </div>
 
     <div class="subject_container">
-        <div class="subject sub1">
-            <h1>Subject1</h1><br>
-            <p>Faculty name</p> <!--can be  a link to the faculty profile-->
-            <p>Department name</p>
-            <a href="single-subject.html" class="sub_info">Read More</a>
-        </div>
 
-        <div class="subject sub2">
-            <h1>Subject2</h1><br>
-            <p>Faculty name</p>
-            <p>Department name</p>
-            <a href="single-subject.html" class="sub_info">Read More</a>
-        </div>
+        {% for sub in subjects %}
 
-        <div class="subject sub3">
-            <h1>Subject3</h1><br>
-            <p>Faculty name</p>
-            <p>Department name</p>
-            <a href="single-subject.html" class="sub_info">Read More</a>
-        </div>
+            <div class="subject sub1">
+                <h1>{{sub.name}}</h1><br>
+                <p>{{sub.teacher.name}}</p> <!--can be  a link to the faculty profile-->
+                <p>{{sub.department.name}}</p>
+                <a href="single-subject.html" class="sub_info">Read More</a>
+            </div>
 
-        <div class="subject sub4">
-            <h1>Subject4</h1><br>
-            <p>Faculty name</p>
-            <p>Department name</p>
-            <a href="single-subject.html" class="sub_info">Read More</a>
-        </div>
+        {% endfor %}
 
-        <div class="subject sub5">
-            <h1>Subject5</h1><br>
-            <p>Faculty name</p>
-            <p>Department name</p>
-            <a href="single-subject.html" class="sub_info">Read More</a>
-        </div>
-
-        <div class="subject sub6">
-            <h1>Subject6</h1><br>
-            <p>Faculty name</p>
-            <p>Department name</p>
-            <a href="single-subject.html" class="sub_info">Read More</a>
-        </div>
-
-        <div class="subject sub7">
-            <h1>Subject7</h1><br>
-            <p>Faculty name</p>
-            <p>Department name</p>
-            <a href="single-subject.html" class="sub_info">Read More</a>
-        </div>
-
-        <div class="subject sub4">
-            <h1>Subject8</h1><br>
-            <p>Faculty name</p>
-            <p>Department name</p>
-            <a href="single-subject.html" class="sub_info">Read More</a>
-        </div>
     </div>
 
-    <script>
-        var menuitem = document.getElementById("menuitem")
-        menuitem.style.maxHeight = "0px";
-        function menutoggle() {
-            if (menuitem.style.maxHeight == "0px") {
-                menuitem.style.maxHeight = "200px";
-            }
-            else {
-                menuitem.style.maxHeight = "0px";
-            }
-        }
-
-    </script>
 </body>
 
 {% endblock content %}
