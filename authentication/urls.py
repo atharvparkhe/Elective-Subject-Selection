@@ -23,7 +23,7 @@ urlpatterns = [
 	path('admin-reset/<token>/', views.AdminReset, name="admin-reset"),
     
 	# Teacher
-	path('all-teachers', views.allTeachers, name="all-teachers"),
+	path('all-teachers/', views.allTeachers, name="all-teachers"),
 	path('teacher/<teacher_id>/', views.singleTeacher, name="single-teacher"),
     
 	# Student

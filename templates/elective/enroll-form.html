@@ -15,16 +15,15 @@
                         <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
                     </ul>
                 </nav>
-                <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
+                <img src="{% static 'images/menu.png' %}" width="30px" height="30px" class="menu" onclick="menutoggle()">
             </div>
         </div>
     </div>
 
     <div class="formbox">
-        <!-- <img class="y" src="image/image.png" width="100px" height="100px"> -->
         <h3 class="x">Enrollment Form</h3>
-
         <form id="login" class="inputgrp" method="post">
+            {% csrf_token %}
             <input type="text" name="stu_name" class="inputfeild" placeholder="Name" required>
             <input type="text" name="stu_rollno" class="inputfeild" placeholder="Roll Number" required>
             <input type="text" name="stu_dept" class="inputfeild" placeholder="Department" required>

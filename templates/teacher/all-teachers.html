@@ -10,43 +10,29 @@
                 </div>
                 <nav>
                     <ul id="menuitem">
-                        <li><a href="">HOME</a></li>
-                        <li><a href="">PROFILE</a></li>
-                        <li><a href="">ELECTIVE</a></li>
-                        <li><a href="">TIME TABLE</a></li>
+                        <li><a href="{% url 'index' %}">HOME</a></li>
+                        <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
+                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
                     </ul>
                 </nav>
-                <img src="image/BELL.png" width="30px" height="30px">
-                <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
+                <img src="{% static 'images/menu.png' %}" width="30px" height="30px" class="menu" onclick="menutoggle()">
             </div>
-        
         </div>
     </div>
 
 
     <div class="smallcon">
-        <h2 class="title">teacher</h2>
+        <h2 class="title">Teachers</h2>
         <div class="row">
-            <div class="col4">
-                <img src="image/hu4.jpeg" width="200px" height="400px">
-                <h4>faculty name</h4>
-                <p>IT dept</p>
-            </div>
-            <div class="col4">
-                <img src="image/hu4.jpeg" width="200px" height="400px">
-                <h4>faculty name</h4>
-                <p>civil dept</p>
-            </div>
-            <div class="col4">
-                <img src="image/hu4.jpeg" width="200px" height="400px">
-                <h4>faculty name</h4>
-                <p>ETC dept</p>
-            </div>
-            <div class="col4">
-                <img src="image/hu4.jpeg" width="200px" height="400px">
-                <h4>faculty name</h4>
-                <p>IT dept</p>
-            </div>
+            {% for tea in teachers %}
+                <a class="col4" href="{% url 'single-teacher' tea.id %}">
+                    <div class="col4">
+                        <img src="{{ tea.profile_pic.url }}" width="200px" height="400px">
+                        <h4>{{ tea.name | safe }}</h4>
+                        <p>{{ tea.department.name | safe }}</p>
+                    </div>
+                </a>
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}

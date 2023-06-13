@@ -6,7 +6,7 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="./a4login/image/image.png" width="125px">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
                 </div>
                 <nav>
                     <ul id="menuitem">
@@ -15,7 +15,7 @@
                         <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
                     </ul>
                 </nav>
-                <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
+                <img src="{% static 'images/menu.png' %}" width="30px" height="30px" class="menu" onclick="menutoggle()">
             </div>
         </div>
     </div>
@@ -25,6 +25,7 @@
         <h3 class="x">Elective Change Request</h3>
 
         <form id="login" class="inputgrp" method="post">
+            {% csrf_token %}
             <input type="text" name="stu_name" class="inputfeild" placeholder="Name" required>
             <input type="text" name="stu_rollno" class="inputfeild" placeholder="Roll Number" required>
             <input type="text" name="stu_dept" class="inputfeild" placeholder="Department" required>
