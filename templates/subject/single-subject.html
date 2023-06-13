@@ -10,10 +10,9 @@
                 </div>
                 <nav>
                     <ul id="menuitem">
-                        <li><a href="">HOME</a></li>
-                        <li><a href="allproduct.html">PROFILE</a></li>
-                        <li><a href="aboutus.html">ELECTIVE</a></li>
-                        <li><a href="">TIME TABLE</a></li>
+                        <li><a href="{% url 'index' %}">HOME</a></li>
+                        <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
+                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
                     </ul>
                 </nav>
                 <!-- <img src="image/BELL.png" width="30px" height="30px">

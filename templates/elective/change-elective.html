@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="static/css/student-style.css">
-</head>
+{% extends '../stu-base.html' %}
+{% load static %}
 
-<body>
+{% block content %}
     <div class="header">
         <div class="container">
             <div class="navbar">
@@ -18,10 +10,9 @@
                 </div>
                 <nav>
                     <ul id="menuitem">
-                        <li><a href="">HOME</a></li>
-                        <li><a href="allproduct.html">PROFILE</a></li>
-                        <li><a href="aboutus.html">ELECTIVE</a></li>
-                        <li><a href="">TIME TABLE</a></li>
+                        <li><a href="{% url 'index' %}">HOME</a></li>
+                        <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
+                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
                     </ul>
                 </nav>
                 <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
@@ -60,21 +51,4 @@
             <input type="submit" name="submit" class="submitbtn">
         </form> 
     </div>
-    <script src="" async defer></script>
-    
-    <script>
-        var menuitem = document.getElementById("menuitem")
-        menuitem.style.maxHeight = "0px";
-        function menutoggle() {
-            if (menuitem.style.maxHeight == "0px") {
-                menuitem.style.maxHeight = "200px";
-            }
-            else {
-                menuitem.style.maxHeight = "0px";
-            }
-        }
-
-    </script>
-</body>
-
-</html>
+{% endblock content %}
