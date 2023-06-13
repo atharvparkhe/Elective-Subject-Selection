@@ -2,8 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <!-- <div class="header"> -->
-        <!-- <div class="container"> -->
+
             <div class="navbar">
                 <div class="logo">
                     <img src="{% static 'images/logo.png' %}" width="125px">
@@ -14,12 +13,8 @@
                         <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
                         <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
                         <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
-                        <!-- <li><a href="">CONTACT US</a></li> -->
                     </ul>
                 </nav>
-
-                <!-- <img  src="./image/BELL.png" width="30px" height="30px"><a href="cart.html" class="yo">2</a> -->
-                <!-- <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()"> -->
             </div>
             <div class="smallcon">
                 <div class="row"> 
@@ -29,15 +24,12 @@
                     <div class="col-2">
                         <h2>{{user.name}}</h2>
                         <p><b>Roll No : </b>{{user.roll_no}}</p>
-                        <p><b>Department : </b>IT</p>
+                        <p><b>Department : </b>{{user.department.name}}</p>
                         <p><b>Contact : </b>{{user.phone}}</p>
                         <p><b>Email : </b>{{user.email}}</p> 
                     </div>
                 </div>
             </div>
-
-        <!-- </div> -->
-    <!-- </div> -->
 
     <h2 class="title">SELECTED ELECTIVES</h2>
     <div class="smallcon">

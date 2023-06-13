@@ -1,9 +1,12 @@
-<body>
+{% extends '../admin-base.html' %}
+{% load static %}
+
+{% block content %}
     <div class="header">
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="image/image.png" width="125px">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
                 </div>
                 <nav>
                     <ul id="menuitem">
@@ -28,7 +31,6 @@
                 <img src="image/hu4.jpeg" width="200px" height="400px">
                 <h4>faculty name</h4>
                 <p>IT dept</p>
-                
             </div>
             <div class="col4">
                 <img src="image/hu4.jpeg" width="200px" height="400px">
@@ -45,17 +47,6 @@
                 <h4>faculty name</h4>
                 <p>IT dept</p>
             </div>
-    <script>
-        var menuitem = document.getElementById("menuitem")
-        menuitem.style.maxHeight = "0px";
-        function menutoggle() {
-            if (menuitem.style.maxHeight == "0px") {
-                menuitem.style.maxHeight = "200px";
-            }
-            else {
-                menuitem.style.maxHeight = "0px";
-            }
-        }
-
-    </script>
-</body>
+        </div>
+    </div>
+{% endblock content %}

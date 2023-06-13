@@ -24,9 +24,12 @@ def singleSubject(request, sub_id):
         if not SubjectModel.objects.filter(id=sub_id).exists():
             messages.error(request, 'Invalid Subject ID.')
             return redirect('all-subjects')
-        context["subject"] = SubjectModel.objects.get(id=sub_id)
+        sub = SubjectModel.objects.get(id=sub_id)
+        context["subject"] = sub
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "subject/single-subject.html", context=context)
 
 
+def enroll(request, sub_id):
+    return render(request, "common/time-table.html")

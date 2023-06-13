@@ -6,7 +6,7 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="./a4login/image/image.png" width="125px">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
                 </div>
                 <nav>
                     <ul id="menuitem">
@@ -15,10 +15,7 @@
                         <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
                     </ul>
                 </nav>
-                <!-- <img src="image/BELL.png" width="30px" height="30px">
-                <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()"> -->
             </div>
-        
         </div>
     </div>
 
@@ -26,22 +23,21 @@
         <div class="row">
             
             <div class="col-2">
-                <h2 class="title">Course name</h2>
+                <h2 class="title">{{subject.name}}</h2>
             </div>
             <div class="col-2">
-                <h4>Taught by : Faculty name</h4>
-                <h5>Assistant prof IT dept</h5><br> 
-                <h3>Subject details &#8594;</h3><br>
-                <p> 
-                    Cyber security refers to the protection of networks, devices, programs, and data from attacks, damage, or unauthorized access.14 It involves the use of cryptographic protocols to encrypt emails, files, and other critical data to ensure confidentiality, integrity, and availability of information.<br>3 Cybersecurity measures are designed to combat threats against networked systems and applications, whether those threats originate from inside or outside of an organization
-                    <br>
-                </p>
+                <h4><b>Taught by : </b>{{subject.teacher.name}}</h4>
+                <h5>{{subject.teacher.post}}</h5>
                 <br> 
-                <h3>Subject syllabus  &#8594;</h3>
-                <a href="">Syllabus link</a>
+                <h3>Subject details &#8594;</h3>
+                <br>
+                <p>{{subject.desc}}<br></p>
+                <br> 
+                <h3>Subject syllabus  &#8594;</h3><br>
+                <a href="{{subject.syllabus}}" target="_blank">Syllabus link</a>
                 
             </div>
-            <a href="enroll_form.html" style="background-color: white; padding: 5px; border-radius: 10px;">Enroll Now</a>
+            <a href="{% url 'enroll' subject.id %}" style="background-color: white; padding: 5px; border-radius: 10px;">Enroll Now</a>
         </div>
     </div>
 {% endblock content %}

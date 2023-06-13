@@ -11,5 +11,8 @@ urlpatterns = [
 	path('all-subjects/', views.allSubjects, name="all-subjects"),
 	path('subject/<sub_id>/', views.singleSubject, name="single-subject"),
     
+
+    
 	# 
+	path('enroll/<sub_id>/', views.enroll, name="enroll"),
 ]

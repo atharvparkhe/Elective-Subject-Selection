@@ -30,7 +30,7 @@
                 <h1>{{sub.name}}</h1><br>
                 <p>{{sub.teacher.name}}</p> <!--can be  a link to the faculty profile-->
                 <p>{{sub.department.name}}</p>
-                <a href="single-subject.html" class="sub_info">Read More</a>
+                <a href="{% url 'single-subject' sub.id %}" class="sub_info">Read More</a>
             </div>
 
         {% endfor %}

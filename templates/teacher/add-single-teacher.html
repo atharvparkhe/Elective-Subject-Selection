@@ -1,9 +1,12 @@
-<body>
+{% extends '../admin-base.html' %}
+{% load static %}
+
+{% block content %}
     <div class="header">
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="image/image.png" width="125px">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
                 </div>
                 <nav>
                     <ul id="menuitem">
@@ -37,17 +40,4 @@
         </form>
     </div>
 </div>
-<script>
-    var menuitem = document.getElementById("menuitem")
-    menuitem.style.maxHeight = "0px";
-    function menutoggle() {
-        if (menuitem.style.maxHeight == "0px") {
-            menuitem.style.maxHeight = "200px";
-        }
-        else {
-            menuitem.style.maxHeight = "0px";
-        }
-    }
-
-</script>
-</body>
+{% endblock content %}
