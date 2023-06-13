@@ -7,36 +7,33 @@
                 </div>
                 <nav>
                     <ul id="menuitem">
-
                         <li><a href="">HOME</a></li>
                         <li><a href="allproduct.html">PROFILE</a></li>
                         <li><a href="aboutus.html">ELECTIVE</a></li>
                         <li><a href="">TIME TABLE</a></li>
                     </ul>
+
                 </nav>
-
-
-                <img src="image/BELL.png" width="30px" height="30px">
+                <!-- <img src="image/BELL.png" width="30px" height="30px"> -->
                 <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
             </div>
-
         </div>
     </div>
    
 <div class="formbox2">
     <div class="contactcol ">
-        <h2 class="title">Add Faculty</h2>
+        <h2 class="title">Add Subject</h2>
         <form action="" method="post">
-            <input class="an" type="text" name="tr_name" placeholder="Enter faculty name" required>
-            <input class="an" type="text" name="tr_regno" placeholder="Enter faculty register no" required>
-            <input class="an" type="text" name="tr_dept" placeholder="Enter faculty Department" required>
-            <input class="an" type="email" name="tr_email" placeholder="Enter faculty email" required>
-            <input class="an" type="text" name="tr_contact" placeholder="Enter faculty contact no" required>
-            <!-- <a href="" class="submitbtn">Add faculty</a> -->
-            <input type="submit" class="submitbtn" name="submit" value="Add Faculty">
+            <input class="an" type="text" placeholder="Enter subject name" required>
+            <input class="an" type="text" placeholder="Enter subject code" required>
+            <input class="an" type="text" placeholder="Enter subject Department" required>
+            <input class="an" type="text" placeholder="Enter subject faculty" required>
+            <!-- <a href="" class="submitbtn">Add subject</a> -->
+            <input type="submit" class="submitbtn" name="submit" value="Add Subject">
         </form>
     </div>
 </div>
+
 <script>
     var menuitem = document.getElementById("menuitem")
     menuitem.style.maxHeight = "0px";
@@ -48,6 +45,6 @@
             menuitem.style.maxHeight = "0px";
         }
     }
-
 </script>
+
 </body>
