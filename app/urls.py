@@ -17,7 +17,7 @@ urlpatterns = [
 	# path('teacher-dashboard/', views.TeacherDashboard, name="teacher-dashboard"),
 	# path('admin-dashboard/', views.AdminDashboard, name="admin-dashboard"),
 
-	# 
+	# Course Enrollment
 	path('enroll/<num>/', views.enroll, name="enroll"),
-	path('change-elective/<num>/<enrollment_id>/', views.changeElective, name="change-elective"),
+	path('request-change-elective/<num>/', views.changeElective, name="change-elective"),
 ]

@@ -24,12 +24,13 @@
         <h3 class="x">Enrollment Form</h3>
         <form id="login" class="inputgrp" method="post">
             {% csrf_token %}
-            <input type="text" name="stu_name" class="inputfeild" placeholder="Name" required>
-            <input type="text" name="stu_rollno" class="inputfeild" placeholder="Roll Number" required>
-            <input type="text" name="stu_dept" class="inputfeild" placeholder="Department" required>
-            <input type="email" name="stu_email" class="inputfeild" placeholder="Email id" required>
-            <input type="tel" name="stu_num" class="inputfeild" placeholder="ContactNumber" required>
-            <input type="submit" name="submit" class="submitbtn">
+            <select id="subject" name="subject" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
+                <option value="">Select Subject</option>
+                {% for sub in subjects %}
+                    <option value={{sub.id}}>{{sub.name}}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="submit" class="submitbtn">SUBMIT</button>
         </form> 
     </div>
 {% endblock content %}

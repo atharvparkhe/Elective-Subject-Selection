@@ -48,17 +48,21 @@ def singleSubject(request, sub_id):
 
 @login_required(login_url="student-login")
 def enroll(request, num):
-    if num not in [1,2,3]:
-        messages.error(request, "Invalid Subject Number")
-        return redirect('student-dashboard')
-    user = StudentModel.objects.get(email=request.user.email)
-    if not EnollmentModel.objects.filter(student=user).exists():
+    try:
+        # if num not in [1,2,3]:
+        #     messages.error(request, "Invalid Subject Number")
+        #     return redirect('student-dashboard')
         context["subjects"] = SubjectModel.objects.all()
-    else:
-        obj = EnollmentModel.objects.get(student=user)
-        li = [obj.subject_1, obj.subject_2, obj.subject_3]
-        context["subjects"] = SubjectModel.objects.all().exclude(li)
-    return render(request, "common/time-table.html")
+    except Exception as e:
+        messages.error(request, str(e))
+    # user = StudentModel.objects.get(email=request.user.email)
+    # if not EnollmentModel.objects.filter(student=user).exists():
+    #     context["subjects"] = SubjectModel.objects.all()
+    # else:
+    #     obj = EnollmentModel.objects.get(student=user)
+    #     li = [obj.subject_1, obj.subject_2, obj.subject_3]
+    #     context["subjects"] = SubjectModel.objects.all().exclude(li)
+    return render(request, "elective/enroll-form.html")
 
 
 def changeElective(request, enrollment_id):
