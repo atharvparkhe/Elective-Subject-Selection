@@ -14,7 +14,7 @@ class ContactUs(models.Model):
 class SubjectModel(BaseModel):
     name = models.CharField(max_length=50)
     desc = models.TextField()
-    cover_img = models.ImageField(upload_to="subject", height_field=None, width_field=None, max_length=None, null=True, blank=True)
+    cover_img = models.ImageField(upload_to="subject", height_field=None, width_field=None, max_length=None)
     department = models.ForeignKey(DepartmentModel, related_name="department_subject", on_delete=models.CASCADE)
     teacher = models.OneToOneField(TeacherModel, on_delete=models.CASCADE, null=True, blank=True)
     syllabus = models.URLField(max_length=200)
