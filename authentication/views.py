@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.conf import settings
+from rest_framework.decorators import api_view
 from .threads import *
 from .models import *
 from .utils import *
@@ -265,16 +266,18 @@ def addStudent(request):
     return render(request, "students/add-single-student.html", context=context)
 
 
+@api_view(["POST"])
 def addStudentsExcel(request):
     try:
-        if request.method == 'POST':
-            excel_file = request.FILES.get('excel_file')
-            obj = FileModel.objects.create(file=excel_file)
-            file_path = settings.BASE_DIR + obj.file
-            print("@@@@@@@@@@@@@@@@")
-            print(file_path)
-            print("@@@@@@@@@@@@@@@@")
-            # df = pandas.read_excel()
+        pass
+        # if request.method == 'POST':
+        #     excel_file = request.FILES.get('excel_file')
+        #     obj = FileModel.objects.create(file=excel_file)
+        #     file_path = settings.BASE_DIR + obj.file
+        #     print("@@@@@@@@@@@@@@@@")
+        #     print(file_path)
+        #     print("@@@@@@@@@@@@@@@@")
+        #     # df = pandas.read_excel()
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "students/add-multiple-students.html", context=context)

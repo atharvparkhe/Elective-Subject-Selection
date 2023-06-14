@@ -18,6 +18,7 @@ class SubjectModel(BaseModel):
     department = models.ForeignKey(DepartmentModel, related_name="department_subject", on_delete=models.CASCADE)
     teacher = models.OneToOneField(TeacherModel, on_delete=models.CASCADE, null=True, blank=True)
     syllabus = models.URLField(max_length=200)
+    intro = models.URLField(max_length=200, default="https://youtu.be/Fw-S8NCDsTY")
     def __str__(self):
         return self.name
 
