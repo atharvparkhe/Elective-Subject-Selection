@@ -37,33 +37,37 @@
             </div>
 
     <h2 class="title">SELECTED ELECTIVES</h2>
+    <div class="feedback">
     <div class="smallcon">
         <div class="row">
         {% if enrollment %}
-                <div class="col4">
-                    <h4>{{enrollment.subject_1.name}}</h4>
+                <div class="col3">
+                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
+                    <h2>{{enrollment.subject_1.name}}</h2>
                     <p>{{enrollment.subject_1.department.name}}</p>
                     <a href="{% url 'change-elective' 1 %}" class="btn">CHANGE</a>
-                    <a href="{% url 'single-subject' enrollment.subject_1.id %}" class="sub_info">Subject Details</a>
+                    <br><a href="{% url 'single-subject' enrollment.subject_1.id %}" class="sub_info">Subject Details</a>
                 </div>
                 {% if enrollment.subject_2 %}
-                <div class="col4">
-                    <h4>{{enrollment.subject_2.name}}</h4>
+                <div class="col3">
+                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
+                    <h2>{{enrollment.subject_2.name}}</h2>
                     <p>{{enrollment.subject_2.department.name}}</p>
                     <a href="{% url 'change-elective' 2 %}" class="btn">CHANGE</a>
-                    <a href="{% url 'single-subject' enrollment.subject_2.id %}" class="sub_info">Subject Details</a>
+                    <br><a href="{% url 'single-subject' enrollment.subject_2.id %}" class="sub_info">Subject Details</a>
                 </div>
                 {% else %}
-                <div class="col4">
+                <div class="col3">
                     <a href="{% url 'enroll' 2 %}" class="btn">Apply for Elective Subject 2</a>
                 </div>
                 {% endif %}
                 {% if enrollment.subject_3 %}
-                <div class="col4">
-                    <h4>{{enrollment.subject_3.name}}</h4>
+                <div class="col3">
+                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
+                    <h2>{{enrollment.subject_3.name}}</h2>
                     <p>{{enrollment.subject_3.department.name}}</p>
                     <a href="{% url 'change-elective' 3 %}" class="btn">CHANGE</a>
-                    <a href="{% url 'single-subject' enrollment.subject_3.id %}" class="sub_info">Subject Details</a>
+                    <br><a href="{% url 'single-subject' enrollment.subject_3.id %}" class="sub_info">Subject Details</a>
                 </div>
                 {% else %}
                 <div class="col4">
@@ -75,4 +79,5 @@
         {% endif %}
         </div>
     </div>
+</div>
 {% endblock content %}
