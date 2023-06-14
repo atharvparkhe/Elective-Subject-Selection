@@ -13,7 +13,7 @@
                     <ul id="menuitem">
                         <li><a href="{% url 'index' %}">HOME</a></li>
                         <li><a href="{% url 'teacher-dashboard' %}">PROFILE</a></li>
-                        <li><a href="{% url 'students' %}">STUDENTS</a></li>
+                        <li><a href="{% url 'enrolled-students-list' %}">STUDENTS</a></li>
                         <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
                         <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
                     </ul>
@@ -22,13 +22,16 @@
             <div class="smallcon">
                 <div class="row" style="display: block;"> 
                     <div class="col-2" style="text-align: center;">
-                        <img src="{{ teacher.profile_pic.url }}">
+                        {% if teacher.profile_pic %}
+                            <img src="{{teacher.profile_pic.url}}" width="400px" height="400px">
+                        {% else %}
+                            <img src="{% static 'images/profile.webp' %}" width="400px" height="400px">
+                        {% endif %}
                     </div>
                    
                     <div class="col-2">
                         <h1>{{ teacher.name | safe }}</h1>
                         <p><b>Department :</b> {{ teacher.department.name | safe }}</p>
-                        <p><b>Subject Taught:</b> {{ subject | safe }}</p>
                         <p><b>Experience :</b> {{ teacher.experience | safe }} years</p>
                         <p><b>Contact :</b> {{ teacher.phone | safe }}</p>
                         <p><b>Email :</b> {{ teacher.email | safe }}</p> 
@@ -39,11 +42,10 @@
         </div>
     </div>
 
-    <h2 class="title">List Of Students Enrolled</h2>
     <div class="smallcon">
         <div class="row">
-            <a href="enrolled-students-list.html" class="btn">
-                Enrolled Students 
+            <a href="{% url 'enrolled-students-list' %}" class="btn">
+                List Of Students Enrolled
             </a>
     </div> 
 

@@ -149,4 +149,49 @@ def StudentDashboard(request):
     return render(request, "dashboard/student.html", context)
 
 
+@login_required(login_url="teacher-login")
+def TeacherDashboard(request):
+    try:
+        teacher_obj = TeacherModel.objects.get(email=request.user.email)
+        context["teacher"] = teacher_obj
+        # if not EnollmentModel.objects.filter(student=teacher_obj).exists():
+        #     context["enrollment"] = None
+        # else :
+        #     context["enrollment"] = EnollmentModel.objects.get(student=teacher_obj)
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "dashboard/teacher.html", context)
+
+
+@login_required(login_url="admin-login")
+def AdminDashboard(request):
+    try:
+        context["hello"] = "hello"
+        # teacher_obj = TeacherModel.objects.get(email=request.user.email)
+        # context["teacher"] = teacher_obj
+        # if not EnollmentModel.objects.filter(student=teacher_obj).exists():
+        #     context["enrollment"] = None
+        # else :
+        #     context["enrollment"] = EnollmentModel.objects.get(student=teacher_obj)
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "dashboard/admin.html", context)
+
+
 ###############################################################################################################
+
+@login_required(login_url="teacher-login")
+def enrolledStudentList(request):
+    try:
+        teacher_obj = TeacherModel.objects.get(email=request.user.email)
+        subjects = teacher_obj.subject_teacher.all()
+        enrollments = set()
+        for sub in subjects:
+            enrollments.add(sub.enrolled_subject_1.all())
+            enrollments.add(sub.enrolled_subject_2.all())
+            enrollments.add(sub.enrolled_subject_3.all())
+        context["students"] = enrollments
+        print(enrollments)
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "students/all-students.html", context)

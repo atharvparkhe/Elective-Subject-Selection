@@ -64,15 +64,12 @@
             <div class="row">
                 <div class="info">
                     <p class=><b>Problem Statement 3 - Elective Subject Selection App
-                        Build an application <br>that can be run as a container on the cloud for <br>selecting/updating/deleting elective subject for each student.</b><br> 
-                                
+                        Build an application <br>that can be run as a container on the cloud for <br>selecting/updating/deleting elective subject for each student.</b><br>     
                         </p>
                 </div>
                 <div class="sec"><img src="{% static 'images/ps3.png' %}" width="400px" height="400px"></div>
             </div>
-
         </div>
-
     </div>
     </div>
     </div>
@@ -81,20 +78,24 @@
     <div class="feedback">
         <div class="smallcon">
             <div class="row">
-                <div class="col3">
-                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
-                    <h2 class="quote">Student login</h2>
-                   
-                </div>
-                <div class="col3">
-                    <div ><img src="{% static 'images/teacher.png' %}" width="100px" height="100px"></div>
-                    <h2 class="quote">teacher login</h2>
-                  
-                </div>
-                <div class="col3">
-                    <div><img src="{% static 'images/admin.png' %}" width="100px" height="100px"></div>
-                    <h2 class="quote">Admin login</h2>
-                </div>
+                <a href="{% url 'student-dashboard' %}">
+                    <div class="col3">
+                        <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div><br>
+                        <h2 class="quote">Student Login</h2>
+                    </div>
+                </a>
+                <a href="{% url 'teacher-dashboard' %}">
+                    <div class="col3">
+                        <div ><img src="{% static 'images/teacher.png' %}" width="100px" height="100px"></div><br>
+                        <h2 class="quote">Teacher Login</h2>
+                    </div>
+                </a>
+                <a href="{% url 'admin-dashboard' %}">
+                    <div class="col3">
+                        <div><img src="{% static 'images/admin.png' %}" width="100px" height="100px"></div><br>
+                        <h2 class="quote">Admin Login</h2>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
