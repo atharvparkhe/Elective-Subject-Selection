@@ -98,6 +98,7 @@ p{
     flex-basis: 30%;
     min-width: 250px;
     margin-bottom: 30px;
+    cursor: pointer;
 }
 .col3 img{
     width: 100%;
@@ -178,9 +179,10 @@ h4{
    background-color: #fff;
 }
 .feedback .col3 img{
-width: 50px;
+width: 100px;
+height: 100px;
 margin-top: 20px;
-border-radius: 50%;
+/* border-radius: 50%; */
 
 }
 .feedback .col3:hover{
@@ -188,7 +190,7 @@ border-radius: 50%;
 }
 .quote{
     font-size: 35px;
-    color: #ff2953;
+    color: #84efff;
 }
 .feedback .col3 h3{
     font-weight: 600;
