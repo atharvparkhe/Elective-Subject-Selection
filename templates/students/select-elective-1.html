@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="with=device-width, intial-scale=1.0 shrink-to-fit=no">
+    <title>addstudent</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <img src="image/image.png" width="125px">
+                </div>
+                <nav>
+                    <ul id="menuitem">
+
+                        <li><a href="">HOME</a></li>
+                        <li><a href="allproduct.html">PROFILE</a></li>
+                        <li><a href="aboutus.html">ELECTIVE</a></li>
+                        <li><a href="">TIME TABLE</a></li>
+                    </ul>
+                </nav>
+                <!-- <img src="image/BELL.png" width="30px" height="30px"> -->
+                <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+   
+<div class="formbox2">
+    <div class="contactcol ">
+        <h2 class="title">Choose Elective 1</h2>
+        <form action="">
+            <input class="an" type="text" placeholder="Enter student name" required>
+            <input class="an" type="text" placeholder="Enter student roll no" required>
+            <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
+                <option value="">Enter Student Department</option>
+                <option value="dept1">dept1</option>
+                <option value="dept2">dept2</option>
+                <option value="dept3">dept3</option>
+                <option value="dept4">dept4</option>
+              </select>
+            <input class="an" type="email" placeholder="Enter student email" required>
+            <input class="an" type="text" placeholder="Enter student contact no" required>
+            <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
+                <option value="">Elective 1</option>
+                <option value="sub1">sub1</option>
+                <option value="sub2">sub2</option>
+                <option value="sub3">sub3</option>
+                <option value="sub4">sub4</option>
+              </select>
+            
+            <a href="" class="submitbtn">Add Student</a>
+        </form>
+    </div>
+</div>
+
+    <script>
+        var menuitem = document.getElementById("menuitem")
+        menuitem.style.maxHeight = "0px";
+        function menutoggle() {
+            if (menuitem.style.maxHeight == "0px") {
+                menuitem.style.maxHeight = "200px";
+            }
+            else {
+                menuitem.style.maxHeight = "0px";
+            }
+        }
+
+    </script>
+</body>
+
+</html>
