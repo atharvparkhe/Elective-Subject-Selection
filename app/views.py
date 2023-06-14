@@ -10,6 +10,20 @@ def homePage(request):
     return render(request, "common/index.html")
 
 
+def contactPage(request):
+    try:
+        if request.method == 'POST':
+            name = request.POST.get('name')
+            email = request.POST.get('email')
+            msg = request.POST.get('message')
+            thread_obj = send_contact_email(email, name)
+            thread_obj.start()
+            ContactUs.objects.create(name=name, email=email, msg=msg)
+    except Exception as e:
+        print(e)
+    return render(request, "common/contact.html", context)
+
+
 def timeTable(request):
     return render(request, "common/time-table.html")
 
