@@ -18,7 +18,7 @@ class SubjectModel(BaseModel):
     department = models.ForeignKey(DepartmentModel, related_name="department_subject", on_delete=models.CASCADE)
     teacher = models.OneToOneField(TeacherModel, on_delete=models.CASCADE, null=True, blank=True)
     syllabus = models.URLField(max_length=200)
-    intro = models.URLField(max_length=200, default="https://youtu.be/Fw-S8NCDsTY")
+    intro = models.URLField(max_length=200)
     def __str__(self):
         return self.name
 
@@ -26,8 +26,8 @@ class SubjectModel(BaseModel):
 class EnollmentModel(BaseModel):
     student = models.OneToOneField(StudentModel, on_delete=models.CASCADE)
     subject_1 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_1", on_delete=models.CASCADE)
-    subject_2 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_2", on_delete=models.CASCADE)
-    subject_3 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_3", on_delete=models.CASCADE)
+    subject_2 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_2", on_delete=models.CASCADE, null=True, blank=True)
+    subject_3 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_3", on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return self.student.name
 

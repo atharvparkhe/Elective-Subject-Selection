@@ -46,7 +46,10 @@ def singleSubject(request, sub_id):
     return render(request, "subject/single-subject.html", context=context)
 
 
-def enroll(request, sub_id):
+def enroll(request, num):
+    if num not in [1,2,3]:
+        messages.error(request, "Invalid Subject Number")
+        return redirect('student-dashboard')
     return render(request, "common/time-table.html")
 
 

@@ -18,6 +18,6 @@ urlpatterns = [
 	# path('admin-dashboard/', views.AdminDashboard, name="admin-dashboard"),
 
 	# 
-	path('enroll/<sub_id>/', views.enroll, name="enroll"),
-	path('change-elective/<enrollment_id>/', views.changeElective, name="change-elective"),
+	path('enroll/<num>/', views.enroll, name="enroll"),
+	path('change-elective/<num>/<enrollment_id>/', views.changeElective, name="change-elective"),
 ]
