@@ -1,0 +1,37 @@
+{% extends '../admin-base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{% static 'images/logo.png' %}" width="125px">
+            </div>
+            <nav>
+                <ul id="menuitem">
+                    <li><a href="{% url 'index' %}">HOME</a></li>
+                    <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
+                    <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
+                </ul>
+            </nav>
+            <!-- <img src="image/BELL.png" width="30px" height="30px"> -->
+            <img src="{% static 'images/menu.jpg' %}" width="30px" height="30px" class="menu" onclick="menutoggle()">
+        </div>
+    </div>
+  </div>
+  <div class="container1">
+    <form action="" method="post">
+      {% csrf_token %}
+      <input type="file" id="file-input" />
+      <label for="file-input">
+        <h3>Upload the excel sheet</h3>
+        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        &nbsp; Choose Files To Upload
+      </label>
+      <button type="submit">SUBMIT</button>
+    </form>
+  </div>
+    <!-- Script -->
+    <script src="{% static 'js/script.js' %}"></script>
+{% endblock content %}

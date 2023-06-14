@@ -277,4 +277,4 @@ def addStudentsExcel(request):
             # df = pandas.read_excel()
     except Exception as e:
         messages.error(request, str(e))
-    return render(request, "students/add-students-excel.html", context=context)
+    return render(request, "students/add-multiple-students.html", context=context)
