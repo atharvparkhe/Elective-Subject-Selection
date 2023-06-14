@@ -38,5 +38,6 @@ class ChangeElectiveModel(BaseModel):
     to_sub = models.ForeignKey(SubjectModel, related_name="to_subject", on_delete=models.CASCADE)
     teacher_1_approval = models.BooleanField(default=False)
     teacher_2_approval = models.BooleanField(default=False)
+    is_resolved = models.BooleanField(default=False)
     def __str__(self):
         return self.student.name

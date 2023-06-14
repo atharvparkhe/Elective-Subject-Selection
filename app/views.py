@@ -49,25 +49,87 @@ def singleSubject(request, sub_id):
 @login_required(login_url="student-login")
 def enroll(request, num):
     try:
-        # if num not in [1,2,3]:
-        #     messages.error(request, "Invalid Subject Number")
-        #     return redirect('student-dashboard')
-        context["subjects"] = SubjectModel.objects.all()
+        if num not in ["1","2","3"]:
+            messages.error(request, "Invalid Subject Number")
+            return redirect('student-dashboard')
+        user = StudentModel.objects.get(email=request.user.email)
+        if not EnollmentModel.objects.filter(student=user).exists():
+            context["subjects"] = SubjectModel.objects.all()
+        else:
+            obj = EnollmentModel.objects.get(student=user)
+            li = [obj.subject_1.id]
+            if obj.subject_2 != None:
+                li.append(obj.subject_2.id)
+            if obj.subject_3 != None:
+                li.append(obj.subject_3.id)
+            context["subjects"] = SubjectModel.objects.all().exclude(id__in=li)
+        if request.method == 'POST':
+            sub_id = request.POST.get('subject')
+            if not SubjectModel.objects.filter(id=sub_id).exists():
+                messages.error(request, "Invalid Subject ID")
+                return redirect('student-dashboard')
+            sub_obj = SubjectModel.objects.get(id=sub_id)
+            if num == "1":
+                obj.subject_1 = sub_obj
+            elif num == "2":
+                obj.subject_2 = sub_obj
+            elif num == "3":
+                obj.subject_3 = sub_obj
+            obj.save()
+            messages.info(request, "Elective Subject Added")
+            return redirect('student-dashboard')
     except Exception as e:
         messages.error(request, str(e))
-    # user = StudentModel.objects.get(email=request.user.email)
-    # if not EnollmentModel.objects.filter(student=user).exists():
-    #     context["subjects"] = SubjectModel.objects.all()
-    # else:
-    #     obj = EnollmentModel.objects.get(student=user)
-    #     li = [obj.subject_1, obj.subject_2, obj.subject_3]
-    #     context["subjects"] = SubjectModel.objects.all().exclude(li)
-    return render(request, "elective/enroll-form.html")
+    return render(request, "elective/enroll-form.html", context)
 
 
-def changeElective(request, enrollment_id):
-    return render(request, "common/time-table.html")
-
+@login_required(login_url="student-login")
+def changeElective(request, num):
+    try:
+        if num not in ["1","2","3"]:
+            messages.error(request, "Invalid Subject Number")
+            return redirect('student-dashboard')
+        user = StudentModel.objects.get(email=request.user.email)
+        obj = EnollmentModel.objects.get(student=user)
+        li = [obj.subject_1.id]
+        if num == "1":
+            if obj.subject_2 != None:
+                li.append(obj.subject_2.id)
+            if obj.subject_3 != None:
+                li.append(obj.subject_3.id)
+        elif num == "2":
+            li.append(obj.subject_2.id)
+            if obj.subject_3 != None:
+                li.append(obj.subject_3.id)
+        elif num == "3":
+            li.append(obj.subject_3.id)
+            if obj.subject_2 != None:
+                li.append(obj.subject_2.id)
+        context["subjects"] = SubjectModel.objects.all().exclude(id__in=li)
+        if request.method == 'POST':
+            sub_id = request.POST.get('subject')
+            if not SubjectModel.objects.filter(id=sub_id).exists():
+                messages.error(request, "Invalid Subject ID")
+                return redirect('student-dashboard')
+            sub_obj = SubjectModel.objects.get(id=sub_id)
+            email_list = [user.email, sub_obj.teacher.email]
+            if num == "1":
+                email_list.append(obj.subject_1.teacher.email)
+                change_sub = obj.subject_1
+            elif num == "2":
+                email_list.append(obj.subject_2.teacher.email)
+                change_sub = obj.subject_2
+            elif num == "3":
+                email_list.append(obj.subject_3.teacher.email)
+                change_sub = obj.subject_3
+            ChangeElectiveModel.objects.create(student=user, from_sub=change_sub, to_sub=sub_obj)
+            thread_obj = send_subject_change_email(email_list)
+            thread_obj.start()
+            messages.info(request, "Elective Subject Change Requested")
+            return redirect('student-dashboard')
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "elective/enroll-form.html", context)
 
 
 ###############################################################################################################

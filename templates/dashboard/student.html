@@ -46,18 +46,30 @@
                     <a href="{% url 'change-elective' 1 %}" class="btn">CHANGE</a>
                     <a href="{% url 'single-subject' enrollment.subject_1.id %}" class="sub_info">Subject Details</a>
                 </div>
+                {% if enrollment.subject_2 %}
                 <div class="col4">
                     <h4>{{enrollment.subject_2.name}}</h4>
                     <p>{{enrollment.subject_2.department.name}}</p>
                     <a href="{% url 'change-elective' 2 %}" class="btn">CHANGE</a>
                     <a href="{% url 'single-subject' enrollment.subject_2.id %}" class="sub_info">Subject Details</a>
                 </div>
+                {% else %}
+                <div class="col4">
+                    <a href="{% url 'enroll' 2 %}" class="btn">Apply for Elective Subject 2</a>
+                </div>
+                {% endif %}
+                {% if enrollment.subject_3 %}
                 <div class="col4">
                     <h4>{{enrollment.subject_3.name}}</h4>
                     <p>{{enrollment.subject_3.department.name}}</p>
                     <a href="{% url 'change-elective' 3 %}" class="btn">CHANGE</a>
                     <a href="{% url 'single-subject' enrollment.subject_3.id %}" class="sub_info">Subject Details</a>
                 </div>
+                {% else %}
+                <div class="col4">
+                    <a href="{% url 'enroll' 3 %}" class="btn">Apply for Elective Subject 3</a>
+                </div>
+                {% endif %}
         {% else %}
             <center><a href="{% url 'enroll' 1 %}" class="btn">Select Electives</a></center>
         {% endif %}

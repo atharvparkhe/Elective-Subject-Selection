@@ -3,19 +3,29 @@
 
 {% block content %}
 
-<h1>Time Table Page</h1>
-    
-{% endblock content %}
-<body>
-    <div class="row">
-         
-        <div class="col-2">
-            <h2 class="title">Timetable</h2>
-            <img src="image/tt.jpg" width="1200px" height="600px">
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <img src="{% static 'images/logo.png' %}" width="125px">
+            </div>
+            <nav>
+                <ul id="menuitem">
+                    <li><a href="{% url 'index' %}">HOME</a></li>
+                    <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
+                    <li><a href="{% url 'all-subjects' %}">SUBJECTS</a></li>
+                    <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
+                    <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
+                </ul>
+            </nav>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+        <h1 class="title">Timetable</h1>
+        <img src="{% static 'images/time-table.jpeg' %}" width="1200px" height="600px">
+    </div>
 </div>
 
-    
-
-    <script src="" async defer></script>
-</body>
+{% endblock content %}
