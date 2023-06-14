@@ -3,6 +3,14 @@ from base.models import BaseModel
 from authentication.models import *
 
 
+class ContactUs(models.Model):
+    name = models.CharField(max_length = 100)
+    email = models.EmailField(max_length = 100)
+    msg = models.TextField()
+    def __str__(self):
+        return self.name
+
+
 class SubjectModel(BaseModel):
     name = models.CharField(max_length=50)
     desc = models.TextField()

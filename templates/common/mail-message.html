@@ -1,15 +1,7 @@
-<html>
+{% extends '../../stu-base.html' %}
 {% load static %}
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/student-style.css' %}">
-</head>
 
-<body>
+{% block content %}
     <div class="formbox">
         <img class="y" src="{% static 'images/logo.png' %}" width="100px" height="100px">
         <h3 class="mess">Check your email</h3>
@@ -18,5 +10,4 @@
         <br>
         <button type="submit" name="submit" class="submitbtn1">Open email</button>
     </div>
-</body>
-</html>
+{% endblock content %}
