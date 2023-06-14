@@ -1,36 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elective Subject Selection </title>
-</head>
-<body>
+{% extends '../stu-base.html' %}
+{% load static %}
+
+{% block content %}
+
     <div class="header">
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="image/image.png" width="125px">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
                 </div>
                 <nav>
                     <ul id="menuitem">
-
-                        <li><a href=">HOME</a></li>
-                        <li><a href=""><h2>student</h2></a></li>
-                        <li><a href=""><h2>teacher</h2></a></li>
-                        <li><a href=""><h2>admin</h2></a></li>
+                        <li><a href="{% url 'index' %}">HOME</a></li>
+                        <li><a href="{% url 'all-subjects' %}">SUBJECTS</a></li>
+                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
+                        <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
                     </ul>
-
                 </nav>
-                <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
             </div>
+
             <div class="row">
                 <div class="col-1">
                     <h1>Elective Subject Selection Project</h1>
-
                 </div>
-                <div class="col-2"><img src="image/first.jpg" width="599px"></div>
+                <div class="col-2"><img src="{% static 'images/hero.gif' %}" width="599px"></div>
             </div>
         </div>
     </div>
@@ -40,9 +33,9 @@
         <h2 class="title">Problem Statement</h2>
         <div class="row">
             <div class="info">
-                <p class=>Problem Statement 1 - Student Details App
+                <p class=><b>Problem Statement 1 - Student Details App
                     Build an application that<br> can be run as a container on <br>the cloud for creating/updating/deleting a student.<br>
-                   <br> Feature:Allow user to add, update, delete a student<br>
+                   <br> Feature:Allow user to add, update, delete a student</b><br>
             Each student should have:<br>
             Student Name<br>
             Student ID Number<br>
@@ -51,15 +44,15 @@
             Persist all student details in the database<br>
                     </p>
             </div>
-            <div class="sec"><img src="image/students.png" width="400px" height="400px"></div>
+            <div class="sec"><img src="{% static 'images/ps1.png' %}" width="400px" height="400px"></div>
         </div>
         <div class="row">
             <div class="info">
-             <div class="sec"><img src="image/text-books.png" width="400px" height="400px"></div>
+             <div class="sec"><img src="{% static 'images/ps2.png' %}" width="400px" height="400px"></div>
         </div>
-        <p class=>Problem Statement 2 - Elective Subject App
+        <p class=><b>Problem Statement 2 - Elective Subject App
             Build an application that can be run as<br> a container on the cloud for <br>creating/updating/deleting an elective subject.<br>
-            <br>Features:Allow user to add, update, delete an elective subject<br>
+            <br>Features:Allow user to add, update, delete an elective subject</b><br>
             Each elective subject should have:<br>
             Elective Subject Name<br>
             Elective Subject Description<br>
@@ -70,12 +63,12 @@
             
             <div class="row">
                 <div class="info">
-                    <p class=>Problem Statement 3 - Elective Subject Selection App
-                        Build an application <br>that can be run as a container on the cloud for <br>selecting/updating/deleting elective subject for each student.<br> 
+                    <p class=><b>Problem Statement 3 - Elective Subject Selection App
+                        Build an application <br>that can be run as a container on the cloud for <br>selecting/updating/deleting elective subject for each student.</b><br> 
                                 
                         </p>
                 </div>
-                <div class="sec"><img src="image/purpose.png" width="400px" height="400px"></div>
+                <div class="sec"><img src="{% static 'images/ps3.png' %}" width="400px" height="400px"></div>
             </div>
 
         </div>
@@ -89,19 +82,18 @@
         <div class="smallcon">
             <div class="row">
                 <div class="col3">
-                    <div><img src="image/students.png" width="100px" height="100px"></div>
+                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
                     <h2 class="quote">Student login</h2>
                    
                 </div>
                 <div class="col3">
-                    <div ><img src="image/text-books.png" width="100px" height="100px"></div>
+                    <div ><img src="{% static 'images/teacher.png' %}" width="100px" height="100px"></div>
                     <h2 class="quote">teacher login</h2>
                   
                 </div>
                 <div class="col3">
-                    <div><img src="image/purpose.png" width="100px" height="100px"></div>
+                    <div><img src="{% static 'images/admin.png' %}" width="100px" height="100px"></div>
                     <h2 class="quote">Admin login</h2>
-                
                 </div>
             </div>
         </div>
@@ -117,65 +109,30 @@
         7.<br>
         8.<br>
     </p></div>
+    
     <footer>
-
         <div class="footer">
             <div class="container">
                 <hr>
                 <div class="row">
-                    <div class="footrecol1">
-                        <h3>Download Our App</h3>
-                        <p>Download App for Android And IOS Mobile Phone</p>
-                        <div class="applogo">
-                            <img src="image/play.png" width="150px" height="75px">
-                            <img src="image/app.svg" width="150px" height="80px">
-                        </div>
-                    </div>
                     <div class="footrecol2">
-                        <img src="image/logo1.png">
+                        <img src="{% static 'images/logo.png' %}">
                         <p>Our purpose is to sustainably make
                             the pleasure<br> and benefit of sweets accessible to the many</p>
                     </div>
                     <div class="footrecol3">
                         <h3>Useful Links</h3>
                         <ul>
-                            <li>Coupons</li>
-                            <li>Blog Post</li>
-                            <li>Return Policy</li>
-                            <li>Join Affilate</li>
+                            <li><a href="{% url 'all-subjects' %}">All Subjects</a></li>
+                            <li><a href="{% url 'student-login' %}">Student Login</a></li>
+                            <li><a href="{% url 'teacher-login' %}">Teacher Login</a></li>
+                            <li><a href="{% url 'admin-login' %}">Admin Login</a></li>
                         </ul>
-
-                    </div>
-                    <div class="footrecol4">
-                        <h3>Follow Us</h3>
-                        <ul>
-                            <li><img src="image/facebook.svg" width="20px" height="20px"> Facebook</li>
-                            <li><img src="image/instagram-2.svg" width="20px" height="20px"> Instagram</li>
-                            <li><img src="image/twitter.svg" width="20px" height="20px"> Twitter</li>
-                            <li><img src="image/youtube.svg" width="20px" height="20px"> YouTube</li>
-                        </ul>
-
                     </div>
                 </div>
                 <hr>
-                <p class="copy">@Copyright 2021 - Sweet Cart</p>
             </div>
         </div>
     </footer>
-    
 
-    <script>
-        var menuitem = document.getElementById("menuitem")
-        menuitem.style.maxHeight = "0px";
-        function menutoggle() {
-            if (menuitem.style.maxHeight == "0px") {
-                menuitem.style.maxHeight = "200px";
-            }
-            else {
-                menuitem.style.maxHeight = "0px";
-            }
-        }
-
-    </script>
-</body>
-</html>
+    {% endblock content %}
