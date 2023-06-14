@@ -30,7 +30,7 @@
                 <input name="roll" class="an" type="text" placeholder="Enter Student Roll No" required>
                 <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
                     <option value="">Enter Student Department</option>
-                    {% for dept in deptartments %}
+                    {% for dept in departments %}
                         <option value={{dept.id}}>{{dept.name}}</option>
                     {% endfor %}
                   </select>
