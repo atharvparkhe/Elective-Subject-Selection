@@ -16,7 +16,7 @@ class SubjectModel(BaseModel):
     desc = models.TextField()
     cover_img = models.ImageField(upload_to="subject", height_field=None, width_field=None, max_length=None, null=True, blank=True)
     department = models.ForeignKey(DepartmentModel, related_name="department_subject", on_delete=models.CASCADE)
-    teacher = models.ForeignKey(TeacherModel, related_name="subject_teacher", on_delete=models.CASCADE, null=True, blank=True)
+    teacher = models.OneToOneField(TeacherModel, on_delete=models.CASCADE, null=True, blank=True)
     syllabus = models.URLField(max_length=200)
     def __str__(self):
         return self.name
