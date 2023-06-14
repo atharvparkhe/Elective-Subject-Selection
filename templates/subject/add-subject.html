@@ -26,11 +26,23 @@
             <h2 class="title">Add Subject</h2>
             <form action="" method="post">
                 {% csrf_token %}
-                <input class="an" type="text" placeholder="Enter subject name" required>
-                <input class="an" type="text" placeholder="Enter subject code" required>
-                <input class="an" type="text" placeholder="Enter subject Department" required>
-                <input class="an" type="text" placeholder="Enter subject faculty" required>
-                <!-- <a href="" class="submitbtn">Add subject</a> -->
+                <input class="an" type="text" name="sub_name" placeholder="Enter subject name" required>
+                <input class="an" type="text" name="sub_code" placeholder="Enter subject code" required>
+                <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
+                    <option value="">Enter Subject Department</option>
+                    <option value="dept1">dept1</option>
+                    <option value="dept2">dept2</option>
+                    <option value="dept3">dept3</option>
+                    <option value="dept4">dept4</option>
+                  </select>                
+                  <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
+                    <option value="">Enter Subject Faculty</option>
+                    <option value="tr1">tr1</option>
+                    <option value="tr2">tr2</option>
+                    <option value="tr3">tr3</option>
+                    <option value="tr4">tr4</option>
+                  </select>                     
+                  <!-- <a href="" class="submitbtn">Add subject</a> -->
                 <input type="submit" class="submitbtn" name="submit" value="Add Subject">
             </form>
         </div>
