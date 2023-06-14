@@ -184,14 +184,31 @@ def AdminDashboard(request):
 def enrolledStudentList(request):
     try:
         teacher_obj = TeacherModel.objects.get(email=request.user.email)
-        subjects = teacher_obj.subject_teacher.all()
-        enrollments = set()
-        for sub in subjects:
-            enrollments.add(sub.enrolled_subject_1.all())
-            enrollments.add(sub.enrolled_subject_2.all())
-            enrollments.add(sub.enrolled_subject_3.all())
-        context["students"] = enrollments
-        print(enrollments)
+        subject_obj = teacher_obj.subject_teacher
+        enrollments, students = [], []
+        if subject_obj.enrolled_subject_1.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_1.all())
+        if subject_obj.enrolled_subject_2.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_2.all())
+        if subject_obj.enrolled_subject_3.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_3.all())
+        for enrr in enrollments:
+            students.extend([stu.student for stu in enrr])
+        context["students"] = students
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "students/all-students.html", context)
+
+
+@login_required(login_url="teacher-login")
+def studentProfile(request, stu_id):
+    try:
+        student_obj = StudentModel.objects.get(id=stu_id)
+        context["user"] = student_obj
+        if not EnollmentModel.objects.filter(student=student_obj).exists():
+            context["enrollment"] = None
+        else :
+            context["enrollment"] = EnollmentModel.objects.get(student=student_obj)
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "dashboard/student.html", context)

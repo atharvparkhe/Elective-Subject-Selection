@@ -23,4 +23,5 @@ urlpatterns = [
 	
 	# Teacher
 	path('enrolled-students-list/', views.enrolledStudentList, name="enrolled-students-list"),
+	path('student-profile/<stu_id>/', views.studentProfile, name="student-profile"),
 ]
