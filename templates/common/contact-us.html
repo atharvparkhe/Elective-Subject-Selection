@@ -3,62 +3,36 @@
 
 {% block content %}
 
-<h1>Contact Us Page</h1>
-    
-{% endblock content %}
-<body>
     <div class="header">
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="image/image.png" width="125px">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
                 </div>
                 <nav>
                     <ul id="menuitem">
-
-                        <li><a href=">HOME</a></li>
-                        <li><a href="allproduct.html">PROFILE</a></li>
-                        <li><a href="aboutus.html">ELECTIVE</a></li>
-                        <li><a href="">TIME TABLE</a></li>
-
+                        <li><a href="{% url 'index' %}">HOME</a></li>
+                        <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
+                        <li><a href="{% url 'all-subjects' %}">SUBJECTS</a></li>
+                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
+                        <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
                     </ul>
-
                 </nav>
             </div>
-            <h2 class="title">Contact Us</h2>
-            <section class="contactus">
-                <div class="row">
-                    <div class="contactcol">
-                        <form action="">
-                            <input class="an" type="text" placeholder="enter your name" required>
-                            <input class="an" type="text" placeholder="enter your roll no" required>
-                            <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
-                                <option value="">Enter Student Department</option>
-                                <option value="dept1">dept1</option>
-                                <option value="dept2">dept2</option>
-                                <option value="dept3">dept3</option>
-                                <option value="dept4">dept4</option>
-                              </select>
-                            <input class="an" type="text" placeholder="enter your contact no" required>
-                            <input class="an" type="email" placeholder="enter email address" required>
-                            <input class="an" type="text" placeholder="enter your query" required>
-                            <button type="submit" class="btn">send message</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-            
-            <script>
-                var menuitem = document.getElementById("menuitem")
-                menuitem.style.maxHeight = "0px";
-                function menutoggle() {
-                    if (menuitem.style.maxHeight == "0px") {
-                        menuitem.style.maxHeight = "200px";
-                    }
-                    else {
-                        menuitem.style.maxHeight = "0px";
-                    }
-                }
-
-            </script>
-</body>
+        </div>
+    </div>
+    <h2 class="title">Contact Us</h2>
+    <section class="contactus">
+        <div class="row">
+            <div class="contactcol">
+                <form method="post">
+                    <input name="name" class="an" type="text" placeholder="Enter your Name" required>
+                    <input name="email" class="an" type="email" placeholder="Enter email address" required>
+                    <textarea class="an" name="message" rows="8" placeholder="Enter you Query" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+{% endblock content %}
