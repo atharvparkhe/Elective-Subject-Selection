@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/admin-style.css">
+  </head>
+  <body1>
+    <div class="grid-container">
+
+      <header class="header1">
+        <div class="menu-icon1" onclick="openSidebar()">
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+          <input class="dash" type="text" placeholder="Search" required>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        </div>
+      </header>
+    
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <img src="image/image.png" width="125px">
+
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="#" >
+              Dashboard
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" >
+               Students
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" >
+              Teacher
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" >
+             Subject
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" >
+               Change
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" >
+               Settings
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="#" >
+               Logout
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <p class="font-weight-bold">DASHBOARD</p>
+        </div>
+
+        <div class="main-cards">
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">Student</p>
+            </div>
+            <span class="text-primary font-weight-bold">100</span>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">Teacher</p>
+            </div>
+            <span class="text-primary font-weight-bold">8</span>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <p class="text-primary">Subjects</p>
+            </div>
+            <span class="text-primary font-weight-bold">5</span>
+          </div>
+
+        </div>
+
+        <div class="charts">
+          <div class="charts-card">
+            <p class="chart-title">Students opted for subject</p>
+            <div id="bar-chart"></div>
+          </div>
+        </div>
+      </main>
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+   
+    <script src="scirpts.js"></script>
+  </body1>
+</html>
