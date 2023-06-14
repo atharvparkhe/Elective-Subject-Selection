@@ -11,15 +11,16 @@
                     <ul id="menuitem">
                         <li><a href="{% url 'index' %}">HOME</a></li>
                         <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
-                        <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
+                        <li><a href="{% url 'all-subjects' %}">SUBJECTS</a></li>
                         <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
+                        <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="smallcon">
                 <div class="row"> 
                     <div class="col-2">
-                        <img src="./image/hu1.jpg">
+                        <img src="{{user.profile_pic.url}}">
                     </div>
                     <div class="col-2">
                         <h2>{{user.name | safe }}</h2>
@@ -33,22 +34,29 @@
 
     <h2 class="title">SELECTED ELECTIVES</h2>
     <div class="smallcon">
-        
         <div class="row">
-            <div class="col4">
-                <h4>SOFT COMPUTING</h4>
-                <p>ETC DEPT</p>
-                <a href="" class="btn">CHANGE</a>
-            </div>
-            <div class="col4">
-                <h4>SOFT COMPUTING</h4>
-                <p>ETC DEPT</p>
-                <a href="" class="btn">CHANGE</a>
-            </div>
-            <div class="col4">
-                <h4>SOFT COMPUTING</h4>
-                <p>ETC DEPT</p>
-                <a href="" class="btn">CHANGE</a>
-            </div>
+        {% if enrollment %}
+                <div class="col4">
+                    <h4>{{enrollment.subject_1.name}}</h4>
+                    <p>{{enrollment.subject_1.department.name}}</p>
+                    <a href="{% url 'change-elective' enrollment.id %}" class="btn">CHANGE</a>
+                    <a href="{% url 'single-subject' enrollment.subject_1.id %}" class="sub_info">Subject Details</a>
+                </div>
+                <div class="col4">
+                    <h4>{{enrollment.subject_2.name}}</h4>
+                    <p>{{enrollment.subject_2.department.name}}</p>
+                    <a href="{% url 'change-elective' enrollment.id %}" class="btn">CHANGE</a>
+                    <a href="{% url 'single-subject' enrollment.subject_2.id %}" class="sub_info">Subject Details</a>
+                </div>
+                <div class="col4">
+                    <h4>{{enrollment.subject_3.name}}</h4>
+                    <p>{{enrollment.subject_3.department.name}}</p>
+                    <a href="{% url 'change-elective' enrollment.id %}" class="btn">CHANGE</a>
+                    <a href="{% url 'single-subject' enrollment.subject_3.id %}" class="sub_info">Subject Details</a>
+                </div>
+        {% else %}
+            <center><button href="" class="btn">Select Electives</button></center>
+        {% endif %}
+        </div>
     </div>
 {% endblock content %}

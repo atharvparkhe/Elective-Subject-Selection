@@ -1,5 +1,5 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
@@ -38,7 +38,7 @@ def StudentLogIn(request):
                 return redirect('student-login')
             login(request, user)
             messages.success(request, 'Successfully logged in')
-            return redirect('index')
+            return redirect('student-dashboard')
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "auth/student/stu-login.html", context)
@@ -100,7 +100,7 @@ def TeacherLogIn(request):
                 return redirect('teacher-login')
             login(request, user)
             messages.success(request, 'Successfully logged in')
-            return redirect('index')
+            return redirect('teacher-dashboard')
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "auth/teacher/tea-login.html", context)
@@ -162,7 +162,7 @@ def AdminLogIn(request):
                 return redirect('admin-login')
             login(request, user)
             messages.success(request, 'Successfully logged in')
-            return redirect('index')
+            return redirect('admin-dashboard')
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "auth/admin/admin-login.html", context)
@@ -210,20 +210,6 @@ def AdminReset(request, token):
 
 
 ###############################################################################################################
-
-
-@login_required(login_url="student-login")
-def StudentDashboard(request):
-    try:
-        context["user"] = StudentModel.objects.get(email=request.user.email)
-        context["abc"] = "abc"
-    except Exception as e:
-        messages.error(request, str(e))
-    return render(request, "dashboard/student.html", context)
-
-
-###############################################################################################################
-
 
 # @login_required("admin-login")
 def allTeachers(request):

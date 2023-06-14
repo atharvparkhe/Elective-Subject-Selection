@@ -5,9 +5,6 @@ from . import views
 urlpatterns = [
     # Common
 	path('mail-message/', views.mailMessage, name="mail-message"),
-    
-	# Dashboard
-	path("student-dashboard/", views.StudentDashboard, name="student-dashboard"),
 
     # Student Auth
 	path('student-login/', views.StudentLogIn, name="student-login"),

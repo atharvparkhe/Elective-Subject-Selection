@@ -12,7 +12,7 @@ class DepartmentModel(BaseModel):
 class StudentModel(BaseUser):
     roll_no = models.CharField(max_length=50)
     profile_pic = models.ImageField(upload_to="student", height_field=None, width_field=None, max_length=None, null=True, blank=True)
-    department = models.ForeignKey(DepartmentModel, related_name="student_department", on_delete=models.CASCADE)
+    department = models.ForeignKey(DepartmentModel, related_name="student_department", on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return self.name
 

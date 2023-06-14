@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .threads import *
@@ -21,7 +22,7 @@ def contactPage(request):
             ContactUs.objects.create(name=name, email=email, msg=msg)
     except Exception as e:
         print(e)
-    return render(request, "common/contact.html", context)
+    return render(request, "common/contact-us.html", context)
 
 
 def timeTable(request):
@@ -47,3 +48,28 @@ def singleSubject(request, sub_id):
 
 def enroll(request, sub_id):
     return render(request, "common/time-table.html")
+
+
+def changeElective(request, enrollment_id):
+    return render(request, "common/time-table.html")
+
+
+
+###############################################################################################################
+
+
+@login_required(login_url="student-login")
+def StudentDashboard(request):
+    try:
+        student_obj = StudentModel.objects.get(email=request.user.email)
+        context["user"] = student_obj
+        if not EnollmentModel.objects.filter(student=student_obj).exists():
+            context["enrollment"] = None
+        else :
+            context["enrollment"] = EnollmentModel.objects.get(student=student_obj)
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "dashboard/student.html", context)
+
+
+###############################################################################################################
