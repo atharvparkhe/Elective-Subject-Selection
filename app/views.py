@@ -154,25 +154,18 @@ def TeacherDashboard(request):
     try:
         teacher_obj = TeacherModel.objects.get(email=request.user.email)
         context["teacher"] = teacher_obj
-        # if not EnollmentModel.objects.filter(student=teacher_obj).exists():
-        #     context["enrollment"] = None
-        # else :
-        #     context["enrollment"] = EnollmentModel.objects.get(student=teacher_obj)
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "dashboard/teacher.html", context)
 
 
-@login_required(login_url="admin-login")
+# @login_required(login_url="admin-login")
 def AdminDashboard(request):
     try:
-        context["hello"] = "hello"
-        # teacher_obj = TeacherModel.objects.get(email=request.user.email)
-        # context["teacher"] = teacher_obj
-        # if not EnollmentModel.objects.filter(student=teacher_obj).exists():
-        #     context["enrollment"] = None
-        # else :
-        #     context["enrollment"] = EnollmentModel.objects.get(student=teacher_obj)
+        context["subject_count"] = SubjectModel.objects.all().count()
+        context["teacher_count"] = TeacherModel.objects.all().count()
+        context["student_count"] = StudentModel.objects.all().count()
+
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "dashboard/admin.html", context)
@@ -212,3 +205,12 @@ def studentProfile(request, stu_id):
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "dashboard/student.html", context)
+
+
+# @login_required(login_url="admin-login")
+def allStudents(request):
+    try:
+        context["students"] = StudentModel.objects.all()
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "students/all-students.html", context)
