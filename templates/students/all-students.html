@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="student-style.css">
-    <title>Document</title>
-</head>
-<body>
+{% extends '../teacher-base.html' %}
+{% load static %}
+
+{% block content %}
+
     <div class="header">
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="./admin/image/image.png" width="125px">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
                 </div>
                 <nav>
                     <ul id="menuitem">
-    
-                        <li><a href="">HOME</a></li>
-                        <li><a href="allproduct.html">PROFILE</a></li>
-                        <li><a href="aboutus.html">ELECTIVE</a></li>
-                        <li><a href="">TIME TABLE</a></li>
-                        <!-- <li><a href="">CONTACT US</a></li> -->
+                        <li><a href="{% url 'index' %}">HOME</a></li>
+                        <li><a href="{% url 'teacher-dashboard' %}">PROFILE</a></li>
+                        <li><a href="{% url 'enrolled-students-list' %}">STUDENTS</a></li>
+                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
+                        <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
                     </ul>
                 </nav>
-                <img src="image/menu.jpg" width="30px" height="30px" class="menu" onclick="menutoggle()">
             </div>
         </div>
     </div>
@@ -88,53 +82,30 @@
         }
     </style>
 
-    <div class="table_heading">LIST OF ALL STUDENTS</div>
+    <h2 class="title">LIST OF ALL STUDENTS</h2>
     <table class="stu_details" id="stu_detail">
+        <tr><b>
+            <th>Student Name</th>
+            <th>Student Dept</th>
+            <th>Student Email ID</th>
+            <th>Student Phone No</th>
+            <th>Student Details</th>
+        </b></tr>
+        {% for stu in students %}
         <tr>
-            <th>Student name</th>
-            <th>Student dept</th>
-            <th>Student email</th>
-            <th>Student contact</th>
+            <td>{{stu.name | safe}}</td>
+            <td>{{stu.department.name | safe}}</td>
+            <td>{{stu.email | safe}}</td>
+            <td>{{stu.phone | safe}}</td>
+            <td><a href="{% url 'student-profile' stu.id %}" class="btn"></a></td>
         </tr>
-       
-        <tr>
-            <td>John Doe</td>
-            <td>IT</td>
-            <td>john@example.com</td>
-            <td>1234567890</td>
-        </tr>
-        
-        <tr>
-            <td>John Doe</td>
-            <td>IT</td>
-            <td>john@example.com</td>
-            <td>1234567890</td>
-        </tr>
-
-        <tr>
-            <td>John Doe</td>
-            <td>IT</td>
-            <td>john@example.com</td>
-            <td>1234567890</td>
-        </tr>
+        {% endfor %}
     </table>
 
     <div style="text-align: center;"><button class="btn">VIEW STUDENT DETAILS</button></div>
     
     <!-- <div style="text-align: center;"><button onclick="downloadExcel()" class="btn">Download as Excel</button></div> -->
     
-    <script>
-        var menuitem = document.getElementById("menuitem")
-        menuitem.style.maxHeight = "0px";
-        function menutoggle() {
-            if (menuitem.style.maxHeight == "0px") {
-                menuitem.style.maxHeight = "200px";
-            }
-            else {
-                menuitem.style.maxHeight = "0px";
-            }
-        }
-    </script>
     <!-- <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script> -->
     <!-- <script>
         
@@ -166,5 +137,5 @@
         }
     }
     </script> -->
-</body>
-</html>
+    
+{% endblock content %}

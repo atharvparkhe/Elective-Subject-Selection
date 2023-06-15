@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     # Common
 	path('mail-message/', views.mailMessage, name="mail-message"),
+	path('logout/', views.logoutView, name="logout"),
 
     # Student Auth
 	path('student-login/', views.StudentLogIn, name="student-login"),

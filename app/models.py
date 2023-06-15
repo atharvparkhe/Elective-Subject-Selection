@@ -16,7 +16,7 @@ class SubjectModel(BaseModel):
     desc = models.TextField()
     cover_img = models.ImageField(upload_to="subject", height_field=None, width_field=None, max_length=None)
     department = models.ForeignKey(DepartmentModel, related_name="department_subject", on_delete=models.CASCADE)
-    teacher = models.OneToOneField(TeacherModel, on_delete=models.CASCADE, null=True, blank=True)
+    teacher = models.OneToOneField(TeacherModel, related_name="subject_teacher", on_delete=models.CASCADE, null=True, blank=True)
     syllabus = models.URLField(max_length=200)
     intro = models.URLField(max_length=200)
     def __str__(self):
@@ -24,7 +24,7 @@ class SubjectModel(BaseModel):
 
 
 class EnollmentModel(BaseModel):
-    student = models.OneToOneField(StudentModel, on_delete=models.CASCADE)
+    student = models.OneToOneField(StudentModel, related_name="enrolled_students", on_delete=models.CASCADE)
     subject_1 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_1", on_delete=models.CASCADE)
     subject_2 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_2", on_delete=models.CASCADE, null=True, blank=True)
     subject_3 = models.ForeignKey(SubjectModel, related_name="enrolled_subject_3", on_delete=models.CASCADE, null=True, blank=True)

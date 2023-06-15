@@ -5,33 +5,20 @@
 
     <div class="grid-container">
 
-      <header class="header1">
-        <div class="menu-icon1" onclick="openSidebar()">
-        </div>
-        <div class="header-left">
-          <span class="material-icons-outlined">search</span>
-          <input class="dash" type="text" placeholder="Search" required>
-        </div>
-        <div class="header-right">
-          <span class="material-icons-outlined">notifications</span>
-          <span class="material-icons-outlined">email</span>
-          <span class="material-icons-outlined">account_circle</span>
-        </div>
-      </header>
-    
+
       <aside id="sidebar">
         <div class="sidebar-title">
           <div class="sidebar-brand">
             <img src="{% static 'images/logo.png' %}" width="125px">
 
         <ul class="sidebar-list">
-          <li class="sidebar-list-item"><a href="#">Dashboard</a></li>
-          <li class="sidebar-list-item"><a href="#">Students</a></li>
-          <li class="sidebar-list-item"><a href="#">Teacher</a></li>
-          <li class="sidebar-list-item"><a href="#">Subject</a></li>
+          <li class="sidebar-list-item"><a href="{% url 'admin-dashboard' %}">Dashboard</a></li>
+          <li class="sidebar-list-item"><a href="{% url 'all-students' %}">Students</a></li>
+          <li class="sidebar-list-item"><a href="{% url 'all-teachers' %}">Teacher</a></li>
+          <li class="sidebar-list-item"><a href="{% url 'all-subjects' %}">Subject</a></li>
           <li class="sidebar-list-item"><a href="#">Change</a></li>
           <li class="sidebar-list-item"><a href="#">Settings</a></li>
-          <li class="sidebar-list-item"><a href="#">Logout</a></li>
+          <li class="sidebar-list-item"><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
 
       </aside>
@@ -47,23 +34,23 @@
 
           <div class="card">
             <div class="card-inner">
-              <p class="text-primary">Student</p>
+              <p class="text-primary"><b>Students Count</b></p>
             </div>
-            <span class="text-primary font-weight-bold">100</span>
+            <span class="text-primary font-weight-bold">{{student_count}}</span>
           </div>
 
           <div class="card">
             <div class="card-inner">
-              <p class="text-primary">Teacher</p>
+              <p class="text-primary"><b>Teachers Count</b></p>
             </div>
-            <span class="text-primary font-weight-bold">8</span>
+            <span class="text-primary font-weight-bold">{{teacher_count}}</span>
           </div>
 
           <div class="card">
             <div class="card-inner">
-              <p class="text-primary">Subjects</p>
+              <p class="text-primary"><b>Subjects Count</b></p>
             </div>
-            <span class="text-primary font-weight-bold">5</span>
+            <span class="text-primary font-weight-bold">{{subject_count}}</span>
           </div>
 
         </div>
@@ -80,6 +67,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
    
-    <script src="scirpts.js"></script>
+    <script src="{% static 'js/scirpts.js' %}"></script>
 
     {% endblock content %}
