@@ -97,17 +97,15 @@
             <td>{{stu.department.name | safe}}</td>
             <td>{{stu.email | safe}}</td>
             <td>{{stu.phone | safe}}</td>
-            <td><a href="{% url 'student-profile' stu.id %}" class="btn"></a></td>
+            <td><a href="{% url 'student-profile' stu.id %}" class="btn">View Details</a></td>
         </tr>
         {% endfor %}
     </table>
 
-    <div style="text-align: center;"><button class="btn">VIEW STUDENT DETAILS</button></div>
+    <div style="text-align: center;"><button onclick="downloadExcel()" class="btn">Download as Excel</button></div>
     
-    <!-- <div style="text-align: center;"><button onclick="downloadExcel()" class="btn">Download as Excel</button></div> -->
-    
-    <!-- <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script> -->
-    <!-- <script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script>
         
         function downloadExcel() {
         const table = document.getElementById("stu_detail");
@@ -120,7 +118,7 @@
             return buf;
         }
         const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
-        const filename = 'Sttudent_data.xlsx';
+        const filename = 'student_data.xlsx';
         if (typeof navigator.msSaveBlob !== 'undefined') {
             navigator.msSaveBlob(blob, filename);
         } else {
@@ -136,6 +134,6 @@
             }
         }
     }
-    </script> -->
+    </script>
     
 {% endblock content %}

@@ -165,7 +165,14 @@ def AdminDashboard(request):
         context["subject_count"] = SubjectModel.objects.all().count()
         context["teacher_count"] = TeacherModel.objects.all().count()
         context["student_count"] = StudentModel.objects.all().count()
-
+        sub_names_array, sub_stu_count = [], []
+        for sub in SubjectModel.objects.all():
+            count = 0
+            sub_names_array.append(sub.name)
+            count = sub.enrolled_subject_1.all().count() + sub.enrolled_subject_2.all().count() + sub.enrolled_subject_3.all().count()
+            sub_stu_count.append(count)
+        context["subject"] = sub_names_array
+        context["count"] = sub_stu_count
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "dashboard/admin.html", context)
@@ -209,8 +216,5 @@ def studentProfile(request, stu_id):
 
 # @login_required(login_url="admin-login")
 def allStudents(request):
-    try:
-        context["students"] = StudentModel.objects.all()
-    except Exception as e:
-        messages.error(request, str(e))
+    context["students"] = StudentModel.objects.all()
     return render(request, "students/all-students.html", context)
