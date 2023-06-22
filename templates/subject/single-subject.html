@@ -25,10 +25,12 @@
         <div class="row">
             
             <div class="col-2">
-                <h2 class="title">{{subject.name}}</h2>
-                <img src="{{ subject.cover_img.url }}" height="300px" width="300px">
+                
+                <div class="video"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/inWWhr5tnEA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
             </div>
             <div class="col-2">
+                <h1>{{subject.name}}</h1>
                 <h4><b>Taught by : </b>{{subject.teacher.name}}</h4>
                 <h5>{{subject.teacher.post}}</h5>
                 <br> 
@@ -36,15 +38,14 @@
                 <br>
                 <p>{{subject.desc}}<br></p>
                 <br> 
-                <h3>Subject syllabus  &#8594;</h3><br>
-                <a href="{{subject.syllabus}}" target="_blank">Syllabus link</a>
-                
+
+                <a href="{{subject.syllabus}}" target="_blank" class="btn">Syllabus link</a>
+                <a href="{% url 'enroll' subject.id %}" class="btn8">Enroll Now</a>
             </div>
-            <div class="video"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/inWWhr5tnEA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
+            
     
            
         </div>
-        <a href="{% url 'enroll' subject.id %}" class="btn8">Enroll Now</a>
+        
     </div>
 {% endblock content %}

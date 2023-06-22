@@ -67,8 +67,9 @@ p{
 
 }
 .col-2{
+    flex-basis: 50%;
     max-width: 100%;
-    padding: 50px 0;
+    padding: 20px 0;
 }
 .col-1 h1{
     font-size: 50px;
@@ -114,7 +115,7 @@ p{
     min-width: 200px;
     margin-bottom: 50px;
     transition: transform 0.5s;
-   
+   border-radius: 10px;
     box-shadow: 10px 0 20px 10px rgba(0, 0,0,0.1);
    background-color: rgb(255, 255, 255);
     cursor: pointer;
@@ -335,10 +336,10 @@ nav ul li a{
     cursor: pointer;
 }
 }
-.col-2 img{
+/* .col-2 img{
    
     transition: transform 0.5s;
-}
+} */
 /* .col-2 img:hover{
     transform: translateY(-15px);
 } */
@@ -628,7 +629,9 @@ margin: 10px 0;
 }
 .singlepro .col-2 img{
     padding: 0;
-
+   height: 300px;
+   width: 300px;
+    
   
 }
 .singlepro .col-2{
@@ -724,18 +727,13 @@ th:last-child{
 }
 .btn8{
     display: inline-block;
-    background: #34c0d5;
+    background: #065865;
     color: #fff;
     padding: 8px 30px;
     margin: 30px 0;
     border-radius: 10px;
     transition:background 0.5s;
-    width: 300px;
-    margin-left: 500px;
-    align-self: center;
-    place-self: center;
-   text-align: center;
- 
+   margin: none;
 }
 .btn8:hover{
     background:rgb(188, 247, 248);
