@@ -57,8 +57,8 @@ function initializeBarChart() {
   // console.warn(api_data());
   var barChartOptions = {
     series: [{
-      data: [10, 8, 7]
-      // data: []
+      // data: [10, 8, 7]
+      data: []
     }],
     chart: {
       type: 'bar',
@@ -120,8 +120,13 @@ initializeBarChart();
 function updateAreaChartWithData(areaChart, newData) {
   areaChart.updateSeries([
     { name: 'student opted for subjects', data: newData.opted },
-    { name: 'student changed subject', data: newData.changed }
+    { name: 'student enrolled for subject', data: newData.enrollments },
+    { name: 'student changed subject', data: newData.changed },
   ]);
+
+  areaChart.updateOptions({
+      labels: newData.subject
+  });
 }
 
 // Function to initialize the area chart
@@ -129,10 +134,13 @@ function initializeAreaChart() {
   var areaChartOptions = {
     series: [{
       name: 'student opted for subjects',
-      data: [10, 8, 6, 8]
+      data: [10, 8, 6, 8] //dummy values (to be removed)
     }, {
+      name: 'student enrolled for subject',
+      data: []
+    },{
       name: 'student changed subject',
-      data: [5, 12, 4, 8]
+      data: [5, 12, 4, 8] //dummy values (to be removed)
     }],
     chart: {
       height: 350,
@@ -148,7 +156,7 @@ function initializeAreaChart() {
     stroke: {
       curve: 'smooth'
     },
-    labels: ["IOT", "CFCS", "SOFT COMP", "WT"],
+    labels: [],
     markers: {
       size: 0
     },
