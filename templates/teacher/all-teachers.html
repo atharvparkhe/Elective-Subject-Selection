@@ -28,11 +28,11 @@
         <div class="row">
             {% for tea in teachers %}
                 <a class="col4" href="{% url 'single-teacher' tea.id %}">
-                    <div class="col4">
+                    <!-- <div class="col4"> -->
                         <img src="{{ tea.profile_pic.url }}" width="200px" height="400px">
                         <h4>{{ tea.name | safe }}</h4>
                         <p>{{ tea.department.name | safe }}</p>
-                    </div>
+                    <!-- </div> -->
                 </a>
             {% endfor %}
         </div>

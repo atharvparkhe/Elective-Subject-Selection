@@ -276,9 +276,7 @@ nav ul li a{
    
     transition: transform 0.5s;
 }
-.col-2 img:hover{
-    transform: translateY(-15px);
-}
+
 @media only screen and (max-width: 600px){
     .row{
         text-align: center;
