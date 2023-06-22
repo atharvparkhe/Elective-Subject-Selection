@@ -34,7 +34,7 @@
                     <a href="{% url 'single-subject' sub.id %}">  
                         <div class="col3">
                             <h1>{{sub.name}}</h1><br>
-                            <div><img src="" width="100px" height="100px"></div><br>
+                            <div><img src="{{ sub.cover_img.url }}" width="100px" height="100px"></div><br>
                             <p>{{sub.teacher.name}}</p> <!--can be  a link to the faculty profile-->
                             <p>{{sub.department.name}}</p>
                         </div>
