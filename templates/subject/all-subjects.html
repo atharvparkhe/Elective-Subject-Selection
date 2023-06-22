@@ -28,20 +28,18 @@
 
         {% for sub in subjects %}
 
-        <!-- <div class="feedback"> -->
             <div class="smallcon">
                 <div class="row"> 
                     <a href="{% url 'single-subject' sub.id %}">  
-                        <div class="col4">
+                        <div class="col4" style="padding: 40px;">
                             <h1>{{sub.name}}</h1><br>
-                            <div><img src="{{ sub.cover_img.url }}" width="100px" height="100px"></div><br>
-                            <p>{{sub.teacher.name}}</p> <!--can be  a link to the faculty profile-->
-                            <p>{{sub.department.name}}</p>
+                            <div><img src="{{ sub.cover_img.url }}" style="width: 250px; height: 250px;"></div><br>
+                            <h3>Taught by:{{sub.teacher.name}}</h3> <!--can be  a link to the faculty profile-->
+                            <h3>{{sub.department.name}}</h3>
                         </div>
                     </a>
                 </div>
             </div>
-        <!-- </div> -->
 
         {% endfor %}
 
