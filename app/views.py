@@ -34,6 +34,10 @@ def allSubjects(request):
     return render(request, "subject/all-subjects.html", context=context)
 
 
+def addSubject(request):
+    return render(request, "subject/add-subject.html", context=context)
+
+
 def singleSubject(request, sub_id):
     try:
         if not SubjectModel.objects.filter(id=sub_id).exists():

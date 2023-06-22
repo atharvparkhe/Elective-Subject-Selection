@@ -25,4 +25,3 @@ typing_extensions
 tzdata
 urllib3
 wrapt
-xlrd

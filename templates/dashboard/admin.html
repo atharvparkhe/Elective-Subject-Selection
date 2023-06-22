@@ -45,21 +45,18 @@
       <aside id="sidebar">
         <div class="sidebar-title">
           <div class="sidebar-brand">
-            <img src="{% static 'images/logo.png' %}" width="125px">
-
+            <a href="{% url 'index' %}">
+              <img src="{% static 'images/logo.png' %}" width="125px">
+          </a>
         <ul class="sidebar-list">
           <li class="sidebar-list-item"><a href="{% url 'admin-dashboard' %}">Dashboard</a></li>
-          <!-- <li class="sidebar-list-item"><a href="{% url 'all-students' %}">Students</a></li> -->
-          <!-- <li class="sidebar-list-item"><a href="{% url 'all-teachers' %}">Teacher</a></li> -->
-          <!-- <li class="sidebar-list-item"><a href="{% url 'all-subjects' %}">Subject</a></li> -->
-          
           <li class="sidebar-list-item">
             <div class="dropdown" >
               <button onclick="myFunction()" class="dropbtn">Student &#9660;</button>
               <div id="myDropdown" class="dropdown-content">
-                <a href="#">Add Student</a>
-                <a href="#about">All Students</a>
-                <a href="#contact">Excel(add multiple)</a>
+                <a href="{% url 'add-single-student' %}">Add Single Student</a>
+                <a href="{% url 'add-multiple-students' %}">Add Multiple Students</a>
+                <a href="{% url 'all-students' %}">All Students</a>
               </div>
             </div>
           </li>
@@ -68,8 +65,8 @@
             <div class="dropdown" >
               <button onclick="myFunction2()" class="dropbtn">Teacher &#9660;</button>
               <div id="myDropdown2" class="dropdown-content">
-                <a href="#">Add Teacher</a>
-                <a href="#about">All Teacher</a>
+                <a href="{% url 'add-teacher' %}">Add Teacher</a>
+                <a href="{% url 'all-teachers' %}">All Teachers</a>
               </div>
             </div>
           </li>
@@ -78,14 +75,14 @@
             <div class="dropdown" >
               <button onclick="myFunction3()" class="dropbtn">Subject &#9660;</button>
               <div id="myDropdown3" class="dropdown-content">
-                <a href="#">Add Subject</a>
-                <a href="#about">All Subjects</a>
+                <a href="{% url 'add-subject' %}">Add Subject</a>
+                <a href="{% url 'all-subjects' %}">All Subjects</a>
               </div>
             </div>
           </li>
 
-          <li class="sidebar-list-item"><a href="#">Change</a></li>
-          <li class="sidebar-list-item"><a href="#">Settings</a></li>
+          <br><br>
+
           <li class="sidebar-list-item"><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
 

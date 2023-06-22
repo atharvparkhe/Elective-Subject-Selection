@@ -9,6 +9,7 @@ urlpatterns = [
 	path('contact-us/', views.contactPage, name="contact-us"),
 
 	# Subjects
+	path('add-subject/', views.addSubject, name="add-subject"),
 	path('all-subjects/', views.allSubjects, name="all-subjects"),
 	path('subject/<sub_id>/', views.singleSubject, name="single-subject"),
 

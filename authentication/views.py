@@ -250,3 +250,18 @@ def addStudent(request):
         messages.error(request, str(e))
     return render(request, "students/add-single-student.html", context=context)
 
+
+def addMultipleStudents(request):
+    try:
+        print("hello")
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "students/add-multiple-students.html", context=context)
+
+
+def addTeacher(request):
+    try:
+        print("hello")
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "teacher/add-teacher.html", context=context)

@@ -7,7 +7,9 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="{% static 'images/logo.png' %}" width="125px">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'images/logo.png' %}" width="125px">
+                    </a>
                 </div>
                 <nav>
                     <ul id="menuitem">
@@ -65,7 +67,17 @@
                 <div class="info">
                     <p class=><b>Problem Statement 3 - Elective Subject Selection App
                         Build an application <br>that can be run as a container on the cloud for <br>selecting/updating/deleting elective subject for each student.</b><br>     
-                        </p>
+
+            There should be 2 pages/screens/views – Student Page and Elective Subject Page <br>
+            On the Student Page: <br>
+            The user should be able to select a student from a list of students(From Problem Statement 1) <br>
+            Then let them select, update, delete the elective subject(s)(From Problem Statement 2) for that student <br>
+            On the Elective Subject Page: <br>
+            The user should be able to select an elective subject from list of elective subject (From Problem Statement 2) <br>
+            Then let them select, update, delete the student(s) that have chosen the elective subject <br>
+
+                        
+                    </p>
                 </div>
                 <div class="sec"><img src="{% static 'images/ps3.png' %}" width="400px" height="400px"></div>
             </div>
@@ -86,7 +98,7 @@
                 </a>
                 <a href="{% url 'teacher-dashboard' %}">
                     <div class="col3">
-                        <div ><img src="{% static 'images/teacher.png' %}" width="100px" height="100px"></div><br>
+                        <div><img src="{% static 'images/teacher.png' %}" width="100px" height="100px"></div><br>
                         <h2 class="quote">Teacher Login</h2>
                     </div>
                 </a>
@@ -103,12 +115,6 @@
     <div class="row"><p>
         1.<br>
         2.<br>
-        3.<br>
-        4.<br>
-        5.<br>
-        6.<br>
-        7.<br>
-        8.<br>
     </p></div>
     
     <footer>
@@ -117,14 +123,22 @@
                 <hr>
                 <div class="row">
                     <div class="footrecol2">
-                        <img src="{% static 'images/logo.png' %}">
+                        <img src="{% static 'images/logo.png' %}" width="150px">
                         <p>Our purpose is to sustainably make
                             the pleasure<br> and benefit of sweets accessible to the many</p>
                     </div>
                     <div class="footrecol3">
                         <h3>Useful Links</h3>
                         <ul>
+                            <li><a href="{% url 'index' %}">Home</a></li>
+                            <li><a href="{% url 'contact-us' %}">Contact Us</a></li>
                             <li><a href="{% url 'all-subjects' %}">All Subjects</a></li>
+                            <li><a href="{% url 'all-teachers' %}">All Teacher</a></li>
+                        </ul>
+                    </div>
+                    <div class="footrecol3">
+                        <h3>Useful Links</h3>
+                        <ul>
                             <li><a href="{% url 'student-login' %}">Student Login</a></li>
                             <li><a href="{% url 'teacher-login' %}">Teacher Login</a></li>
                             <li><a href="{% url 'admin-login' %}">Admin Login</a></li>
