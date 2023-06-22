@@ -1,5 +1,6 @@
 // SIDEBAR TOGGLE
 var sidebarOpen = false;
+var subjects_list = []
 var sidebar = document.getElementById("sidebar");
 
 function openSidebar() {
@@ -17,9 +18,12 @@ function closeSidebar() {
 }
 
 // Function to fetch data using Axios
-function fetchData() {
+function api_data() {
   return axios.get('http://127.0.0.1:8000/api/graph-data/')  // Replace '/api/chart-data/' with your actual API endpoint URL
-    .then(response => response.data)
+    .then(response => {
+      let obj = response.data.subject;
+      return obj;
+    })
     .catch(error => {
       console.error('Error fetching chart data:', error);
       return [];
@@ -27,19 +31,20 @@ function fetchData() {
 }
 
 // Function to update the bar chart data and render the chart
-function updateBarChartWithData(barChart, newData) {
-  barChart.updateOptions({
-    series: [{
-      data: newData
-    }]
-  });
-}
+// function updateBarChartWithData(barChart, newData) {
+//   barChart.updateOptions({
+//     series: [{
+//       data: newData
+//     }]
+//   });
+// }
 
 // Function to initialize the bar chart
 function initializeBarChart() {
+  console.warn(api_data());
   var barChartOptions = {
     series: [{
-      data: [10, 8, 6, 8]
+      data: [10, 8]
     }],
     chart: {
       type: 'bar',
@@ -51,9 +56,7 @@ function initializeBarChart() {
     colors: [
       "#246dec",
       "#cc3c43",
-      "#367952",
-      "#f5b74f",
-      "#4f35a1"
+      // "#367952",
     ],
     plotOptions: {
       bar: {
@@ -70,7 +73,8 @@ function initializeBarChart() {
       show: false
     },
     xaxis: {
-      categories: ["IOT", "CFCS", "SOFT COMP", "WT"],
+      categories: ["IOT",  "WT"],
+      // categories: subjects,
     },
     yaxis: {
       title: {
@@ -83,9 +87,9 @@ function initializeBarChart() {
   barChart.render();
 
   // Fetch data and update the bar chart when the page loads
-  fetchData().then(data => {
-    updateBarChartWithData(barChart, data);
-  });
+  // fetchData().then(data => {
+  //   updateBarChartWithData(barChart, data);
+  // });
 
   // Fetch data and update the bar chart periodically (example: every 5 seconds)
   setInterval(() => {
