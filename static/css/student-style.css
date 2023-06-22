@@ -732,7 +732,8 @@ th:last-child{
     transition:background 0.5s;
     width: 300px;
     margin-left: 500px;
-
+    align-self: center;
+    place-self: center;
    text-align: center;
  
 }
