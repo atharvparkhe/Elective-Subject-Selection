@@ -5,6 +5,7 @@ charset-normalizer
 Django
 django-redis
 django-storages
+djangorestframework
 idna
 numpy
 oauthlib

@@ -17,6 +17,7 @@ urlpatterns = [
 	path('student-dashboard/', views.StudentDashboard, name="student-dashboard"),
 	path('teacher-dashboard/', views.TeacherDashboard, name="teacher-dashboard"),
 	path('admin-dashboard/', views.AdminDashboard, name="admin-dashboard"),
+	path('api/graph-data/', views.get_graph_data, name="graph-data"),
 
 	# Course Enrollment
 	path('enroll/<num>/', views.enroll, name="enroll"),
