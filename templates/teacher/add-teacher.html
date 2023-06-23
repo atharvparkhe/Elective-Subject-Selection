@@ -27,19 +27,19 @@
         <div class="contactcol ">
             <h2 class="title">Add Faculty</h2>
             <form action="" method="post">
-                <input class="an" type="text" name="tr_name" placeholder="Enter faculty name" required>
-                <input class="an" type="text" name="tr_regno" placeholder="Enter faculty register no" required>
+                <input class="an" type="text" name="name" placeholder="Enter faculty name" required>
                 <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
                     <option value="">Enter Student Department</option>
-                    <option value="dept1">dept1</option>
-                    <option value="dept2">dept2</option>
-                    <option value="dept3">dept3</option>
-                    <option value="dept4">dept4</option>
+                    {% for dept in departments %}
+                    <option value={{dept.id}}>{{dept.name}}</option>
+                    {% endfor %}
                 </select>
-                <input class="an" type="email" name="tr_email" placeholder="Enter faculty email" required>
-                <input class="an" type="text" name="tr_contact" placeholder="Enter faculty contact no" required>
-                <!-- <a href="" class="submitbtn">Add faculty</a> -->
-                <input type="submit" class="submitbtn" name="submit" value="Add Faculty">
+                <input class="an" type="email" name="email" placeholder="Enter faculty email" required>
+                <input class="an" type="text" name="contact" placeholder="Enter faculty contact no" required>
+                <input class="an" type="text" name="post" placeholder="Enter faculty Post" required>
+                <!-- <input type="image" placeholder="Upload Teacher's Profile Picture" required> -->
+                <input type="image"  name="profile_pic" src="" alt="profile_pic">
+                <button type="submit" class="submitbtn">Add faculty</button>
             </form>
         </div>
     </div>

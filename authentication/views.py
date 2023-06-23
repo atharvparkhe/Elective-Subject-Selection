@@ -228,6 +228,7 @@ def singleTeacher(request, teacher_id):
     return render(request, "teacher/single-teacher.html", context=context)
 
 
+# @login_required("admin-login")
 def addStudent(request):
     try:
         context["departments"] = DepartmentModel.objects.all()
@@ -251,17 +252,21 @@ def addStudent(request):
     return render(request, "students/add-single-student.html", context=context)
 
 
+# @login_required("admin-login")
 def addMultipleStudents(request):
     try:
-        print("hello")
+        if request.method == 'POST':
+            file = request.POST.get('file')
+            print("######")
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "students/add-multiple-students.html", context=context)
 
 
+# @login_required("admin-login")
 def addTeacher(request):
     try:
-        print("hello")
+        context["departments"] = DepartmentModel.objects.all()
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "teacher/add-teacher.html", context=context)
