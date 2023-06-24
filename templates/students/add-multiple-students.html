@@ -2,29 +2,11 @@
 {% load static %}
 
 {% block content %}
-  <div class="header">
-    <div class="container">
-        <div class="navbar">
-            <div class="logo">
-              <a href="{% url 'index' %}">
-                <img src="{% static 'images/logo.png' %}" width="125px">
-            </a>
-            </div>
-            <nav>
-                <ul id="menuitem">
-                    <li><a href="{% url 'index' %}">HOME</a></li>
-                    <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
-                    <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
-                </ul>
-            </nav>
-            <img src="{% static 'images/menu.jpg' %}" width="30px" height="30px" class="menu" onclick="menutoggle()">
-        </div>
-    </div>
-  </div>
+<main class="main-container">
   <div class="container1">
-    <form action="" method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <input type="file" id="file-input" />
+      <input type="file" id="file-input" name="excelfile" />
       <label for="file-input">
         <h3>Upload the excel sheet</h3>
         <i class="fa-solid fa-arrow-up-from-bracket"></i>
@@ -33,6 +15,7 @@
       <button type="submit" class="submitbtn">SUBMIT</button>
     </form>
   </div>
+</main>
     <!-- Script -->
     <script src="{% static 'js/script.js' %}"></script>
 {% endblock content %}

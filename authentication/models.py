@@ -5,6 +5,7 @@ from base.models import *
 class DepartmentModel(BaseModel):
     name = models.CharField(max_length=50)
     time_table = models.ImageField(upload_to="time-table", height_field=None, width_field=None, max_length=None, null=True, blank=True)
+    code = models.CharField(max_length=6)
     def __str__(self):
         return self.name
 
@@ -36,5 +37,3 @@ class AdminModel(BaseUser):
 
 class FileModel(BaseModel):
     file = models.FileField(upload_to="upload", max_length=100)
-    def __str__(self):
-        return self.file

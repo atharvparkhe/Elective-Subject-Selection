@@ -4,18 +4,16 @@ import threading
 
 
 class send_contact_email(threading.Thread):
-    def __init__(self, email, name):
-        self.email = email
-        self.name = name
+    def __init__(self, em, nm):
+        self.em = em
+        self.nm = nm
         threading.Thread.__init__(self)
     def run(self):
         try:
             subject = "Thanks for filling up the Contact Us Form."
-            message = f"Hay {self.name} !\nThanks for filling up the Contact Form.\nWe will reachout to you as soon as possible."
+            message = f"Hay {self.nm} !\nThanks for filling up the Contact Form.\nWe will reachout to you as soon as possible."
             email_from = settings.EMAIL_HOST_USER
-            print("Email send started")
-            send_mail(subject , message ,email_from ,[self.email])
-            print("Email send finished")
+            send_mail(subject , message ,email_from ,[self.em])
         except Exception as e:
             print(e)
 

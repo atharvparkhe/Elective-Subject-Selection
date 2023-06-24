@@ -210,13 +210,19 @@ def AdminReset(request, token):
 
 ###############################################################################################################
 
-# @login_required("admin-login")
+
 def allTeachers(request):
     context["teachers"] = TeacherModel.objects.all()
     return render(request, "teacher/all-teachers.html", context=context)
 
 
-# @login_required("admin-login")
+@login_required(login_url="admin-login")
+def adminAllTeachers(request):
+    context["teachers"] = TeacherModel.objects.all()
+    return render(request, "teacher/admin-all-teachers.html", context=context)
+
+
+# @login_required(login_url="admin-login")
 def singleTeacher(request, teacher_id):
     try:
         if not TeacherModel.objects.filter(id=teacher_id).exists():
@@ -227,8 +233,19 @@ def singleTeacher(request, teacher_id):
         messages.error(request, str(e))
     return render(request, "teacher/single-teacher.html", context=context)
 
+@login_required(login_url="admin-login")
+def adminSingleTeacher(request, teacher_id):
+    try:
+        if not TeacherModel.objects.filter(id=teacher_id).exists():
+            messages.error(request, 'Invalid Teacher ID.')
+            return redirect('all-teachers')
+        context["teacher"] = TeacherModel.objects.get(id=teacher_id)
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "teacher/admin-single-teacher.html", context=context)
 
-# @login_required("admin-login")
+
+# @login_required(login_url="admin-login")
 def addStudent(request):
     try:
         context["departments"] = DepartmentModel.objects.all()
@@ -246,27 +263,68 @@ def addStudent(request):
             obj.save()
             thread_obj = send_password_via_mail(email, pw)
             thread_obj.start()
-            messages.info(request, 'Student Added')
+            messages.info(request, 'Student Added Successfully')
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "students/add-single-student.html", context=context)
 
 
-# @login_required("admin-login")
+# @login_required(login_url="admin-login")
 def addMultipleStudents(request):
     try:
         if request.method == 'POST':
-            file = request.POST.get('file')
-            print("######")
+            obj = FileModel.objects.create(file=request.FILES['excelfile'])
+            obj.save()
+            # file_path = f"{settings.BASE_DIR}/{obj.file}"
+            df = pandas.read_excel(obj.file)
+            for stu in df.values.tolist():
+                obj = StudentModel.objects.create(
+                    roll_no = stu[0],
+                    name = stu[1],
+                    email = stu[2],
+                    phone = stu[3],
+                    department = DepartmentModel.objects.get(code=stu[4])
+                )
+                pw = generate_random_passsword(12)
+                obj.set_password(pw)
+                obj.save()
+                thread_obj = send_password_via_mail(stu[2], pw)
+                thread_obj.start()
+            messages.info(request, 'Students Added Successfully')
+            return redirect("admin-dashboard")
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "students/add-multiple-students.html", context=context)
 
 
-# @login_required("admin-login")
+# @login_required(login_url="admin-login")
 def addTeacher(request):
     try:
         context["departments"] = DepartmentModel.objects.all()
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "teacher/add-teacher.html", context=context)
+
+
+@login_required(login_url="admin-login")
+def adminAllStudents(request):
+    context["students"] = StudentModel.objects.all()
+    return render(request, "students/admin-all-students.html", context)
+
+
+@login_required(login_url="admin-login")
+def adminSingleStudent(request, stu_id):
+    try:
+        if not StudentModel.objects.filter(id=stu_id).exists():
+            messages.error(request, "Invalid Student ID")
+            return redirect("all-students")
+        student_obj = StudentModel.objects.get(id=stu_id)
+        context["student"] = student_obj
+        from app.models import EnollmentModel
+        if not EnollmentModel.objects.filter(student=student_obj).exists():
+            context["enrollment"] = None
+        else :
+            context["enrollment"] = EnollmentModel.objects.get(student=student_obj)
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "students/admin-single-student.html", context)

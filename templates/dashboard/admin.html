@@ -3,92 +3,6 @@
 
 {% block content %}
 
-<style>
-  .dropbtn {
-    background-color: transparent;
-    color: black;
-    padding: 0px;
-    font-size: 20px;
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-  }
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown a:hover {background-color: #ddd;}
-
-.show {display: block;}
-</style>
-
-
-    <div class="grid-container">
-      <aside id="sidebar">
-        <div class="sidebar-title">
-          <div class="sidebar-brand">
-            <a href="{% url 'index' %}">
-              <img src="{% static 'images/logo.png' %}" width="125px">
-          </a>
-        <ul class="sidebar-list">
-          <li class="sidebar-list-item"><a href="{% url 'admin-dashboard' %}">Dashboard</a></li>
-          <li class="sidebar-list-item">
-            <div class="dropdown" >
-              <button onclick="myFunction()" class="dropbtn">Student &#9660;</button>
-              <div id="myDropdown" class="dropdown-content">
-                <a href="{% url 'add-single-student' %}">Add Single Student</a>
-                <a href="{% url 'add-multiple-students' %}">Add Multiple Students</a>
-                <a href="{% url 'all-students' %}">All Students</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="sidebar-list-item">
-            <div class="dropdown" >
-              <button onclick="myFunction2()" class="dropbtn">Teacher &#9660;</button>
-              <div id="myDropdown2" class="dropdown-content">
-                <a href="{% url 'add-teacher' %}">Add Teacher</a>
-                <a href="{% url 'all-teachers' %}">All Teachers</a>
-              </div>
-            </div>
-          </li>
-
-          <li class="sidebar-list-item">
-            <div class="dropdown" >
-              <button onclick="myFunction3()" class="dropbtn">Subject &#9660;</button>
-              <div id="myDropdown3" class="dropdown-content">
-                <a href="{% url 'add-subject' %}">Add Subject</a>
-                <a href="{% url 'all-subjects' %}">All Subjects</a>
-              </div>
-            </div>
-          </li>
-<!-- 
-          <br><br> -->
-
-          <li class="sidebar-list-item"><a href="{% url 'logout' %}">Logout</a></li>
-        </ul>
-
-      </aside>
-      <!-- End Sidebar -->
-
       <!-- Main -->
       <main class="main-container">
         <div class="main-title">
@@ -122,11 +36,11 @@
 
         <div class="charts">
           <div class="charts-card">
-            <p class="chart-title">Students opted for subject</p>
+            <p class="chart-title">Students Subject Enrollment Graph</p>
             <div id="bar-chart"></div>
           </div>
           <div class="charts-card">
-            <p class="chart-title">Students selected and changed subjects</p>
+            <p class="chart-title">Students Subject Enrollment and Change Requests Graph</p>
             <div id="area-chart"></div>
           </div>
         </div>
@@ -140,33 +54,5 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
    
     <script src="{% static 'js/graph-script.js' %}"></script>
-
-    <script>
-      /* When the user clicks on the button, 
-      toggle between hiding and showing the dropdown content */
-      function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-      }
-      function myFunction2() {
-        document.getElementById("myDropdown2").classList.toggle("show");
-      }
-      function myFunction3() {
-        document.getElementById("myDropdown3").classList.toggle("show");
-      }
-      
-      // Close the dropdown if the user clicks outside of it
-      window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
-          var dropdowns = document.getElementsByClassName("dropdown-content");
-          var i;
-          for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
-            }
-          }
-        }
-      }
-      </script>
 
     {% endblock content %}

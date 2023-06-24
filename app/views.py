@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from rest_framework.decorators import api_view
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -21,9 +22,11 @@ def contactPage(request):
             name = request.POST.get('name')
             email = request.POST.get('email')
             msg = request.POST.get('message')
+            ContactUs.objects.create(name=name, email=email, msg=msg)
             thread_obj = send_contact_email(email, name)
             thread_obj.start()
-            ContactUs.objects.create(name=name, email=email, msg=msg)
+            messages.info(request, "Admin would contact you soon")
+            return redirect("index")
     except Exception as e:
         print(e)
     return render(request, "common/contact-us.html", context)
@@ -34,6 +37,12 @@ def timeTable(request):
 
 
 def allSubjects(request):
+    context["subjects"] = SubjectModel.objects.all()
+    return render(request, "subject/all-subjects.html", context=context)
+
+
+@login_required(login_url="admin-login")
+def adminAllSubjects(request):
     context["subjects"] = SubjectModel.objects.all()
     return render(request, "subject/all-subjects.html", context=context)
 
@@ -160,6 +169,9 @@ def StudentDashboard(request):
 @login_required(login_url="teacher-login")
 def TeacherDashboard(request):
     try:
+        if not TeacherModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("teacher-login")
         teacher_obj = TeacherModel.objects.get(email=request.user.email)
         context["teacher"] = teacher_obj
     except Exception as e:
@@ -189,6 +201,7 @@ def AdminDashboard(request):
 @api_view(["GET"])
 def get_graph_data(request):
     try:
+        api_data = {}
         sub_array, enrollment_count, change_count, to_change_count = [], [], [], []
         for sub in SubjectModel.objects.all():
             c1 = sub.enrolled_subject_1.all().count()
@@ -198,11 +211,11 @@ def get_graph_data(request):
             enrollment_count.append(c1 + c2 + c3)
             change_count.append(sub.from_subject.all().count())
             to_change_count.append(sub.to_subject.all().count())
-        context["subject"] = sub_array
-        context["enrollments"] = enrollment_count
-        context["change_from"] = change_count
-        context["change_to"] = to_change_count
-        return Response(context, status=status.HTTP_200_OK)
+        api_data["subject"] = sub_array
+        api_data["enrollments"] = enrollment_count
+        api_data["change_from"] = change_count
+        api_data["change_to"] = to_change_count
+        return Response(api_data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -243,7 +256,4 @@ def studentProfile(request, stu_id):
     return render(request, "dashboard/student.html", context)
 
 
-# @login_required(login_url="admin-login")
-def allStudents(request):
-    context["students"] = StudentModel.objects.all()
-    return render(request, "students/all-students.html", context)
+

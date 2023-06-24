@@ -24,8 +24,12 @@ urlpatterns = [
 	path('all-teachers/', views.allTeachers, name="all-teachers"),
 	path('teacher/<teacher_id>/', views.singleTeacher, name="single-teacher"),
 	path('add-teacher/', views.addTeacher, name="add-teacher"),
+	path('admin-all-teachers/', views.adminAllTeachers, name="admin-all-teachers"),
+	path('admin-teacher/<teacher_id>/', views.adminSingleTeacher, name="admin-single-teacher"),
     
 	# Student
+	path('admin-all-students/', views.adminAllStudents, name="admin-all-students"),
+	path('admin-single-student/<stu_id>/', views.adminSingleStudent, name="admin-single-student"),
 	path('add-single-student/', views.addStudent, name="add-single-student"),
 	path('add-multiple-students/', views.addMultipleStudents, name="add-multiple-students"),
 

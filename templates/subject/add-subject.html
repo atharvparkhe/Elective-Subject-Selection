@@ -1,28 +1,8 @@
-{% extends '../stu-base.html' %}
+{% extends '../admin-base.html' %}
 {% load static %}
 
 {% block content %}
-
-    <div class="header">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="{% url 'index' %}">
-                        <img src="{% static 'images/logo.png' %}" width="125px">
-                    </a>
-                </div>
-                <nav>
-                    <ul id="menuitem">
-                        <li><a href="{% url 'index' %}">HOME</a></li>
-                        <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
-                        <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
-                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
-   
+<main class="main-container">
     <div class="formbox2">
         <div class="contactcol ">
             <h2 class="title">Add Subject</h2>
@@ -54,5 +34,5 @@
             </form>
         </div>
     </div>
-
+</main>
 {% endblock content %}

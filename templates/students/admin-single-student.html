@@ -1,0 +1,65 @@
+{% extends '../admin-base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <main class="main-container">
+            <div class="smallcon">
+                <div class="row"> 
+                    <div class="col-2">
+                        {% if student.profile_pic %}
+                            <img src="{{student.profile_pic.url}}" width="400px" height="400px">
+                        {% else %}
+                            <img src="{% static 'images/profile.webp' %}" width="400px" height="400px">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="image" src="" alt="" name="profile_pic" required>
+                                <button type="submit">Update Profile Pic</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <div class="col-2">
+                        <h2>{{student.name | safe }}</h2>
+                        <p><b>Roll No : </b>{{student.roll_no | safe }}</p>
+                        <p><b>Department : </b>{{student.department.name | safe }}</p>
+                        <p><b>Contact : </b>{{student.phone | safe }}</p>
+                        <p><b>Email : </b>{{student.email | safe }}</p> 
+                    </div>
+                </div>
+            </div>
+
+    <h2 class="title">SELECTED ELECTIVES</h2>
+    <div class="feedback">
+    <div class="smallcon">
+        <div class="row">
+        {% if enrollment %}
+                <div class="col3">
+                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
+                    <h2>{{enrollment.subject_1.name}}</h2>
+                    <p>{{enrollment.subject_1.department.name}}</p>
+                    <br><a href="{% url 'single-subject' enrollment.subject_1.id %}" class="sub_info">Subject Details</a>
+                </div>
+                {% if enrollment.subject_2 %}
+                <div class="col3">
+                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
+                    <h2>{{enrollment.subject_2.name}}</h2>
+                    <p>{{enrollment.subject_2.department.name}}</p>
+                    <br><a href="{% url 'single-subject' enrollment.subject_2.id %}" class="sub_info">Subject Details</a>
+                </div>
+                {% endif %}
+                {% if enrollment.subject_3 %}
+                <div class="col3">
+                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
+                    <h2>{{enrollment.subject_3.name}}</h2>
+                    <p>{{enrollment.subject_3.department.name}}</p>
+                    <br><a href="{% url 'single-subject' enrollment.subject_3.id %}" class="sub_info">Subject Details</a>
+                </div>
+                {% endif %}
+        {% else %}
+            <h2 class="alert">No Electives Selected by the Student</h2>
+        {% endif %}
+        </div>
+    </div>
+</div>
+</main>
+{% endblock content %}

@@ -6,3 +6,5 @@ admin.site.register(StudentModel)
 admin.site.register(TeacherModel)
 admin.site.register(AdminModel)
 admin.site.register(DepartmentModel)
+
+# admin.site.register(FileModel)

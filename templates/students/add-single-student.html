@@ -2,27 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <div class="header">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="{% url 'index' %}">
-                        <img src="{% static 'images/logo.png' %}" width="125px">
-                    </a>
-                </div>
-                <nav>
-                    <ul id="menuitem">
-                        <li><a href="{% url 'index' %}">HOME</a></li>
-                        <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
-                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
-                    </ul>
-                </nav>
-                <!-- <img src="image/BELL.png" width="30px" height="30px"> -->
-                <img src="{% static 'images/menu.jpg' %}" width="30px" height="30px" class="menu" onclick="menutoggle()">
-            </div>
-        </div>
-    </div>
-
+<main class="main-container">
     <div class="formbox2">
         <div class="contactcol ">
             <h2 class="title">Add Student</h2>
@@ -42,4 +22,5 @@
             </form>
         </div>
     </div>
+</main>
 {% endblock content %}

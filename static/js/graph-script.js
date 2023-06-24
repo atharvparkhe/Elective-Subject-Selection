@@ -19,18 +19,8 @@ function closeSidebar() {
 
 // Function to fetch data using Axios
 function api_data() {
-  return axios.get('http://127.0.0.1:8000/api/graph-data/')  // Replace '/api/chart-data/' with your actual API endpoint URL
-    // .then(response => {
-    //   // let obj = response.data.subject;
-    //   const obj = response.data.subject;
-    //   console.log(obj);
-    //   return obj;
-    // })
-
-    // .then(response => response.data.subject)  //working
-    
+  return axios.get('http://127.0.0.1:8000/api/graph-data/')
     .then(response => response.data)
-
     .catch(error => {
       console.error('Error fetching chart data:', error);
       return [];
@@ -54,7 +44,7 @@ function updateBarChartWithData(barChart, newData) {
 
 // Function to initialize the bar chart
 function initializeBarChart() {
-  // console.warn(api_data());
+
   var barChartOptions = {
     series: [{
       // data: [10, 8, 7]
@@ -67,11 +57,6 @@ function initializeBarChart() {
         show: false
       },
     },
-    colors: [
-      "#246dec",
-      "#cc3c43",
-      // "#367952",
-    ],
     plotOptions: {
       bar: {
         distributed: true,
@@ -88,12 +73,11 @@ function initializeBarChart() {
     },
     xaxis: {
       // categories: ["IOT",  "WT"],
-      // categories: api_data(),
       categories: []
     },
     yaxis: {
       title: {
-        text: "No of Students"
+        text: "Number of Students"
       }
     }
   };
@@ -106,12 +90,6 @@ function initializeBarChart() {
     updateBarChartWithData(barChart, data);
   });
 
-  // Fetch data and update the bar chart periodically (example: every 5 seconds)
-  // setInterval(() => {
-  //   api_data().then(data => {
-  //     updateBarChartWithData(barChart, data);
-  //   });
-  // }, 5000);
 }
 
 initializeBarChart();
@@ -119,9 +97,9 @@ initializeBarChart();
 // Function to update the area chart data and render the chart
 function updateAreaChartWithData(areaChart, newData) {
   areaChart.updateSeries([
-    { name: 'student opted for subjects', data: newData.opted },
-    { name: 'student enrolled for subject', data: newData.enrollments },
-    { name: 'student changed subject', data: newData.changed },
+    { name: 'Student Subject Enrollment', data: newData.enrollments },
+    { name: 'Change requested FROM subject', data: newData.change_from },
+    { name: 'Change requested TO subject', data: newData.change_to },
   ]);
 
   areaChart.updateOptions({
@@ -133,14 +111,14 @@ function updateAreaChartWithData(areaChart, newData) {
 function initializeAreaChart() {
   var areaChartOptions = {
     series: [{
-      name: 'student opted for subjects',
-      data: [10, 8, 6, 8] //dummy values (to be removed)
+      name: 'Change requested FROM subject',
+      data: []
     }, {
-      name: 'student enrolled for subject',
+      name: 'Student Subject Enrollment',
       data: []
     },{
-      name: 'student changed subject',
-      data: [5, 12, 4, 8] //dummy values (to be removed)
+      name: 'Change requested TO subject',
+      data: []
     }],
     chart: {
       height: 350,
@@ -163,15 +141,15 @@ function initializeAreaChart() {
     yaxis: [
       {
         title: {
-          text: 'student opted for subject',
+          text: 'Number of Students',
         },
       },
-      {
-        opposite: true,
-        title: {
-          text: 'student changed subject',
-        },
-      },
+      // {
+      //   opposite: true,
+      //   title: {
+      //     text: 'student changed subject',
+      //   },
+      // },
     ],
     tooltip: {
       shared: true,

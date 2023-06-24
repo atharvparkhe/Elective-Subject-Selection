@@ -12,6 +12,7 @@ urlpatterns = [
 	path('add-subject/', views.addSubject, name="add-subject"),
 	path('all-subjects/', views.allSubjects, name="all-subjects"),
 	path('subject/<sub_id>/', views.singleSubject, name="single-subject"),
+	path('admin-all-subjects/', views.adminAllSubjects, name="admin-all-subjects"),
 
 	# Dashboard
 	path('student-dashboard/', views.StudentDashboard, name="student-dashboard"),
@@ -27,5 +28,4 @@ urlpatterns = [
 	path('enrolled-students-list/', views.enrolledStudentList, name="enrolled-students-list"),
 	path('student-profile/<stu_id>/', views.studentProfile, name="student-profile"),
 	
-	path('all-students/', views.allStudents, name="all-students"),
 ]
