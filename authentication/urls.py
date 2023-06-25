@@ -19,6 +19,7 @@ urlpatterns = [
 	path('admin-login/', views.AdminLogIn, name="admin-login"),
 	path('admin-forgot/', views.AdminForgot, name="admin-forgot"),
 	path('admin-reset/<token>/', views.AdminReset, name="admin-reset"),
+	path('api/add-admin/', views.AddAdmin, name="add-admin"),
     
 	# Teacher
 	path('all-teachers/', views.allTeachers, name="all-teachers"),

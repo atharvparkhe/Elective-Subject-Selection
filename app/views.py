@@ -47,7 +47,25 @@ def adminAllSubjects(request):
     return render(request, "subject/all-subjects.html", context=context)
 
 
+@login_required(login_url="admin-login")
 def addSubject(request):
+    try:
+        context["departments"] = DepartmentModel.objects.all()
+        context["faculty"] = TeacherModel.objects.all()
+        if request.method == 'POST':
+            SubjectModel.objects.create(
+                name = request.POST.get('name'),
+                desc = request.POST.get('desc'),
+                cover_img = request.FILES['cover_img'],
+                department = request.POST.get('dept'),
+                teacher = request.POST.get('teacher'),
+                syllabus = request.POST.get('syllabus'),
+                intro = request.POST.get('intro')
+            )
+            messages.info(request, "Subject Added Successfully")
+            return redirect("admin-dashboard")
+    except Exception as e:
+        messages.error(request, str(e))
     return render(request, "subject/add-subject.html", context=context)
 
 
@@ -179,7 +197,7 @@ def TeacherDashboard(request):
     return render(request, "dashboard/teacher.html", context)
 
 
-# @login_required(login_url="admin-login")
+@login_required(login_url="admin-login")
 def AdminDashboard(request):
     try:
         context["subject_count"] = SubjectModel.objects.all().count()
@@ -254,6 +272,4 @@ def studentProfile(request, stu_id):
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "dashboard/student.html", context)
-
-
 

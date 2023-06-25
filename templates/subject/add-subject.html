@@ -6,31 +6,27 @@
     <div class="formbox2">
         <div class="contactcol ">
             <h2 class="title">Add Subject</h2>
-            <form action="" method="post">
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input class="an" type="text" name="name" placeholder="Enter Subject Name" required>
                 <input class="an" type="text" name="desc" placeholder="Enter Subject Description" required>
-                <input class="an" type="text" name="code" placeholder="Enter Subject Code" required>
-                <input class="an" type="file" name="cover_img" placeholder="Enter Cover Image" required>
-
-                <select id="dept" name="department" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
-                    <option value="">Enter Subject Department</option>
-                    <option value="dept1">dept1</option>
-                    <option value="dept2">dept2</option>
-                    <option value="dept3">dept3</option>
-                    <option value="dept4">dept4</option>
-                  </select>                
-                  <select id="teacher" name="tecaher" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
-                    <option value="">Enter Subject Faculty</option>
-                    <option value="tr1">tr1</option>
-                    <option value="tr2">tr2</option>
-                    <option value="tr3">tr3</option>
-                    <option value="tr4">tr4</option>
-                  </select>                     
-                <input class="an" type="url" name="syllabus" placeholder="Enter Syllabus" required>
+                <input class="an" type="image" name="cover_img" placeholder="Enter Cover Image" required>
+                <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
+                    <option value="">Select Department</option>
+                    {% for dept in departments %}
+                    <option value={{dept.id}}>{{dept.name}}</option>
+                    {% endfor %}
+                </select>              
+                <select id="teacher" name="teacher" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
+                    <option value="">Select Faculty</option>
+                    {% for teacher in faculty %}
+                    <option value={{teacher.id}}>{{teacher.name}}</option>
+                    {% endfor %}
+                </select>                    
+                <input class="an" type="url" name="syllabus" placeholder="Subject Syllabus Link" required>
+                <input class="an" type="url" name="intro" placeholder="Subject Introduction Video Link" required>
                 <!-- <input class="an" type="textarea" name="intro" placeholder="Add Subject Intro" required> -->
-                <textarea class="an" name="intro" id="intro" cols="30" rows="4" placeholder="Add Subject Intro"></textarea>
-                <input type="submit" class="submitbtn" name="submit" value="Add Subject">
+                <button type="submit" class="submitbtn">Add Subject</button>
             </form>
         </div>
     </div>

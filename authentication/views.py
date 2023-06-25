@@ -1,9 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+# from django.http import HttpResponseRedirect
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 from django.contrib import messages
 from django.conf import settings
+from .serializers import *
 from .threads import *
 from .models import *
 from .utils import *
@@ -19,7 +23,7 @@ def mailMessage(request):
 @login_required(login_url='index')
 def logoutView(request):
     logout(request)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect("index")
 
 
 def StudentLogIn(request):
@@ -146,6 +150,30 @@ def TeacherReset(request, token):
     return render(request, "auth/teacher/tea-reset.html", context)
 
 
+@api_view(["POST"])
+def AddAdmin(request):
+    try:
+        data = request.data
+        serializer = signupSerializer(data=data)
+        if serializer.is_valid():
+            name = serializer.data["name"]
+            email = serializer.data["email"]
+            password = serializer.data["password"]
+            if AdminModel.objects.filter(email=email).first():
+                return Response({"message":"Acount already exists."}, status=status.HTTP_406_NOT_ACCEPTABLE)
+            new_admin = AdminModel.objects.create(
+                email = email,
+                name = name,
+            )
+            new_admin.set_password(password)
+            new_admin.save()
+            return Response({"message":"Account created"}, status=status.HTTP_201_CREATED)
+        return Response({"error":serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
 def AdminLogIn(request):
     try:
         if request.method == 'POST':
@@ -222,7 +250,7 @@ def adminAllTeachers(request):
     return render(request, "teacher/admin-all-teachers.html", context=context)
 
 
-# @login_required(login_url="admin-login")
+@login_required(login_url="admin-login")
 def singleTeacher(request, teacher_id):
     try:
         if not TeacherModel.objects.filter(id=teacher_id).exists():
@@ -245,7 +273,7 @@ def adminSingleTeacher(request, teacher_id):
     return render(request, "teacher/admin-single-teacher.html", context=context)
 
 
-# @login_required(login_url="admin-login")
+@login_required(login_url="admin-login")
 def addStudent(request):
     try:
         context["departments"] = DepartmentModel.objects.all()
@@ -269,7 +297,7 @@ def addStudent(request):
     return render(request, "students/add-single-student.html", context=context)
 
 
-# @login_required(login_url="admin-login")
+@login_required(login_url="admin-login")
 def addMultipleStudents(request):
     try:
         if request.method == 'POST':
@@ -297,7 +325,7 @@ def addMultipleStudents(request):
     return render(request, "students/add-multiple-students.html", context=context)
 
 
-# @login_required(login_url="admin-login")
+@login_required(login_url="admin-login")
 def addTeacher(request):
     try:
         context["departments"] = DepartmentModel.objects.all()
