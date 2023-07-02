@@ -7,7 +7,7 @@
         {% for sub in subjects %}
             <div class="smallcon">
                 <div class="row"> 
-                    <a href="{% url 'admin-single-subject' sub.id %}">  
+                    <a href="{% url 'single-subject' sub.id %}">  
                         <div class="col4" style="padding: 40px;">
                             <h1>{{sub.name}}</h1><br>
                             <div><img src="{{ sub.cover_img.url }}" style="width: 250px; height: 250px;"></div><br>
