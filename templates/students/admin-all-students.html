@@ -13,7 +13,7 @@
         border-radius: 20px;
         padding: 20px;
         background-color: aliceblue;
-        }
+        }   
 
         .tr_bio{
             padding-left: 20px;
@@ -35,7 +35,7 @@
             font-size: 15px;
         }
 
-        th, td{
+       td{
             border-bottom: 1px solid grey;
             padding: 10px;
             border-radius: 2.5px;
@@ -86,7 +86,7 @@
         {% endfor %}
     </table>
 
-    <div style="text-align: center;"><button onclick="downloadExcel()" class="btn">Download as Excel</button></div>
+    <div><button onclick="downloadExcel()" class="submitbtn">Download as Excel</button></div>
 </main>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <script>
