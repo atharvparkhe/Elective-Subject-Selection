@@ -176,6 +176,86 @@ function initializeAreaChart() {
 initializeAreaChart();
 
 
+//3RD CHART
+
+var options = {
+  series: [70, 55, 13, 43, 22],
+  
+  //for displaying no. of students instead of percentage
+  dataLabels: {
+    formatter: function (val, opts) {
+        return opts.w.config.series[opts.seriesIndex]
+    },
+  },
+  
+  chart: {
+  width: 380,
+  type: 'pie',
+},
+
+labels: ['IT', 'COMP', 'ETC', 'MECH', 'CIVIL'],
+responsive: [{
+  breakpoint: 480,
+  options: {
+    chart: {
+      width: 200
+    },
+    legend: {
+      position: 'bottom'
+    }
+  }
+}]
+};
+
+var piechart = new ApexCharts(document.querySelector("#pie-chart"), options);
+piechart.render();
+
+
+//4TH CHART
+
+
+
+var options = {
+  series: [{
+  name: 'IT',
+  data: [80, 50, 30, 40, 100, 20],
+}, {
+  name: 'COMP',
+  data: [20, 30, 40, 80, 20, 80],
+}, {
+  name: 'ETC',
+  data: [44, 76, 78, 13, 43, 10],
+}],
+  chart: {
+  height: 350,
+  type: 'radar',
+  dropShadow: {
+    enabled: true,
+    blur: 1,
+    left: 1,
+    top: 1
+  }
+},
+title: {
+  text: 'Radar Chart - Multi Series'
+},
+stroke: {
+  width: 2
+},
+fill: {
+  opacity: 0.1
+},
+markers: {
+  size: 0
+},
+xaxis: {
+  categories: ['IOT', 'SOFTCOMP', 'AIFL', 'CFCS', 'ANN', 'DBMS']
+}
+};
+
+var radarchart = new ApexCharts(document.querySelector("#radar-chart"), options);
+radarchart.render();
+
 
 
 // SIDEBAR TOGGLE
@@ -349,48 +429,3 @@ initializeAreaChart();
 // }
 
 // initializeAreaChart();
-var barChartOptions = {
-  series: [{
-    data: [40, 80, 35, 65]
-  }],
-  chart: {
-    type: 'bar',
-    height: 350,
-    toolbar: {
-      show: false
-    },
-  },
-  colors: [
-    "#246dec",
-    "#cc3c43",
-    "#367952",
-    "#f5b74f",
-    "#4f35a1"
-  ],
-  plotOptions: {
-    bar: {
-      distributed: true,
-      borderRadius: 4,
-      horizontal: false,
-      columnWidth: '40%',
-    }
-  },
-  dataLabels: {
-    enabled: false
-  },
-  legend: {
-    show: false
-  },
-  xaxis: {
-    categories: ["comp", "it", "etc", "mech"],
-  },
-  yaxis: {
-    title: {
-      text: "No of Students"
-    }
-  }
-};
-
-
-var barChart = new ApexCharts(document.querySelector("#bar-chart1"), barChartOptions);
-barChart.render();
