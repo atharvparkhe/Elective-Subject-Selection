@@ -360,3 +360,12 @@ def adminSingleStudent(request, stu_id):
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "students/admin-single-student.html", context)
+
+
+
+def allDepartments(request):
+    context["department"] = DepartmentModel.objects.all()
+    return render(request, "department/all-department.html", context)
+
+def addDepartments(request):
+    return render(request, "department/add-department.html", context)
