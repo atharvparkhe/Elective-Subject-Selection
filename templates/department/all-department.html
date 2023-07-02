@@ -1,0 +1,21 @@
+{% extends '../admin-base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="main-container">
+    <div class="smallcon">
+        <h2 class="title">Department</h2>
+        <div class="row">
+            <!-- {% for tea in teachers %} -->
+                <a class="col4" href="{% url 'single-teacher' tea.id %}">
+                    <!-- <div class="col4"> -->
+                        <img src="{{ tea.profile_pic.url }}" width="200px" height="400px">
+                        <h4>{{ tea.name | safe }}</h4>
+                        <p>{{ tea.department.name | safe }}</p>
+                    <!-- </div> -->
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock content %}
