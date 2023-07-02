@@ -362,10 +362,11 @@ def adminSingleStudent(request, stu_id):
     return render(request, "students/admin-single-student.html", context)
 
 
-
+@login_required(login_url="admin-login")
 def allDepartments(request):
     context["department"] = DepartmentModel.objects.all()
     return render(request, "department/all-department.html", context)
 
+@login_required(login_url="admin-login")
 def addDepartments(request):
     return render(request, "department/add-department.html", context)
