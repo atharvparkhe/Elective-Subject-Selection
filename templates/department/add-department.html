@@ -1,0 +1,23 @@
+{% extends '../admin-base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="main-container">
+    <div class="formbox2">
+        <div class="contactcol ">
+            <h2 class="title">Add Department</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input class="an" type="text" name="name" placeholder="Enter Department Name" required>
+                <input class="an" type="text" name="desc" placeholder="Enter Department code" required>
+                <span style="color: grey; font-size: 14px;margin-left: 12px;">Add time-table image</span>
+                <input class="an custom_file_up" type="file" name="profile_pic" style="width: 70%;" required>
+                <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
+
+                <!-- <input class="an" type="textarea" name="intro" placeholder="Add Subject Intro" required> -->
+                <button type="submit" class="submitbtn">Add Department</button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock content %}
