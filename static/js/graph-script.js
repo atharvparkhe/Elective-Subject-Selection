@@ -227,13 +227,13 @@ console.log(data.depatments);
 var radarchartoptions = {
   series: [{
   name: 'IT',
-  data: [80, 50, 30, 40, 100, 20],
+  data: [80, 50, 30, 40, 100],
 }, {
   name: 'COMP',
-  data: [20, 30, 40, 80, 20, 80],
+  data: [20, 30, 40, 80, 20],
 }, {
   name: 'ETC',
-  data: [44, 76, 78, 13, 43, 10],
+  data: [44, 76, 78, 13, 43],
 }],
   chart: {
   height: 350,
@@ -255,7 +255,7 @@ markers: {
   size: 0
 },
 xaxis: {
-  categories: ['IOT', 'SOFTCOMP', 'AIFL', 'CFCS', 'ANN', 'DBMS']
+  categories: ['IOT', 'SOFTCOMP', 'AIFL', 'CFCS', 'DBMS']
 }
 };
 
