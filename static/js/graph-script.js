@@ -178,9 +178,19 @@ initializeAreaChart();
 
 //3RD CHART
 
-var options = {
-  series: [70, 55, 13, 43, 22],
-  
+function updatePieChartWithData(pieChart, newData) {
+
+  pieChart.updateOptions({
+      series: newData.dept_stu,
+      labels: newData.departments,
+
+  });
+}
+
+var piechartoptions = {
+  // series: [70, 55, 13, 43, 22],
+  series: [],
+
   //for displaying no. of students instead of percentage
   dataLabels: {
     formatter: function (val, opts) {
@@ -193,7 +203,9 @@ var options = {
   type: 'pie',
 },
 
-labels: ['IT', 'COMP', 'ETC', 'MECH', 'CIVIL'],
+// labels: ['IT', 'COMP', 'ETC', 'MECH', 'CIVIL'],
+labels: [],
+
 responsive: [{
   breakpoint: 480,
   options: {
@@ -207,15 +219,19 @@ responsive: [{
 }]
 };
 
-var piechart = new ApexCharts(document.querySelector("#pie-chart"), options);
+var piechart = new ApexCharts(document.querySelector("#pie-chart"), piechartoptions);
 piechart.render();
+
+api_data().then(data => {
+  updateBarChartWithData(pieChart, data);
+});
 
 
 //4TH CHART
 
 
 
-var options = {
+var radarchartoptions = {
   series: [{
   name: 'IT',
   data: [80, 50, 30, 40, 100, 20],
@@ -250,7 +266,7 @@ xaxis: {
 }
 };
 
-var radarchart = new ApexCharts(document.querySelector("#radar-chart"), options);
+var radarchart = new ApexCharts(document.querySelector("#radar-chart"), radarchartoptions);
 radarchart.render();
 
 
