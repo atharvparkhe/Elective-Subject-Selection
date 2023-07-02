@@ -236,9 +236,6 @@ var options = {
     top: 1
   }
 },
-title: {
-  text: 'Radar Chart - Multi Series'
-},
 stroke: {
   width: 2
 },
