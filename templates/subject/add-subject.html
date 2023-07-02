@@ -10,7 +10,8 @@
                 {% csrf_token %}
                 <input class="an" type="text" name="name" placeholder="Enter Subject Name" required>
                 <input class="an" type="text" name="desc" placeholder="Enter Subject Description" required>
-                <input class="an" type="image" name="cover_img" placeholder="Enter Cover Image" required>
+                <span style="color: grey; font-size: 14px;margin-left: 12px;">Add subject cover image</span>
+                <input class="an custom_file_up" type="file" name="profile_pic" style="width: 70%;" required>
                 <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
                     <option value="">Select Department</option>
                     {% for dept in departments %}
