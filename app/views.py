@@ -220,16 +220,18 @@ def AdminDashboard(request):
 def get_graph_data(request):
     try:
         api_data = {}
-        sub_array, enrollment_count, change_count, to_change_count = [], [], [], []
+        subject_name_array, dept_name_array, enrollment_count, change_count, to_change_count = [], [], [], [], []
         for sub in SubjectModel.objects.all():
             c1 = sub.enrolled_subject_1.all().count()
             c2 = sub.enrolled_subject_2.all().count()
             c3 = sub.enrolled_subject_3.all().count()
-            sub_array.append(sub.name)
+            subject_name_array.append(sub.name)
             enrollment_count.append(c1 + c2 + c3)
             change_count.append(sub.from_subject.all().count())
             to_change_count.append(sub.to_subject.all().count())
-        api_data["subject"] = sub_array
+        for dept in DepartmentModel.objects.all():
+            dept_name_array.append(dept.name)
+        api_data["subject"] = subject_name_array
         api_data["enrollments"] = enrollment_count
         api_data["change_from"] = change_count
         api_data["change_to"] = to_change_count
