@@ -168,13 +168,15 @@ initializeAreaChart();
 function updatePieChartWithData(pieChart, newData) {
 
   pieChart.updateOptions({
-      series: newData.dept_stu,
-      labels: newData.departments,
-      
+      // series: newData.dept_stu,
+      // labels: newData.departments,
 
       // series: [{
       //   data: newData.dept_stu
       // }],
+
+      pieChart.updateSeries(newData.dept_students);
+      pieChart.updateLabels(newData.departments);
 
   });
 }
@@ -222,7 +224,6 @@ var piechart = new ApexCharts(document.querySelector("#pie-chart"), piechartopti
 piechart.render();
 
 api_data().then(data => {
-  console.log(series);
   updatePieChartWithData(piechart, data);
 });
 
