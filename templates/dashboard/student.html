@@ -19,21 +19,22 @@
                     </ul>
                 </nav>
             </div>
-            <div class="smallcon">
+            <div class="smallcon singlepro">
                 <div class="row"> 
+
                     <div class="col-2">
                         {% if user.profile_pic %}
-                            <img src="{{user.profile_pic.url}}" width="400px" height="400px">
+                            <img src="{{user.profile_pic.url}}" style="width: 400px; height: 400px;" >
                         {% else %}
-                            <img src="{% static 'images/profile.webp' %}" width="400px" height="400px">
+                            <img src="{% static 'images/profile.webp' %}" style="width: 400px; height: 400px;">
                         {% endif %}
                     </div>
                     <div class="col-2">
                         <h2>{{user.name | safe }}</h2>
-                        <p><b>Roll No : </b>{{user.roll_no | safe }}</p>
-                        <p><b>Department : </b>{{user.department.name | safe }}</p>
-                        <p><b>Contact : </b>{{user.phone | safe }}</p>
-                        <p><b>Email : </b>{{user.email | safe }}</p> 
+                        <h4><b>Roll No : </b>{{user.roll_no | safe }}</h4>
+                        <h4><b>Department : </b>{{user.department.name | safe }}</h4>
+                        <h4><b>Contact : </b>{{user.phone | safe }}</h4>
+                        <h4><b>Email : </b>{{user.email | safe }}</h4> 
                     </div>
                 </div>
             </div>

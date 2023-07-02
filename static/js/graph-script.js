@@ -349,3 +349,48 @@ initializeAreaChart();
 // }
 
 // initializeAreaChart();
+var barChartOptions = {
+  series: [{
+    data: [40, 80, 35, 65]
+  }],
+  chart: {
+    type: 'bar',
+    height: 350,
+    toolbar: {
+      show: false
+    },
+  },
+  colors: [
+    "#246dec",
+    "#cc3c43",
+    "#367952",
+    "#f5b74f",
+    "#4f35a1"
+  ],
+  plotOptions: {
+    bar: {
+      distributed: true,
+      borderRadius: 4,
+      horizontal: false,
+      columnWidth: '40%',
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  legend: {
+    show: false
+  },
+  xaxis: {
+    categories: ["comp", "it", "etc", "mech"],
+  },
+  yaxis: {
+    title: {
+      text: "No of Students"
+    }
+  }
+};
+
+
+var barChart = new ApexCharts(document.querySelector("#bar-chart1"), barChartOptions);
+barChart.render();
