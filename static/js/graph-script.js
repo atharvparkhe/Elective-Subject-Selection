@@ -166,18 +166,9 @@ initializeAreaChart();
 //3RD CHART
 
 function updatePieChartWithData(pieChart, newData) {
-
   pieChart.updateOptions({
-      // series: newData.dept_stu,
-      // labels: newData.departments,
-
-      // series: [{
-      //   data: newData.dept_stu
-      // }],
-
-      pieChart.updateSeries(newData.dept_students);
-      pieChart.updateLabels(newData.departments);
-
+      series: newData.dept_stu,
+      labels: newData.depatments,
   });
 }
 
@@ -198,7 +189,7 @@ var piechartoptions = {
   },
   
   chart: {
-  width: 380,
+  width: 480,
   type: 'pie',
 },
 
@@ -222,8 +213,9 @@ responsive: [{
 
 var piechart = new ApexCharts(document.querySelector("#pie-chart"), piechartoptions);
 piechart.render();
-
 api_data().then(data => {
+  console.log(data.dept_stu);
+console.log(data.depatments);
   updatePieChartWithData(piechart, data);
 });
 
