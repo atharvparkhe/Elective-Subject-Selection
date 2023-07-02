@@ -36,7 +36,7 @@ function updateBarChartWithData(barChart, newData) {
     }],
     
     xaxis: {
-      categories: newData.subject
+      categories: newData.subjects
     }
 
   });
@@ -103,7 +103,7 @@ function updateAreaChartWithData(areaChart, newData) {
   ]);
 
   areaChart.updateOptions({
-      labels: newData.subject
+      labels: newData.subjects
   });
 }
 
@@ -127,7 +127,6 @@ function initializeAreaChart() {
         show: false,
       },
     },
-    // colors: ["#367952", "#cc3c43"],
     dataLabels: {
       enabled: false,
     },
@@ -144,12 +143,6 @@ function initializeAreaChart() {
           text: 'Number of Students',
         },
       },
-      // {
-      //   opposite: true,
-      //   title: {
-      //     text: 'student changed subject',
-      //   },
-      // },
     ],
     tooltip: {
       shared: true,
@@ -165,12 +158,6 @@ function initializeAreaChart() {
     updateAreaChartWithData(areaChart, data);
   });
 
-  // Fetch data and update the area chart periodically (example: every 5 seconds)
-  // setInterval(() => {
-  //   api_data().then(data => {
-  //     updateAreaChartWithData(areaChart, data);
-  //   });
-  // }, 5000);
 }
 
 initializeAreaChart();
@@ -178,8 +165,11 @@ initializeAreaChart();
 
 //3RD CHART
 
+
+
 var options = {
-  series: [70, 55, 13, 43, 22],
+  // series: [70, 55, 13, 43, 22],
+  series: [],
   
   //for displaying no. of students instead of percentage
   dataLabels: {
@@ -193,7 +183,8 @@ var options = {
   type: 'pie',
 },
 
-labels: ['IT', 'COMP', 'ETC', 'MECH', 'CIVIL'],
+// labels: ['IT', 'COMP', 'ETC', 'MECH', 'CIVIL'],
+labels: [],
 responsive: [{
   breakpoint: 480,
   options: {
