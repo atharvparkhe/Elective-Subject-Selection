@@ -272,26 +272,39 @@ def adminSingleTeacher(request, teacher_id):
         messages.error(request, str(e))
     return render(request, "teacher/admin-single-teacher.html", context=context)
 
+@login_required(login_url="admin-login")
+def addTeacher(request):
+    try:
+        context["departments"] = DepartmentModel.objects.all()
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "teacher/add-teacher.html", context=context)
+
 
 @login_required(login_url="admin-login")
 def addStudent(request):
     try:
         context["departments"] = DepartmentModel.objects.all()
         if request.method == 'POST':
-            name = request.POST.get('name')
             roll = request.POST.get('roll')
             email = request.POST.get('email')
-            phone = request.POST.get('phone')
             if StudentModel.objects.filter(roll_no=roll).exists() or StudentModel.objects.filter(email=email).exists():
                 messages.info(request, 'This account already exist')
                 return redirect('add-student')
-            obj = StudentModel.objects.create(name=name, email=email, phone=phone, roll_no=roll, department=DepartmentModel.objects.first())
+            obj = StudentModel.objects.create(
+                name = request.POST.get('name'), 
+                email = email, 
+                phone = request.POST.get('phone'), 
+                roll_no = roll,
+                department = DepartmentModel.objects.get(id=request.POST.get("dept"))
+            )
             pw = generate_random_passsword(12)
             obj.set_password(pw)
             obj.save()
             thread_obj = send_password_via_mail(email, pw)
             thread_obj.start()
             messages.info(request, 'Student Added Successfully')
+            return redirect("admin-dashboard")
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "students/add-single-student.html", context=context)
@@ -323,15 +336,6 @@ def addMultipleStudents(request):
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "students/add-multiple-students.html", context=context)
-
-
-@login_required(login_url="admin-login")
-def addTeacher(request):
-    try:
-        context["departments"] = DepartmentModel.objects.all()
-    except Exception as e:
-        messages.error(request, str(e))
-    return render(request, "teacher/add-teacher.html", context=context)
 
 
 @login_required(login_url="admin-login")
