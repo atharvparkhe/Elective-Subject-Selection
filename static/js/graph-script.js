@@ -170,6 +170,11 @@ function updatePieChartWithData(pieChart, newData) {
   pieChart.updateOptions({
       series: newData.dept_stu,
       labels: newData.departments,
+      
+
+      // series: [{
+      //   data: newData.dept_stu
+      // }],
 
   });
 }
@@ -177,6 +182,11 @@ function updatePieChartWithData(pieChart, newData) {
 var piechartoptions = {
   // series: [70, 55, 13, 43, 22],
   series: [],
+  
+  
+  // series: [{
+  //   data:[]
+  // }],
 
   //for displaying no. of students instead of percentage
   dataLabels: {
@@ -192,6 +202,7 @@ var piechartoptions = {
 
 // labels: ['IT', 'COMP', 'ETC', 'MECH', 'CIVIL'],
 labels: [],
+
 responsive: [{
   breakpoint: 480,
   options: {
@@ -205,11 +216,14 @@ responsive: [{
 }]
 };
 
+
+
 var piechart = new ApexCharts(document.querySelector("#pie-chart"), piechartoptions);
 piechart.render();
 
 api_data().then(data => {
-  updateBarChartWithData(pieChart, data);
+  console.log(series);
+  updatePieChartWithData(piechart, data);
 });
 
 
