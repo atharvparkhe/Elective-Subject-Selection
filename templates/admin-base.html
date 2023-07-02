@@ -102,8 +102,18 @@
                 </div>
               </div>
             </li>
-  <!-- 
-            <br><br> -->
+
+            <li class="sidebar-list-item">
+              <div class="dropdown" >
+                <button onclick="myFunction4()" class="dropbtn">Department &#9660;</button>
+                <div id="myDropdown4" class="dropdown-content">
+                  <a href="{% url 'admin-all-subjects' %}">All Departments</a>
+                  <a href="{% url 'add-subject' %}">Add Department</a>
+                </div>
+              </div>
+            </li>
+  
+            <!-- <br><br> -->
   
             <li class="sidebar-list-item"><a href="{% url 'logout' %}">Logout</a></li>
           </ul>
@@ -140,6 +150,9 @@
   }
   function myFunction3() {
     document.getElementById("myDropdown3").classList.toggle("show");
+  }
+  function myFunction4() {
+    document.getElementById("myDropdown4").classList.toggle("show");
   }
   
   // Close the dropdown if the user clicks outside of it
