@@ -8,21 +8,13 @@
         {% for dept in department %}
             <div class="smallcon">
                 <div class="row"> 
-<<<<<<< HEAD
                     <div class="col4" style="padding: 40px;">
                         <h1>{{dept.name}}</h1><br>
                         <h3>{{dept.code}}</h3><br><br>
-                        <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Edit</a>
+                        <a class="submitbtn" href="{% url 'admin-all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Edit</a>
+                        <!-- <form action="delete-" method="post"></form> -->
                         <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Delete</a>
                     </div>
-=======
-                    <a href="{% url 'single-department' dept.id %}">
-                        <div class="col4" style="padding: 40px;">
-                            <h1>{{dept.name}}</h1><br>
-                            <h3>{{dept.code}}</h3>
-                        </div>
-                    </a>
->>>>>>> 7344ffc51b58a333071305d389d664d6d684a6bb
                 </div>
             </div>
         {% endfor %}
