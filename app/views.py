@@ -44,7 +44,7 @@ def allSubjects(request):
 @login_required(login_url="admin-login")
 def adminAllSubjects(request):
     context["subjects"] = SubjectModel.objects.all()
-    return render(request, "subject/all-subjects.html", context=context)
+    return render(request, "subject/admin-all-subjects.html", context=context)
 
 
 @login_required(login_url="admin-login")
@@ -221,7 +221,7 @@ def AdminDashboard(request):
 def get_graph_data(request):
     try:
         api_data = {}
-        subject_name_array, dept_no_of_stu, dept_name_array, enrollment_count, change_count, to_change_count = [], [], [], [], [], []
+        subject_name_array, dept_no_of_stu, dept_name_array, enrollment_count, change_count, to_change_count, radar = [], [], [], [], [], [], []
         for sub in SubjectModel.objects.all():
             c1 = sub.enrolled_subject_1.all().count()
             c2 = sub.enrolled_subject_2.all().count()
@@ -231,14 +231,25 @@ def get_graph_data(request):
             change_count.append(sub.from_subject.all().count())
             to_change_count.append(sub.to_subject.all().count())
         for dept in DepartmentModel.objects.all():
+            li = []
+            temp = {}
             dept_name_array.append(dept.name)
             dept_no_of_stu.append(dept.student_department.all().count())
+            for sub in SubjectModel.objects.all():
+                x1 = EnollmentModel.objects.filter(subject_1=sub, student__department=dept).count()
+                x2 = EnollmentModel.objects.filter(subject_2=sub, student__department=dept).count()
+                x3 = EnollmentModel.objects.filter(subject_3=sub, student__department=dept).count()
+                li.append(x1+x2+x3)
+            temp["name"] = dept.name
+            temp["data"] = li
+            radar.append(temp)
         api_data["subjects"] = subject_name_array
         api_data["depatments"] = dept_name_array
         api_data["dept_stu"] = dept_no_of_stu
         api_data["enrollments"] = enrollment_count
         api_data["change_from"] = change_count
         api_data["change_to"] = to_change_count
+        api_data["radar"] = radar
         return Response(api_data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"error":str(e), "message":"Something went wrong"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

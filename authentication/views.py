@@ -369,4 +369,16 @@ def allDepartments(request):
 
 @login_required(login_url="admin-login")
 def addDepartments(request):
+    try:
+        if request.method == 'POST':
+            name = request.POST.get('name')
+            code = request.POST.get('code')
+            if DepartmentModel.objects.filter(code=code).exists():
+                messages.error(request, "Department Already Exists")
+                return redirect("admin-dashboard")
+            DepartmentModel.objects.create(name = name, code = code)
+            messages.success(request, "Department Added Successfully")
+            return redirect("admin-dashboard")
+    except Exception as e:
+        messages.error(request, str(e))
     return render(request, "department/add-department.html", context)

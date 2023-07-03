@@ -212,7 +212,11 @@ legend: {
 var piechart = new ApexCharts(document.querySelector("#pie-chart"), piechartoptions);
 piechart.render();
 api_data().then(data => {
+<<<<<<< HEAD
 // console.log(data.dept_stu);
+=======
+  // console.log(data.dept_stu);
+>>>>>>> 90bef8dbff5877e1fff810da2cc3765f5fb44ff7
 // console.log(data.depatments);
   updatePieChartWithData(piechart, data);
 });
@@ -220,19 +224,29 @@ api_data().then(data => {
 
 //4TH CHART
 
-
+function updateRadarChartWithData(pieChart, newData) {
+  pieChart.updateOptions({
+      series: newData.radar,
+      xaxis: {
+        categories: newData.subjects
+      }
+  });
+}
 
 var radarchartoptions = {
-  series: [{
-  name: 'IT',
-  data: [80, 50, 30, 40, 100, 20],
-}, {
-  name: 'COMP',
-  data: [20, 30, 40, 80, 20, 80],
-}, {
-  name: 'ETC',
-  data: [44, 76, 78, 13, 43, 10],
-}],
+  // series: [
+    // {
+    //   name: 'IT',
+    //   data: [80, 50, 30],
+    // }, {
+    //   name: 'COMP',
+    //   data: [20, 30, 40],
+    // }, {
+    //   name: 'ETC',
+    //   data: [44, 76, 78],
+    // }
+// ],
+  series: [],
   chart: {
   height: 350,
   type: 'radar',
@@ -253,13 +267,17 @@ markers: {
   size: 0
 },
 xaxis: {
-  categories: ['IOT', 'SOFTCOMP', 'AIFL', 'CFCS', 'ANN', 'DBMS']
+  categories: []
 }
 };
 
 var radarchart = new ApexCharts(document.querySelector("#radar-chart"), radarchartoptions);
 radarchart.render();
 
+api_data().then(data => {
+  console.warn(data.radar)
+  updateRadarChartWithData(radarchart, data);
+});
 
 
 // SIDEBAR TOGGLE
