@@ -33,15 +33,15 @@
                     <h2>{{enrollment.subject_1.name}}</h2>
                     <p>{{enrollment.subject_1.department.name}}</p>
                     <a href="{% url 'change-elective' 1 %}" class="btn">CHANGE</a>
-                    <br><a href="{% url 'single-subject' enrollment.subject_1.id %}" class="sub_info">Subject Details</a>
+                    <a href="{% url 'single-subject' enrollment.subject_1.id %}" class="btn">Subject Details</a>
                 </div>
                 {% if enrollment.subject_2 %}
                 <div class="col3">
                     <div><img src="{{ enrollment.subject_2.cover_img.url }}" width="100px" height="100px"></div>
                     <h2>{{enrollment.subject_2.name}}</h2>
                     <p>{{enrollment.subject_2.department.name}}</p>
-                    <a href="{% url 'change-elective' 2 %}" class="btn">CHANGE</a>
-                    <br><a href="{% url 'single-subject' enrollment.subject_2.id %}" class="sub_info">Subject Details</a>
+                    <a href="{% url 'change-elective' 1 %}" class="btn">CHANGE</a>
+                    <a href="{% url 'single-subject' enrollment.subject_1.id %}" class="btn">Subject Details</a>
                 </div>
                 {% else %}
                 <div class="col3">
@@ -53,8 +53,8 @@
                     <div><img src="{{ enrollment.subject_3.cover_img.url }}" width="100px" height="100px"></div>
                     <h2>{{enrollment.subject_3.name}}</h2>
                     <p>{{enrollment.subject_3.department.name}}</p>
-                    <a href="{% url 'change-elective' 3 %}" class="btn">CHANGE</a>
-                    <br><a href="{% url 'single-subject' enrollment.subject_3.id %}" class="sub_info">Subject Details</a>
+                    <a href="{% url 'change-elective' 1 %}" class="btn">CHANGE</a>
+                    <a href="{% url 'single-subject' enrollment.subject_1.id %}" class="btn">Subject Details</a>
                 </div>
                 {% else %}
                 <div class="col4">
@@ -67,9 +67,24 @@
         </div>
     </div><br><br>
     <h2 class="title">Change Elective Status</h2>
-    <div class="col3">
-        <h2>Maths  -->  Sci    ></h2>
-        <h2>abhinav  -->  sairaj    Aproved</h2>
-    </div>
+    <center><div class="col5">
+        <div class="col6"> <h2>Maths</h2><br>
+            <div><img src="{{ enrollment.subject_1.cover_img.url }}" style="width: 100px; height: 100px;"></div>
+            <h4>Taught by:athrv</h4> <!--can be  a link to the faculty profile-->
+            <h4>it dept</h4>
+            <img src="{% static 'images/check.png' %}" style="width: 30px; height: 30px;">
+        </div>
+            <div class="col6"> <div><img src="{% static 'images/right-arrow.png' %}" style="width: 100px; height: 55px; margin-top: 90px;"></div></div>
+            <div class="col6"> <h2>Hindi</h2><br>
+                <img src="{{ enrollment.subject_1.cover_img.url }}" style="width: 100px; height: 100px;">
+                <h4>Taught by:abinav</h4> <!--can be  a link to the faculty profile-->
+                <h4>comp dept</h4>
+                <img src="{% static 'images/check.png' %}" style="width: 30px; height: 30px;"></div>
+                <div class="col6"> 
+                    <img src="{% static 'images/check.png' %}" style="width: 80px; height: 80px;margin-top: 60px;"><br><br>
+                    <h1>Status</h1>
+                </div>
+    </div></center>
+    
 </div>
 {% endblock content %}
