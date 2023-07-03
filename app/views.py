@@ -114,12 +114,12 @@ def enroll(request, num):
         if not EnollmentModel.objects.filter(student=user).exists():
             context["subjects"] = SubjectModel.objects.all()
         else:
-            obj = EnollmentModel.objects.get(student=user)
-            li = [obj.subject_1.id]
-            if obj.subject_2 != None:
-                li.append(obj.subject_2.id)
-            if obj.subject_3 != None:
-                li.append(obj.subject_3.id)
+            enrollment_obj = EnollmentModel.objects.get(student=user)
+            li = [enrollment_obj.subject_1.id]
+            if enrollment_obj.subject_2 != None:
+                li.append(enrollment_obj.subject_2.id)
+            if enrollment_obj.subject_3 != None:
+                li.append(enrollment_obj.subject_3.id)
             context["subjects"] = SubjectModel.objects.all().exclude(id__in=li)
         if request.method == 'POST':
             sub_id = request.POST.get('subject')
@@ -128,15 +128,19 @@ def enroll(request, num):
                 return redirect('student-dashboard')
             sub_obj = SubjectModel.objects.get(id=sub_id)
             if num == "1":
-                obj.subject_1 = sub_obj
+                new_enrollment_obj = EnollmentModel.objects.create(student=user, subject_1=sub_obj)
             elif num == "2":
-                obj.subject_2 = sub_obj
+                new_enrollment_obj = EnollmentModel.objects.get(student=user)
+                new_enrollment_obj.subject_2 = sub_obj
+                new_enrollment_obj.save()
             elif num == "3":
-                obj.subject_3 = sub_obj
-            obj.save()
+                new_enrollment_obj = EnollmentModel.objects.get(student=user)
+                new_enrollment_obj.subject_3 = sub_obj
+                new_enrollment_obj.save()
             messages.info(request, "Elective Subject Added")
             return redirect('student-dashboard')
     except Exception as e:
+        print(e)
         messages.error(request, str(e))
     return render(request, "elective/enroll-form.html", context)
 
