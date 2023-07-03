@@ -10,7 +10,9 @@
                 <div class="row"> 
                     <div class="col4" style="padding: 40px;">
                         <h1>{{dept.name}}</h1><br>
-                        <h3>{{dept.code}}</h3>
+                        <h3>{{dept.code}}</h3><br><br>
+                        <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Edit</a>
+                        <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Delete</a>
                     </div>
                 </div>
             </div>

@@ -7,13 +7,27 @@
         <h2 class="title">Teachers</h2>
         <div class="row">
             {% for tea in teachers %}
-                <a class="col4" href="{% url 'admin-single-teacher' tea.id %}">
+            <div class="col4">
+                <a href="{% url 'admin-single-teacher' tea.id %}">
                     <!-- <div class="col4"> -->
                         <img src="{{ tea.profile_pic.url }}" width="200px" height="400px">
                         <h4>{{ tea.name | safe }}</h4>
                         <p>{{ tea.department.name | safe }}</p>
+                        
+                        <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Edit</a>
+                        <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Delete</a>
+                        
+                            <!-- <p><a href="{% url 'all-subjects' %}">hello</a></p> -->
+
+                        <!-- <button type="button" class="btn btn-primary" href="{% url 'all-subjects' %}">Edit</button> -->
+                        <!-- <button type="button" class="btn btn-primary">Primary</button> -->
+                        
+                        <!-- <a class="btn btn-primary" href="#" role="button" style="display: inline; width: 100px;">Link</a>
+                        <a class="btn btn-primary" href="#" role="button"  style="display: inline; width: 100px;">Link</a> -->
+
                     <!-- </div> -->
                 </a>
+            </div>
             {% endfor %}
         </div>
     </div>
