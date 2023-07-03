@@ -11,8 +11,9 @@ urlpatterns = [
 	# Subjects
 	path('add-subject/', views.addSubject, name="add-subject"),
 	path('all-subjects/', views.allSubjects, name="all-subjects"),
-	path('admin-all-subjects/', views.adminAllSubjects, name="admin-all-subjects"),
 	path('subject/<sub_id>/', views.singleSubject, name="single-subject"),
+	path('admin-all-subjects/', views.adminAllSubjects, name="admin-all-subjects"),
+	path('admin-single-subject/<sub_id>/', views.adminSingleSubject, name="admin-single-subject"),
 
 	# Dashboard
 	path('student-dashboard/', views.StudentDashboard, name="student-dashboard"),

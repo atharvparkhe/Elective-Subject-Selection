@@ -8,10 +8,12 @@
         {% for dept in department %}
             <div class="smallcon">
                 <div class="row"> 
-                    <div class="col4" style="padding: 40px;">
-                        <h1>{{dept.name}}</h1><br>
-                        <h3>{{dept.code}}</h3>
-                    </div>
+                    <a href="{% url 'single-department' dept.id %}">
+                        <div class="col4" style="padding: 40px;">
+                            <h1>{{dept.name}}</h1><br>
+                            <h3>{{dept.code}}</h3>
+                        </div>
+                    </a>
                 </div>
             </div>
         {% endfor %}

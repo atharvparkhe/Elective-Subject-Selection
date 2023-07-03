@@ -25,6 +25,27 @@
 </head>
 
 <body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'images/logo.png' %}" width="125px">
+                    </a>
+                </div>
+                <nav>
+                    <ul id="menuitem">
+                        <li><a href="{% url 'index' %}">HOME</a></li>
+                        <li><a href="{% url 'teacher-dashboard' %}">PROFILE</a></li>
+                        <li><a href="{% url 'enrolled-students-list' %}">STUDENTS</a></li>
+                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
+                        <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    
     <!-- Messages -->
     {% if messages %}
         {% for msg in messages %}

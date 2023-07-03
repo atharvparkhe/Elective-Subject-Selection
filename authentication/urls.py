@@ -36,5 +36,6 @@ urlpatterns = [
 
 	# Department
 	path('all-departments/', views.allDepartments, name="all-departments"),
+	path('single-department/<dept_id>/', views.singleDepartment, name="single-department"),
 	path('add-department/', views.addDepartments, name="add-department"),
 ]

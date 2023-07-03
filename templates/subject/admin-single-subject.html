@@ -1,4 +1,4 @@
-{% extends '../stu-base.html' %}
+{% extends '../admin-base.html' %}
 {% load static %}
 
 {% block content %}
@@ -19,9 +19,125 @@
                 <p>{{subject.desc}}<br></p>
                 <br> 
                 <a href="{{subject.syllabus}}" target="_blank" class="btn">Syllabus link</a>
-                <a href="{% url 'enroll' subject.id %}" class="btn8">Enroll Now</a>
             </div>
         </div>
     </div>
+
+
+    <style>
+        .tr_info{
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        border: 2px solid blue;
+        border-radius: 20px;
+        padding: 20px;
+        background-color: aliceblue;
+        }
+
+        .tr_bio{
+            padding-left: 20px;
+        }
+        .tr_dp{
+            width: 120px;
+            height: 120px;
+        }
+
+        .tr_name{
+            font-size: 40px;
+        }
+
+        .tr_dept{
+            padding-top: 20px;
+        }
+
+        .tr_dept,.tr_sub ,.tr_email{
+            font-size: 15px;
+        }
+
+        th, td{
+            border-bottom: 1px solid grey;
+            padding: 10px;
+            border-radius: 2.5px;
+            text-align: center !important;
+        }
+        table{
+            margin: auto;
+            background-color: none;
+            width: 90%;
+            font-weight: 500;
+            /* border: 2px solid black; */
+            border-radius: 0px;
+            padding: 2px;
+            /* display: flex;
+            flex-wrap: wrap;
+            justify-content: center; */
+        }
+
+        .table_heading{
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+            justify-content: center;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+
+    <h2 class="title">List of Students Enrolled for {{subject.name}}</h2>
+    <br>
+    <table class="stu_details" id="stu_detail">
+        <tr><b>
+            <th>Student Name</th>
+            <th>Student Dept</th>
+            <th>Student Email ID</th>
+            <th>Student Phone No</th>
+            <th>Student Details</th>
+        </b></tr>
+        {% for stu in students %}
+        <tr>
+            <td>{{stu.name | safe}}</td>
+            <td>{{stu.department.name | safe}}</td>
+            <td>{{stu.email | safe}}</td>
+            <td>{{stu.phone | safe}}</td>
+            <td><a href="{% url 'student-profile' stu.id %}" class="btn">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div style="text-align: center;"><button onclick="downloadExcel()" class="btn">Download as Excel</button></div>
+    
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script>
+        
+        function downloadExcel() {
+        const table = document.getElementById("stu_detail");
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet JS" });
+        const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+        function s2ab(s) {
+            const buf = new ArrayBuffer(s.length);
+            const view = new Uint8Array(buf);
+            for (let i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+            return buf;
+        }
+        const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+        const filename = 'student_data.xlsx';
+        if (typeof navigator.msSaveBlob !== 'undefined') {
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            const link = document.createElement('a');
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    }
+    </script>
+
 </main>
 {% endblock content %}
