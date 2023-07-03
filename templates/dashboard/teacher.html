@@ -106,6 +106,57 @@
 
     <div style="text-align: center;"><button onclick="downloadExcel()" class="btn">Download as Excel</button></div>
     
+    <br><hr style="width: 90%; margin: auto;">
+    
+    <h2 class="title">Change Request</h2>
+    <table class="stu_details" id="stu_detail">
+        <tr><b>
+            <th>Student Name</th>
+            <th>Student Dept</th>
+            <th>Student Email ID</th>
+            <th>Student Details</th>
+            <th>Change From</th>
+            <th>Change To</th>
+            <th>Approve/Reject</th>
+            <th>Submit</th>
+        </b></tr>
+        <tr><b>
+            <td>Abhinav</td>
+            <td>Information Technology</td>
+            <td>abhinav@example.com</td>
+            <td>View Details</td>
+            <td>CFCS</td>
+            <td>Soft Comp</td>
+            <td>
+                <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-success">Approve</button>
+                    <button type="button" class="btn btn-danger">Reject</button>
+                </div>  -->
+                 <select name="approve" id="approve">
+                    <option value="approve">Approve</option>
+                    <option value="reject">Reject</option>
+                </select> 
+            </td>
+            <td><button type="submit" class="btn btn-primary">Submit</button></td>
+            
+        </b></tr>
+        <tr><b>
+            <td>Abhinav</td>
+            <td>Information Technology</td>
+            <td>abhinav@example.com</td>
+            <td>View Details</td>
+            <td>CFCS</td>
+            <td>Soft Comp</td>
+            <td>
+                 <select name="approve" id="approve">
+                    <option value="approve">Approve</option>
+                    <option value="reject">Reject</option>
+                </select> 
+            </td>
+            <td><button type="submit" class="btn btn-yellow">Submit</button></td>
+        </b></tr>
+    </table>
+    
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <script>
         
