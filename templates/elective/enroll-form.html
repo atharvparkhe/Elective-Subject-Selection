@@ -2,27 +2,6 @@
 {% load static %}
 
 {% block content %}
-    <div class="header">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="{% url 'index' %}">
-                        <img src="{% static 'images/logo.png' %}" width="125px">
-                    </a>
-                </div>
-                <nav>
-                    <ul id="menuitem">
-                        <li><a href="{% url 'index' %}">HOME</a></li>
-                        <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
-                        <li><a href="{% url 'all-subjects' %}">SUBJECTS</a></li>
-                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
-                        <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
-                    </ul>
-                </nav>
-                <img src="{% static 'images/menu.png' %}" width="30px" height="30px" class="menu" onclick="menutoggle()">
-            </div>
-        </div>
-    </div>
 
     <div class="formbox">
         <h2 style="text-align: center; margin-top: 35px;">Enrollment Form</h2>

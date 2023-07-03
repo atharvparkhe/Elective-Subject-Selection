@@ -29,7 +29,7 @@
         <div class="row">
         {% if enrollment %}
                 <div class="col3">
-                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
+                    <div><img src="{{ enrollment.subject_1.cover_img.url }}" width="100px" height="100px"></div>
                     <h2>{{enrollment.subject_1.name}}</h2>
                     <p>{{enrollment.subject_1.department.name}}</p>
                     <a href="{% url 'change-elective' 1 %}" class="btn">CHANGE</a>
@@ -37,7 +37,7 @@
                 </div>
                 {% if enrollment.subject_2 %}
                 <div class="col3">
-                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
+                    <div><img src="{{ enrollment.subject_2.cover_img.url }}" width="100px" height="100px"></div>
                     <h2>{{enrollment.subject_2.name}}</h2>
                     <p>{{enrollment.subject_2.department.name}}</p>
                     <a href="{% url 'change-elective' 2 %}" class="btn">CHANGE</a>
@@ -50,7 +50,7 @@
                 {% endif %}
                 {% if enrollment.subject_3 %}
                 <div class="col3">
-                    <div><img src="{% static 'images/student.png' %}" width="100px" height="100px"></div>
+                    <div><img src="{{ enrollment.subject_3.cover_img.url }}" width="100px" height="100px"></div>
                     <h2>{{enrollment.subject_3.name}}</h2>
                     <p>{{enrollment.subject_3.department.name}}</p>
                     <a href="{% url 'change-elective' 3 %}" class="btn">CHANGE</a>
