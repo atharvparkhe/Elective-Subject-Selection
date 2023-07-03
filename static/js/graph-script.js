@@ -212,11 +212,7 @@ legend: {
 var piechart = new ApexCharts(document.querySelector("#pie-chart"), piechartoptions);
 piechart.render();
 api_data().then(data => {
-<<<<<<< HEAD
 // console.log(data.dept_stu);
-=======
-  // console.log(data.dept_stu);
->>>>>>> 90bef8dbff5877e1fff810da2cc3765f5fb44ff7
 // console.log(data.depatments);
   updatePieChartWithData(piechart, data);
 });
