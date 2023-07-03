@@ -1,37 +1,68 @@
-{% extends '../stu-base.html' %}
-{% load static %}
+<!DOCTYPE html>
+<html>
+    {% load static %}
+<head>
+    <!-- Respponsive Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Title -->
+    <title>Elective Subject Selection</title>
+    <link rel="icon" href="{% static 'images/logo.png' %}" sizes="32x32" type="image/png">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="{% static 'css/student-style.css' %}">
+    <!-- SEO tags -->
+    <meta name="description" content="Elective Subject Selection">
+    <meta name="author" content="Team Alpha">
+    <meta name="keywords" content="Elective, Subject, Selection">
+    <meta property="og:title" content="Elective Subject Selection" />
+    <meta property="og:type" content="web-application" />
+    <meta property="og:url" content="http://127.0.0.1:8000" />
+    <meta property="og:image" content="{% static 'images/logo.png' %}" />
 
-{% block content %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 
-    <div class="header">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="{% url 'index' %}">
-                        <img src="{% static 'images/logo.png' %}" width="125px">
-                    </a>
-                </div>
-                <nav>
-                    <ul id="menuitem">
-                        <li><a href="{% url 'index' %}">HOME</a></li>
-                        <li><a href="{% url 'all-subjects' %}">SUBJECTS</a></li>
-                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
-                        <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
-                    </ul>
-                </nav>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'images/logo.png' %}" width="125px">
+                </a>
             </div>
-
-            <div class="row">
-                <div class="col-1">
-                    <h1>Elective Subject Selection Project</h1>
-                </div>
-                <div class="col-2"><img src="{% static 'images/hero.gif' %}" width="599px"></div>
-            </div>
+            <nav>
+                <ul id="menuitem">
+                    <li><a href="{% url 'index' %}">HOME</a></li>
+                    <li><a href="{% url 'all-subjects' %}">SUBJECTS</a></li>
+                    <li><a href="{% url 'all-teachers' %}">TEACHERS</a></li>
+                    <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
+                    <li><a href="{% url 'contact-us' %}">CONTACT</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
-    </div>
-    </div>
-    <!-- <div class="smallcon"> -->
+    </header>
+
+    <!-- Messages -->
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{ msg }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row">
+        <div class="col-1">
+            <h1>Elective Subject Selection Project</h1>
+        </div>
+        <div class="col-2"><img src="{% static 'images/hero.gif' %}" width="650px"></div>
+    </div><br><br>
+
         <h2 class="title">Problem Statement</h2>
         <div class="row">
             <div class="info">
@@ -62,12 +93,10 @@
             Persist all subjects in the database 
             </p>
             </div>
-            
             <div class="row">
                 <div class="info">
                     <p class=><b>Problem Statement 3 - Elective Subject Selection App
                         Build an application <br>that can be run as a container on the cloud for <br>selecting/updating/deleting elective subject for each student.</b><br>     
-
             There should be 2 pages/screens/views – Student Page and Elective Subject Page <br>
             On the Student Page: <br>
             The user should be able to select a student from a list of students(From Problem Statement 1) <br>
@@ -75,8 +104,6 @@
             On the Elective Subject Page: <br>
             The user should be able to select an elective subject from list of elective subject (From Problem Statement 2) <br>
             Then let them select, update, delete the student(s) that have chosen the elective subject <br>
-
-                        
                     </p>
                 </div>
                 <div class="sec"><img src="{% static 'images/ps3.png' %}" width="400px" height="400px"></div>
@@ -124,8 +151,6 @@
                 <div class="row">
                     <div class="footrecol2">
                         <img src="{% static 'images/logo.png' %}" width="150px">
-                        <p>Our purpose is to sustainably make
-                            the pleasure<br> and benefit of sweets accessible to the many</p>
                     </div>
                     <div class="footrecol3">
                         <h3>Useful Links</h3>
@@ -150,4 +175,17 @@
         </div>
     </footer>
 
-    {% endblock content %}
+</body>
+<script>
+    var menuitem = document.getElementById("menuitem")
+    menuitem.style.maxHeight = "0px";
+    function menutoggle() {
+        if (menuitem.style.maxHeight == "0px") {
+            menuitem.style.maxHeight = "200px";
+        }
+        else {
+            menuitem.style.maxHeight = "0px";
+        }
+    }
+</script>
+</html>
