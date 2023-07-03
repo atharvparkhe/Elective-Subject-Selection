@@ -43,6 +43,9 @@ def allSubjects(request):
 
 @login_required(login_url="admin-login")
 def adminAllSubjects(request):
+    if not AdminModel.objects.filter(email=request.user.email):
+        logout(request)
+        return redirect("admin-login")
     context["subjects"] = SubjectModel.objects.all()
     return render(request, "subject/admin-all-subjects.html", context=context)
 
@@ -50,6 +53,9 @@ def adminAllSubjects(request):
 @login_required(login_url="admin-login")
 def addSubject(request):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         context["departments"] = DepartmentModel.objects.all()
         context["faculty"] = TeacherModel.objects.all()
         if request.method == 'POST':
@@ -84,6 +90,9 @@ def singleSubject(request, sub_id):
 @login_required(login_url="admin-login")
 def adminSingleSubject(request, sub_id):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         if not SubjectModel.objects.filter(id=sub_id).exists():
             messages.error(request, 'Invalid Subject ID.')
             return redirect('all-subjects')
@@ -107,6 +116,9 @@ def adminSingleSubject(request, sub_id):
 @login_required(login_url="student-login")
 def enroll(request, num):
     try:
+        if not StudentModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("student-login")
         if num not in ["1","2","3"]:
             messages.error(request, "Invalid Subject Number")
             return redirect('student-dashboard')
@@ -148,6 +160,9 @@ def enroll(request, num):
 @login_required(login_url="student-login")
 def changeElective(request, num):
     try:
+        if not StudentModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("student-login")
         if num not in ["1","2","3"]:
             messages.error(request, "Invalid Subject Number")
             return redirect('student-dashboard')
@@ -200,12 +215,16 @@ def changeElective(request, num):
 @login_required(login_url="student-login")
 def StudentDashboard(request):
     try:
+        if not StudentModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("student-login")
         student_obj = StudentModel.objects.get(email=request.user.email)
         context["user"] = student_obj
         if not EnollmentModel.objects.filter(student=student_obj).exists():
             context["enrollment"] = None
         else :
             context["enrollment"] = EnollmentModel.objects.get(student=student_obj)
+        context["change_requests"] = student_obj.student_change_elective.all()
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "dashboard/student.html", context)
@@ -219,6 +238,18 @@ def TeacherDashboard(request):
             return redirect("teacher-login")
         teacher_obj = TeacherModel.objects.get(email=request.user.email)
         context["teacher"] = teacher_obj
+        subject_obj = teacher_obj.subject_teacher
+        enrollments, students = [], []
+        if subject_obj.enrolled_subject_1.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_1.all())
+        if subject_obj.enrolled_subject_2.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_2.all())
+        if subject_obj.enrolled_subject_3.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_3.all())
+        for enrr in enrollments:
+            students.extend([stu.student for stu in enrr])
+        context["students"] = students
+        context["change_requests"] = ChangeElectiveModel.objects.filter(from_sub=subject_obj) or ChangeElectiveModel.objects.filter(to_sub=subject_obj)
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "dashboard/teacher.html", context)
@@ -227,6 +258,9 @@ def TeacherDashboard(request):
 @login_required(login_url="admin-login")
 def AdminDashboard(request):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         context["subject_count"] = SubjectModel.objects.all().count()
         context["teacher_count"] = TeacherModel.objects.all().count()
         context["student_count"] = StudentModel.objects.all().count()
@@ -278,6 +312,9 @@ def get_graph_data(request):
 @login_required(login_url="teacher-login")
 def enrolledStudentList(request):
     try:
+        if not TeacherModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("teacher-login")
         teacher_obj = TeacherModel.objects.get(email=request.user.email)
         subject_obj = teacher_obj.subject_teacher
         enrollments, students = [], []
@@ -298,6 +335,9 @@ def enrolledStudentList(request):
 @login_required(login_url="teacher-login")
 def studentProfile(request, stu_id):
     try:
+        if not TeacherModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("teacher-login")
         student_obj = StudentModel.objects.get(id=stu_id)
         context["user"] = student_obj
         if not EnollmentModel.objects.filter(student=student_obj).exists():

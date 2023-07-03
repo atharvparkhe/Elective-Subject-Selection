@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-# from django.http import HttpResponseRedirect
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -246,6 +245,9 @@ def allTeachers(request):
 
 @login_required(login_url="admin-login")
 def adminAllTeachers(request):
+    if not AdminModel.objects.filter(email=request.user.email):
+        logout(request)
+        return redirect("admin-login")
     context["teachers"] = TeacherModel.objects.all()
     return render(request, "teacher/admin-all-teachers.html", context=context)
 
@@ -253,6 +255,9 @@ def adminAllTeachers(request):
 @login_required(login_url="admin-login")
 def singleTeacher(request, teacher_id):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         if not TeacherModel.objects.filter(id=teacher_id).exists():
             messages.error(request, 'Invalid Teacher ID.')
             return redirect('all-teachers')
@@ -264,6 +269,9 @@ def singleTeacher(request, teacher_id):
 @login_required(login_url="admin-login")
 def adminSingleTeacher(request, teacher_id):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         if not TeacherModel.objects.filter(id=teacher_id).exists():
             messages.error(request, 'Invalid Teacher ID.')
             return redirect('all-teachers')
@@ -284,10 +292,32 @@ def adminSingleTeacher(request, teacher_id):
         messages.error(request, str(e))
     return render(request, "teacher/admin-single-teacher.html", context=context)
 
+
 @login_required(login_url="admin-login")
 def addTeacher(request):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         context["departments"] = DepartmentModel.objects.all()
+        if request.method == "POST":
+            email = request.POST.get("email")
+            if TeacherModel.objects.filter(email=email).exists():
+                messages.error(request, "Teacher Already Exists")
+                return redirect("admin-dashboard")
+            teacher_obj = TeacherModel.objects.create(
+                name = request.POST.get("name"),
+                email = email,
+                phone = request.POST.get("contact"),
+                experience = request.POST.get("post"),
+                department = request.POST.get("dept"),
+                profile_pic = request.FILES.get("profile_pic")
+            )
+            pw = generate_random_passsword(12)
+            teacher_obj.set_password(pw)
+            teacher_obj.save()
+            thread_obj = send_password_via_mail(email, pw)
+            thread_obj.start()
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "teacher/add-teacher.html", context=context)
@@ -296,6 +326,9 @@ def addTeacher(request):
 @login_required(login_url="admin-login")
 def addStudent(request):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         context["departments"] = DepartmentModel.objects.all()
         if request.method == 'POST':
             roll = request.POST.get('roll')
@@ -325,6 +358,9 @@ def addStudent(request):
 @login_required(login_url="admin-login")
 def addMultipleStudents(request):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         if request.method == 'POST':
             obj = FileModel.objects.create(file=request.FILES['excelfile'])
             obj.save()
@@ -352,6 +388,9 @@ def addMultipleStudents(request):
 
 @login_required(login_url="admin-login")
 def adminAllStudents(request):
+    if not AdminModel.objects.filter(email=request.user.email):
+        logout(request)
+        return redirect("admin-login")
     context["students"] = StudentModel.objects.all()
     return render(request, "students/admin-all-students.html", context)
 
@@ -359,6 +398,9 @@ def adminAllStudents(request):
 @login_required(login_url="admin-login")
 def adminSingleStudent(request, stu_id):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         if not StudentModel.objects.filter(id=stu_id).exists():
             messages.error(request, "Invalid Student ID")
             return redirect("all-students")
@@ -376,12 +418,18 @@ def adminSingleStudent(request, stu_id):
 
 @login_required(login_url="admin-login")
 def allDepartments(request):
+    if not AdminModel.objects.filter(email=request.user.email):
+        logout(request)
+        return redirect("admin-login")
     context["department"] = DepartmentModel.objects.all()
     return render(request, "department/all-department.html", context)
 
 @login_required(login_url="admin-login")
 def addDepartments(request):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         if request.method == 'POST':
             name = request.POST.get('name')
             code = request.POST.get('code')
@@ -399,6 +447,9 @@ def addDepartments(request):
 @login_required(login_url="admin-login")
 def singleDepartment(request, dept_id):
     try:
+        if not AdminModel.objects.filter(email=request.user.email):
+            logout(request)
+            return redirect("admin-login")
         dept_obj = DepartmentModel.objects.get(id=dept_id)
         context["dept"] = dept_obj
         context["students"] = dept_obj.student_department.all()

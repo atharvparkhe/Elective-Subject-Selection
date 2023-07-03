@@ -2,6 +2,7 @@ from django.db import models
 from base.models import BaseModel
 from authentication.models import *
 
+CHANGE_STATUS = (("PENDING","PENDING"),("APPROVED","APPROVED"),("REJECTED","REJECTED"))
 
 
 class ContactUs(models.Model):
@@ -37,8 +38,8 @@ class ChangeElectiveModel(BaseModel):
     student = models.ForeignKey(StudentModel, related_name="student_change_elective", on_delete=models.CASCADE)
     from_sub = models.ForeignKey(SubjectModel, related_name="from_subject", on_delete=models.CASCADE)
     to_sub = models.ForeignKey(SubjectModel, related_name="to_subject", on_delete=models.CASCADE)
-    teacher_1_approval = models.BooleanField(default=False)
-    teacher_2_approval = models.BooleanField(default=False)
+    teacher_1_decision = models.CharField(max_length=10, choices=CHANGE_STATUS, default=CHANGE_STATUS[0])
+    teacher_2_decision = models.CharField(max_length=10, choices=CHANGE_STATUS, default=CHANGE_STATUS[0])
     is_resolved = models.BooleanField(default=False)
     def __str__(self):
         return self.student.name

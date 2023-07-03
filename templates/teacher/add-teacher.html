@@ -6,21 +6,21 @@
     <div class="formbox2">
         <div class="contactcol ">
             <h2 class="title">Add Faculty</h2>
-            <form action="" method="post">
-                <input class="an" type="text" name="name" placeholder="Enter faculty name" required>
+            <form method="post">
+                {% csrf_token %}
+                <input class="an" type="text" name="name" placeholder="Enter Faculty Name" required>
                 <select id="dept" name="dept" class="an" required style="color: grey; width: 100%; padding: 15px; margin-bottom: 15px;">
                     <option value="">Enter Faculty Department</option>
                     {% for dept in departments %}
                     <option value={{dept.id}}>{{dept.name}}</option>
                     {% endfor %}
                 </select>
-                <input class="an" type="email" name="email" placeholder="Enter faculty email" required>
-                <input class="an" type="text" name="contact" placeholder="Enter faculty contact no" required>
-                <input class="an" type="text" name="post" placeholder="Enter faculty Post" required>
-                <!-- <input type="image" placeholder="Upload Teacher's Profile Picture" required> -->
+                <input class="an" type="email" name="email" placeholder="Enter Faculty email" required>
+                <input class="an" type="text" name="contact" placeholder="Enter Faculty contact no" required>
+                <input class="an" type="text" name="post" placeholder="Enter Faculty Post" required>
                 <span style="color: grey; font-size: 14px;margin-left: 12px;">Add teacher profile picture</span>
                 <input class="an custom_file_up" type="file" name="profile_pic" style="width: 60%;" required>
-                <button type="submit" class="submitbtn">Add faculty</button>
+                <button type="submit" class="submitbtn">Add Faculty</button>
             </form>
         </div>
     </div>
