@@ -267,7 +267,19 @@ def adminSingleTeacher(request, teacher_id):
         if not TeacherModel.objects.filter(id=teacher_id).exists():
             messages.error(request, 'Invalid Teacher ID.')
             return redirect('all-teachers')
-        context["teacher"] = TeacherModel.objects.get(id=teacher_id)
+        teacher_obj = TeacherModel.objects.get(id=teacher_id)
+        context["teacher"] = teacher_obj
+        subject_obj = teacher_obj.subject_teacher
+        enrollments, students = [], []
+        if subject_obj.enrolled_subject_1.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_1.all())
+        if subject_obj.enrolled_subject_2.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_2.all())
+        if subject_obj.enrolled_subject_3.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_3.all())
+        for enrr in enrollments:
+            students.extend([stu.student for stu in enrr])
+        context["students"] = students
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "teacher/admin-single-teacher.html", context=context)
@@ -382,3 +394,16 @@ def addDepartments(request):
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "department/add-department.html", context)
+
+
+@login_required(login_url="admin-login")
+def singleDepartment(request, dept_id):
+    try:
+        dept_obj = DepartmentModel.objects.get(id=dept_id)
+        context["dept"] = dept_obj
+        context["students"] = dept_obj.student_department.all()
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "department/single-department.html", context)
+
+

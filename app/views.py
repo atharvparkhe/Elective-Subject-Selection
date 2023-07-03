@@ -81,6 +81,29 @@ def singleSubject(request, sub_id):
     return render(request, "subject/single-subject.html", context=context)
 
 
+@login_required(login_url="admin-login")
+def adminSingleSubject(request, sub_id):
+    try:
+        if not SubjectModel.objects.filter(id=sub_id).exists():
+            messages.error(request, 'Invalid Subject ID.')
+            return redirect('all-subjects')
+        subject_obj = SubjectModel.objects.get(id=sub_id)
+        context["subject"] = subject_obj
+        enrollments, students = [], []
+        if subject_obj.enrolled_subject_1.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_1.all())
+        if subject_obj.enrolled_subject_2.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_2.all())
+        if subject_obj.enrolled_subject_3.all().count() != 0:
+            enrollments.append(subject_obj.enrolled_subject_3.all())
+        for enrr in enrollments:
+            students.extend([stu.student for stu in enrr])
+        context["students"] = students
+    except Exception as e:
+        messages.error(request, str(e))
+    return render(request, "subject/admin-single-subject.html", context=context)
+
+
 @login_required(login_url="student-login")
 def enroll(request, num):
     try:
@@ -204,14 +227,6 @@ def AdminDashboard(request):
         context["teacher_count"] = TeacherModel.objects.all().count()
         context["student_count"] = StudentModel.objects.all().count()
         context["dept_count"] = DepartmentModel.objects.all().count()
-        # sub_names_array, sub_stu_count = [], []
-        # for sub in SubjectModel.objects.all():
-        #     count = 0
-        #     sub_names_array.append(sub.name)
-        #     count = sub.enrolled_subject_1.all().count() + sub.enrolled_subject_2.all().count() + sub.enrolled_subject_3.all().count()
-        #     sub_stu_count.append(count)
-        # context["subject"] = sub_names_array
-        # context["count"] = sub_stu_count
     except Exception as e:
         messages.error(request, str(e))
     return render(request, "dashboard/admin.html", context)
@@ -231,8 +246,7 @@ def get_graph_data(request):
             change_count.append(sub.from_subject.all().count())
             to_change_count.append(sub.to_subject.all().count())
         for dept in DepartmentModel.objects.all():
-            li = []
-            temp = {}
+            li, temp = [], {}
             dept_name_array.append(dept.name)
             dept_no_of_stu.append(dept.student_department.all().count())
             for sub in SubjectModel.objects.all():

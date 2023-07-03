@@ -1,27 +1,11 @@
-{% extends '../stu-base.html' %}
+{% extends '../admin-base.html' %}
 {% load static %}
 
 {% block content %}
+<main class="main-container">
+    <h1>{{dept.name}}</h1><br>
+    <h3>{{dept.code}}</h3>
 
-    <div class="header">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="{% url 'index' %}">
-                        <img src="{% static 'images/logo.png' %}" width="125px">
-                    </a>
-                </div>
-                <nav>
-                    <ul id="menuitem">
-                        <li><a href="{% url 'index' %}">HOME</a></li>
-                        <li><a href="{% url 'student-dashboard' %}">PROFILE</a></li>
-                        <li><a href="{% url 'all-subjects' %}">ELECTIVE</a></li>
-                        <li><a href="{% url 'time-table' %}">TIME TABLE</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
 
     <style>
         .tr_info{
@@ -55,21 +39,22 @@
         }
 
         th, td{
-            border: 1px solid black;
+            border-bottom: 1px solid grey;
             padding: 10px;
-            border-radius: 2px;
-            text-align: center;
+            border-radius: 2.5px;
+            text-align: center !important;
         }
         table{
             margin: auto;
-            background-color: white;
-            width: 100%;
-            border: 2px solid black;
+            background-color: none;
+            width: 90%;
+            font-weight: 500;
+            /* border: 2px solid black; */
             border-radius: 0px;
             padding: 2px;
-            /* display: flex; */
-            /*flex-wrap: wrap; */
-            /* justify-content: center; */
+            /* display: flex;
+            flex-wrap: wrap;
+            justify-content: center; */
         }
 
         .table_heading{
@@ -82,38 +67,29 @@
         }
     </style>
 
-    <div class="table_heading">STUDENTS ENROLLED FOR {{subject}}</div>
+    <h2 class="title">List of Students Enrolled in {{ dept.name | safe }}</h2>
+    <br>
     <table class="stu_details" id="stu_detail">
         <tr><b>
-            <th>Student name</th>
-            <th>Student dept</th>
-            <th>Student email</th>
-            <th>Student contact</th>
+            <th>Student Name</th>
+            <th>Student Dept</th>
+            <th>Student Email ID</th>
+            <th>Student Phone No</th>
+            <th>Student Details</th>
         </b></tr>
-       
+        {% for stu in students %}
         <tr>
-            <td>John Doe</td>
-            <td>IT</td>
-            <td>john@example.com</td>
-            <td>1234567890</td>
+            <td>{{stu.name | safe}}</td>
+            <td>{{stu.department.name | safe}}</td>
+            <td>{{stu.email | safe}}</td>
+            <td>{{stu.phone | safe}}</td>
+            <td><a href="{% url 'student-profile' stu.id %}" class="btn">View Details</a></td>
         </tr>
-        
-        <tr>
-            <td>John Doe</td>
-            <td>IT</td>
-            <td>john@example.com</td>
-            <td>1234567890</td>
-        </tr>
-
-        <tr>
-            <td>John Doe</td>
-            <td>IT</td>
-            <td>john@example.com</td>
-            <td>1234567890</td>
-        </tr>
+        {% endfor %}
     </table>
-    <div style="text-align: center;"><button onclick="downloadExcel()" class="btn">Download as Excel</button></div>
 
+    <div style="text-align: center;"><button onclick="downloadExcel()" class="btn">Download as Excel</button></div>
+    
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <script>
         
@@ -128,7 +104,7 @@
             return buf;
         }
         const blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
-        const filename = 'Sttudent_data.xlsx';
+        const filename = 'student_data.xlsx';
         if (typeof navigator.msSaveBlob !== 'undefined') {
             navigator.msSaveBlob(blob, filename);
         } else {
@@ -145,5 +121,7 @@
         }
     }
     </script>
+    
 
+</main>
 {% endblock content %}
