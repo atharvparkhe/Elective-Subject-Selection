@@ -13,9 +13,8 @@
                         <img src="{{ tea.profile_pic.url }}" width="200px" height="400px">
                         <h4>{{ tea.name | safe }}</h4>
                         <p>{{ tea.department.name | safe }}</p>
-                        
-                        <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Edit</a>
-                        <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Delete</a>
+                        <a class="btn" href="{% url 'all-subjects' %}">Edit</a>
+                        <a class="btn" href="{% url 'all-subjects' %}">Delete</a>
                         
                             <!-- <p><a href="{% url 'all-subjects' %}">hello</a></p> -->
 
