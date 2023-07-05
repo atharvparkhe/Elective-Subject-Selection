@@ -40,6 +40,8 @@ class ChangeElectiveModel(BaseModel):
     to_sub = models.ForeignKey(SubjectModel, related_name="to_subject", on_delete=models.CASCADE)
     teacher_1_decision = models.CharField(max_length=10, choices=CHANGE_STATUS, default=CHANGE_STATUS[0])
     teacher_2_decision = models.CharField(max_length=10, choices=CHANGE_STATUS, default=CHANGE_STATUS[0])
-    is_resolved = models.BooleanField(default=False)
+    final_decision = models.CharField(max_length=10, choices=CHANGE_STATUS, default=CHANGE_STATUS[0])
     def __str__(self):
         return self.student.name
+
+

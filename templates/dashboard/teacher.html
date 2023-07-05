@@ -118,44 +118,29 @@
             <th>Change From</th>
             <th>Change To</th>
             <th>Approve/Reject</th>
-            <th>Submit</th>
         </b></tr>
+        {% for req in change_requests %}
         <tr><b>
-            <td>Abhinav</td>
-            <td>Information Technology</td>
-            <td>abhinav@example.com</td>
+            <td>{{req.student.name}}</td>
+            <td>{{req.student.department.name}}</td>
+            <td>{{req.student.email}}</td>
             <td>View Details</td>
-            <td>CFCS</td>
-            <td>Soft Comp</td>
+            <td>{{req.from_sub.name}}</td>
+            <td>{{req.to_sub.name}}</td>
             <td>
-                <!-- <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-success">Approve</button>
-                    <button type="button" class="btn btn-danger">Reject</button>
-                </div>  -->
-                 <select name="approve" id="approve">
-                    <option value="approve">Approve</option>
-                    <option value="reject">Reject</option>
-                </select> 
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <select name="decision" id="approve">
+                       <option value="approve">Approve</option>
+                       <option value="reject">Reject</option>
+                   </select> 
+                   <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </td>
-            <td><button type="submit" class="btn btn-primary">Submit</button></td>
+        {% endfor %}
             
         </b></tr>
-        <tr><b>
-            <td>Abhinav</td>
-            <td>Information Technology</td>
-            <td>abhinav@example.com</td>
-            <td>View Details</td>
-            <td>CFCS</td>
-            <td>Soft Comp</td>
-            <td>
-                 <select name="approve" id="approve">
-                    <option value="approve">Approve</option>
-                    <option value="reject">Reject</option>
-                </select> 
-            </td>
-            <td><button type="submit" class="btn btn-yellow">Submit</button></td>
-        </b></tr>
-    </table>
+    </table><br><br><br>
     
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <script>

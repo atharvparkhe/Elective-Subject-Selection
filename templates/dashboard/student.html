@@ -66,25 +66,34 @@
         {% endif %}
         </div>
     </div><br><br>
+
+    {% if change_requests %}
     <h2 class="title">Change Elective Status</h2>
-    <center><div class="col5">
-        <div class="col6"> <h2>Maths</h2><br>
-            <div><img src="{{ enrollment.subject_1.cover_img.url }}" style="width: 100px; height: 100px;"></div>
-            <h4>Taught by:athrv</h4> <!--can be  a link to the faculty profile-->
-            <h4>it dept</h4>
-            <img src="{% static 'images/check.png' %}" style="width: 30px; height: 30px;">
-        </div>
-            <div class="col6"> <div><img src="{% static 'images/right-arrow.png' %}" style="width: 100px; height: 55px; margin-top: 90px;"></div></div>
-            <div class="col6"> <h2>Hindi</h2><br>
-                <img src="{{ enrollment.subject_1.cover_img.url }}" style="width: 100px; height: 100px;">
-                <h4>Taught by:abinav</h4> <!--can be  a link to the faculty profile-->
-                <h4>comp dept</h4>
-                <img src="{% static 'images/check.png' %}" style="width: 30px; height: 30px;"></div>
+    <center>
+        {% for req in change_requests %}
+        <div class="col5">
+            <div class="col6"><h2>{{req.from_sub.name}}</h2><br>
+                <div><img src="{{req.from_sub.cover_img.url}}" style="width: 100px; height: 100px;"></div>
+                <h4><b>Taught by: </b>{{req.from_sub.teacher.name}}</h4> <!--can be  a link to the faculty profile-->
+                <h4>{{req.from_sub.teacher.department.name}}</h4>
+                <p>{{req.final_decision}}</p>
+            </div>
+            <div class="col6">
+                <div><img src="{% static 'images/right-arrow.png' %}" style="width: 100px; height: 55px; margin-top: 90px;"></div>
+            </div>
+            <div class="col6"> <h2>{{req.to_sub.name}}</h2><br>
+                <img src="{{req.to_sub.cover_img.url}}" style="width: 100px; height: 100px;">
+                <h4><b>Taught by: </b>{{req.to_sub.teacher.name}}</h4> <!--can be  a link to the faculty profile-->
+                <h4>{{req.to_sub.teacher.department.name}}</h4>
+                <img src="{% static 'images/accept.png' %}" style="width: 30px; height: 30px;"></div>
                 <div class="col6"> 
-                    <img src="{% static 'images/check.png' %}" style="width: 80px; height: 80px;margin-top: 60px;"><br><br>
+                    <img src="{% static 'images/accept.png' %}" style="width: 80px; height: 80px;margin-top: 60px;"><br><br>
                     <h1>Status</h1>
                 </div>
-    </div></center>
-    
+            </div>
+        </div>
+        {% endfor %}
+    </center>
+    {% endif %}
 </div>
 {% endblock content %}
