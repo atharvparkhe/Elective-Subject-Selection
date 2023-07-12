@@ -2,13 +2,14 @@
 {% load static %}
 
 {% block content %}
-<main class="main-container1">
-    <div class="subject_container">
+<main class="main-container">
+    <div class="smallcon">
+        <h2 class="title">All Subjects</h2>
+        <div class="row"> 
         {% for sub in subjects %}
-            <div class="smallcon">
-                <div class="row"> 
-                    <a href="{% url 'admin-single-subject' sub.id %}">  
-                        <div class="col4" style="padding: 40px;">
+                
+                        <div class="col4" style="padding: 20px;">
+                             <a href="{% url 'admin-single-subject' sub.id %}">  
                             <h1>{{sub.name}}</h1><br>
                             <div><img src="{{ sub.cover_img.url }}" style="width: 250px; height: 250px;"></div><br>
                             <h3>Taught by:{{sub.teacher.name}}</h3> <!--can be  a link to the faculty profile-->
@@ -17,9 +18,10 @@
                             <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Delete</a>
                         </div>
                     </a>
-                </div>
-            </div>
+                
+            
         {% endfor %}
+    </div>
     </div>
 </main>
 {% endblock content %}

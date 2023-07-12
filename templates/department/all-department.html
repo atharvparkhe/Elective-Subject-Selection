@@ -3,11 +3,12 @@
 
 {% block content %}
 <main class="main-container">
-    <div class="subject_container">
+    <div class="smallcon">
         <h2 class="title">ALL DEPARTMENT</h2>
-        {% for dept in department %}
-            <div class="smallcon">
+       
+
                 <div class="row"> 
+                     {% for dept in department %}
                     <div class="col4" style="padding: 40px;">
                         <h1>{{dept.name}}</h1><br>
                         <h3>{{dept.code}}</h3><br><br>
@@ -15,9 +16,10 @@
                         <!-- <form action="delete-" method="post"></form> -->
                         <a class="submitbtn" href="{% url 'all-subjects' %}" style="width: 100px;display: inline;text-decoration: none">Delete</a>
                     </div>
-                </div>
-            </div>
+                
+            
         {% endfor %}
+    </div>
     </div>
 </main>
 {% endblock content %}
