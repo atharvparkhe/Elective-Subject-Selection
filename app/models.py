@@ -2,8 +2,6 @@ from django.db import models
 from base.models import BaseModel
 from authentication.models import *
 
-CHANGE_STATUS = (("PENDING","PENDING"),("APPROVED","APPROVED"),("REJECTED","REJECTED"))
-
 
 class ContactUs(models.Model):
     name = models.CharField(max_length = 100)
@@ -11,6 +9,13 @@ class ContactUs(models.Model):
     msg = models.TextField()
     def __str__(self):
         return self.name
+
+
+class StatusModel(models.Model):
+    status = models.CharField(max_length=10)
+    img = models.ImageField(upload_to="status", height_field=None, width_field=None, max_length=None)
+    def __str__(self):
+        return self.status
 
 
 class SubjectModel(BaseModel):
@@ -38,9 +43,9 @@ class ChangeElectiveModel(BaseModel):
     student = models.ForeignKey(StudentModel, related_name="student_change_elective", on_delete=models.CASCADE)
     from_sub = models.ForeignKey(SubjectModel, related_name="from_subject", on_delete=models.CASCADE)
     to_sub = models.ForeignKey(SubjectModel, related_name="to_subject", on_delete=models.CASCADE)
-    teacher_1_decision = models.CharField(max_length=10, choices=CHANGE_STATUS, default=CHANGE_STATUS[0])
-    teacher_2_decision = models.CharField(max_length=10, choices=CHANGE_STATUS, default=CHANGE_STATUS[0])
-    final_decision = models.CharField(max_length=10, choices=CHANGE_STATUS, default=CHANGE_STATUS[0])
+    teacher_1_decision = models.ForeignKey(StatusModel, related_name="teacher_1_decision", on_delete=models.CASCADE)
+    teacher_2_decision = models.ForeignKey(StatusModel, related_name="teacher_2_decision", on_delete=models.CASCADE)
+    final_decision = models.ForeignKey(StatusModel, related_name="teacher_3_decision", on_delete=models.CASCADE)
     def __str__(self):
         return self.student.name
 

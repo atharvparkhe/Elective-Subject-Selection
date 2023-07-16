@@ -76,8 +76,8 @@
                 <div><img src="{{req.from_sub.cover_img.url}}" style="width: 100px; height: 100px;"></div>
                 <h4><b>Taught by: </b>{{req.from_sub.teacher.name}}</h4> <!--can be  a link to the faculty profile-->
                 <h4>{{req.from_sub.teacher.department.name}}</h4>
-                <p>{{req.final_decision}}</p>
             </div>
+            <!-- <img src="{% static 'images/pending.png' %}" style="width: 30px; height: 30px;"></div> -->
             <div class="col6">
                 <div><img src="{% static 'images/right-arrow.png' %}" style="width: 100px; height: 55px; margin-top: 90px;"></div>
             </div>
@@ -85,9 +85,9 @@
                 <img src="{{req.to_sub.cover_img.url}}" style="width: 100px; height: 100px;">
                 <h4><b>Taught by: </b>{{req.to_sub.teacher.name}}</h4> <!--can be  a link to the faculty profile-->
                 <h4>{{req.to_sub.teacher.department.name}}</h4>
-                <img src="{% static 'images/accept.png' %}" style="width: 30px; height: 30px;"></div>
+                <img src="{% static 'images/pending.png' %}" style="width: 30px; height: 30px;"></div>
                 <div class="col6"> 
-                    <img src="{% static 'images/accept.png' %}" style="width: 80px; height: 80px;margin-top: 60px;"><br><br>
+                    <img src="{% static 'images/pending.png' %}" style="width: 80px; height: 80px;margin-top: 60px;"><br><br>
                     <h1>Status</h1>
                 </div>
             </div>
