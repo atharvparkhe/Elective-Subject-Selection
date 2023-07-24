@@ -22,7 +22,7 @@ def contactPage(request):
             name = request.POST.get('name')
             email = request.POST.get('email')
             msg = request.POST.get('message')
-            ContactUs.objects.create(name=name, email=email, msg=msg)
+            ContactUsModel.objects.create(name=name, email=email, msg=msg)
             thread_obj = send_contact_email(email, name)
             thread_obj.start()
             messages.info(request, "Admin would contact you soon")
